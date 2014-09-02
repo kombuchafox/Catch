@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  WelcomeViewController.h
 //  Catch
 //
 //  Created by Ian Fox on 8/7/14.
@@ -8,8 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
-
+@interface WelcomeViewController : UIViewController
 
 @end
 

@@ -1,0 +1,395 @@
+//
+//  NewBallViewController.m
+//  Catch - Share Happy
+//
+//  Created by Ian Fox on 8/10/14.
+//  Copyright (c) 2014 Catch Labs. All rights reserved.
+//
+
+#import "NewBallViewController.h"
+#import "AppNavigationController.h"
+#import "AddMessageViewController.h"
+#import "AddMessageTransitionManager.h"
+#import "NewBallTableView.h"
+#import "Utils.h"
+#import <UIKit/UIKit.h>
+#import "FriendsViewController.h"
+#import "BallGraphicTableViewCell.h"
+#import "CatchPhraseTableViewCell.h"
+#import "CollapsableHeaderView.h"
+#import <AssetsLibrary/AssetsLibrary.h>
+
+#define headerViewHeight 65.0
+#define friendsHeaderHeight 45.0
+@interface NewBallViewController()
+{
+    int defaultHeight;
+    float sectionBallHue;
+    NSDictionary *identifierToSection;
+    BallGraphicTableViewCell *tCell;
+    bool ballRowExpanded;
+    NSString *defaultCatchPhraseHeader;
+    CollapsableHeaderView *catchPhraseHeaderView, *sendToHeaderView;
+    CatchPhraseTableViewCell *catchPhraseViewCell;
+    UIButton *camera;
+    
+}
+@property (strong, nonatomic)   NSArray *colorArray;
+@property (strong, nonatomic) IBOutlet NewBallTableView *ballTableView;
+@property AddMessageTransitionManager *addMessageTransitionManager;
+@property BallView *ballSectionView;
+
+
+@end
+@implementation NewBallViewController
+@synthesize ballSectionView, ballTableView, animator;
+-(void) viewDidLoad
+{
+    [super viewDidLoad];
+    [self setUp];
+    self.addMessageTransitionManager = [[AddMessageTransitionManager alloc] init];
+    identifierToSection = [[NSDictionary alloc] init];
+    defaultHeight = 30;
+    
+}
+-(void) setUp
+{
+
+    //setup currentMood
+    self.currentMood = HAPPY;
+    
+    //setup navigation bar
+    [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar setBarTintColor:[Utils UIColorFromRGB:0xAC8CFF]];
+
+    [self.view setBackgroundColor:[Utils UIColorFromRGB:0xF5F5F5]];
+    [self.messageView setBackgroundColor:[Utils UIColorFromRGB:0xE5F5FF]];
+    int height = self.navigationController.navigationBar.frame.size.height + 0;
+    int width = self.navigationController.navigationBar.frame.size.width;
+    UILabel *newballLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, width, height)];
+    newballLabel.backgroundColor = [UIColor clearColor];
+    newballLabel.textColor = [UIColor whiteColor];
+    newballLabel.text = @"New Ball";
+    newballLabel.shadowColor = [UIColor colorWithWhite:0.0 alpha:0];
+    newballLabel.textAlignment = NSTextAlignmentCenter;
+    newballLabel.font = [UIFont systemFontOfSize:30];
+    self.navigationItem.titleView = newballLabel;
+    //Round the corners of the colorbar picker and text view
+//    self.colorBarPicker.layer.cornerRadius = 5;
+//    self.colorBarPicker.layer.masksToBounds = YES;
+//    self.colorBarPicker.layer.borderColor = [UIColor grayColor].CGColor;
+//    self.colorBarPicker.layer.borderWidth = 1.0;
+    self.messageView.layer.cornerRadius = 5;
+    self.messageView.layer.masksToBounds = YES;
+    self.messageView.layer.borderColor = [UIColor grayColor].CGColor;
+    self.messageView.layer.borderWidth = 1.0;
+    self.defaultText = self.messageView.text;
+    
+    ballRowExpanded = true;
+    
+    //self.ballTableView.frame = CGRectMake(self.ballTableView.frame.origin.x, self.ballTableView.frame.origin.y, self.ballTableView.frame.size.width,[UIScreen mainScreen].bounds.size.height - 64);
+    self.ballTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+}
+-(void) viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    
+}
+
+- (IBAction)dismissNewBall:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+
+
+-(NSString *)moodToString: (Mood) mood
+{
+    switch (mood) {
+        case HAPPY:
+            return @"Happy";
+            break;
+        case PARTY:
+            return @"Party";
+            break;
+        case ROMANCE:
+            return @"Romance";
+            break;
+        case RANDOM:
+            return @"Random";
+            break;
+        default:
+            break;
+    }
+}
+- (IBAction)pushFriendsViewController:(UIButton *)sender {
+    
+    FriendsViewController *friends = [self.storyboard instantiateViewControllerWithIdentifier:@"FriendsViewController"];
+    [self.navigationController pushViewController:friends animated:YES];
+}
+- (IBAction)popViewController:(id)sender {
+    [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar setBarTintColor:[Utils UIColorFromRGB:0xD73033]];
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
+
+#pragma mark textView delegate
+-(BOOL) textViewShouldBeginEditing:(UITextView *) textView
+{    
+    self.messageView.textColor = [UIColor darkGrayColor];
+    AddMessageViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"AddMessageViewController"];
+    viewController.modalPresentationStyle = UIModalPresentationCustom;
+    viewController.transitioningDelegate  = self.addMessageTransitionManager;
+    [self presentViewController:viewController animated:true completion:^{
+        self.messageView.hidden = YES;
+    }];
+    return false;
+    
+}
+#pragma mark UITableViewDataSource
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 2;
+    
+}
+#pragma mark UITableViewDelegateMethods
+-(UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+//{
+    CGFloat deviceWidth = [[UIScreen mainScreen] bounds].size.width;
+   CollapsableHeaderView *headerView =[[CollapsableHeaderView alloc] initWithFrame:CGRectMake(0, 0, deviceWidth,headerViewHeight + 5)];
+    //add tap gesture
+    headerView.userInteractionEnabled = YES;
+    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(collapseCell:)];
+    [headerView addGestureRecognizer:singleTap];
+    
+    UILabel *title = [[UILabel alloc] initWithFrame: CGRectMake(20, 0, deviceWidth- 20, headerViewHeight - 10)];
+    UIImageView *ballImageLayer;
+    title.textColor = [UIColor whiteColor];
+    title.font = [UIFont systemFontOfSize:28];
+    title.textAlignment = NSTextAlignmentCenter;
+    
+    switch (section) {
+        case 0:
+            
+            if (!ballRowExpanded)
+            {
+                headerView.backgroundColor = [Utils UIColorFromRGB:0xE8E4D8];
+                ballImageLayer = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"crumpled_paper.png"]];
+                ballImageLayer.alpha = 0.6f;
+                ballImageLayer.frame = CGRectMake(0, 10, defaultHeight + 40, defaultHeight + 40);
+                [ballImageLayer setCenter: CGPointMake(self.view.center.x, defaultHeight)];
+                [headerView addSubview:ballSectionView];
+                [headerView addSubview:ballImageLayer];
+                [headerView setFrame:CGRectMake(0,0, deviceWidth, 1)];
+                headerView.sectionTag = @"0";
+            } else {
+                headerView.frame =CGRectMake(0, 0, deviceWidth, .5);
+                headerView.alpha = 0;
+            }
+            [title setCenter:headerView.center];
+            break;
+        case 2:
+            title.font = [UIFont systemFontOfSize:30];
+            title.frame =  CGRectMake(10, 0, deviceWidth - headerViewHeight, headerViewHeight);
+            headerView.backgroundColor = [Utils UIColorFromRGB:0x83CDFF];
+            if([catchPhraseViewCell.textView.text isEqualToString: catchPhraseViewCell.defaultString])
+            {
+                title.text = defaultCatchPhraseHeader;
+            } else {
+                title.text = catchPhraseViewCell.textView.text;
+                title.font = [UIFont boldSystemFontOfSize:40];
+            }
+            
+            headerView.sectionTag = @"0";
+            catchPhraseHeaderView = headerView;
+            break;
+        case 1:
+            headerView.backgroundColor = [Utils UIColorFromRGB:0xE8A731];
+            headerView.frame = CGRectMake(0, 0, deviceWidth, friendsHeaderHeight);
+            title.text = @"Throw To...";
+            headerView.sectionTag = @"1";
+            sendToHeaderView = headerView;
+            [title setCenter:headerView.center];
+            break;
+        default:
+            break;
+    }
+    //create border
+    UIView *border = [[UIView alloc] initWithFrame:CGRectMake(0, headerView.frame.size.height - 1, deviceWidth, 0.4f)];
+    
+    border.backgroundColor = [UIColor lightGrayColor];
+    [headerView addSubview:border];
+    [headerView addSubview:title];
+    headerView.titleLabel = title;
+    return headerView;
+}
+
+-(void) presentPhotoAlbum: (UIButton*) sender
+{
+    UIImagePickerController * picker = [[UIImagePickerController alloc] init];
+    
+    // Don't forget to add UIImagePickerControllerDelegate in your .h
+    picker.delegate = self;
+    
+//    if((UIButton *) sender == choosePhotoBtn) {
+        picker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+//    } else {
+//        picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+//    }
+    
+    [self presentViewController:picker animated:YES completion:nil];
+}
+-(CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    if (ballRowExpanded && section == 0) return 0.1;
+    if (section == 1) return friendsHeaderHeight;
+    return headerViewHeight;
+}
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    printf("%d", indexPath.section);
+    UITableViewCell *cell;
+    CGRect frame;
+    switch (indexPath.section) {
+        case 0:
+            catchPhraseViewCell = [self.ballTableView dequeueReusableCellWithIdentifier:@"CatchPhraseCell"];
+            catchPhraseViewCell.delegate = self;
+
+            frame = catchPhraseViewCell.addPictureButton.frame;
+            catchPhraseViewCell.addPictureButton.frame = CGRectMake(frame.origin.x, [self tableView:tableView heightForRowAtIndexPath:indexPath] - frame.size.height - 5, frame.size.width, frame.size.height);
+            cell = catchPhraseViewCell;
+            break;
+        case 1:
+            cell = [self.ballTableView dequeueReusableCellWithIdentifier:@"friendsTableViewCell"];
+            break;
+        case 2:
+            if (!tCell) {
+            tCell = [self.ballTableView dequeueReusableCellWithIdentifier:@"interactiveBallGraphic"];
+            [tCell setUp];
+            [tCell resizeBallToScreen: [self tableView:tableView heightForRowAtIndexPath:indexPath]];
+            tCell.selectionStyle = UITableViewCellSelectionStyleNone;
+            tCell.delegate = self;
+            }
+            cell = tCell;
+            break;
+        default:
+            cell = [[UITableViewCell alloc] init];
+            break;
+    }
+
+    return cell;
+}
+
+
+
+-(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    CGFloat height;
+    switch (indexPath.section){
+            
+            default:
+            height = [UIScreen mainScreen].bounds.size.height -headerViewHeight - friendsHeaderHeight + 5;
+            break;
+    }
+    return height;
+}
+-(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return 1;
+}
+
+-(void)tableView:(UITableView *) tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+}
+
+
+#pragma mark CollapseableDataSource
+-(BOOL) isInitiallyCollapsed:(NSNumber *)section
+{
+    if ([section intValue] == 0) {
+        return YES;
+    } else {
+        return NO;
+    }
+}
+#pragma mark BallViewDelegate
+-(void) updateBallColor:(CGFloat)value
+{
+    [ballSectionView updateColor:[UIColor colorWithHue:value saturation:1 brightness:1 alpha:1]];
+}
+-(void)setAllViewToZeroAlpha
+{
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+    self.navigationController.navigationBar.shadowImage = [UIImage new];
+    self.navigationItem.titleView = nil;
+    self.navigationController.navigationBar.translucent = YES;
+    
+
+    //[self changeOriginYBy:self.ballTableView.frame.origin.y - 64 for:self.ballTableView];
+//    catchPhraseHeaderView.alpha = 0.2f;
+//    sendToHeaderView.alpha = 0.2f;
+
+}
+
+-(void) changeOriginYBy: (CGFloat) newY for:(UIView *) view;
+{
+    view.frame = CGRectMake(view.frame.origin.x, newY, view.frame.size.width, view.frame.size.height);
+}
+
+#pragma mark TapGesuteMethod
+-(void)collapseCell:(UITapGestureRecognizer *) tap
+{
+    if ([tap.view isKindOfClass:[CollapsableHeaderView class]])
+    {
+        CollapsableHeaderView *view = (CollapsableHeaderView *)tap.view;
+        switch ([view.sectionTag intValue]) {
+            case 0:
+                
+                ballRowExpanded = true;
+                self.ballTableView.scrollEnabled = false;
+                
+                break;
+            case 1:
+                
+                self.ballTableView.scrollEnabled = false;
+                ballRowExpanded = false;
+                break;
+            case 2:
+                ballRowExpanded = false;
+                self.ballTableView.scrollEnabled = false;
+                break;
+            default:
+                break;
+        }
+        
+       [self.ballTableView expandHeader:[view.sectionTag intValue]];
+
+    }
+}
+#pragma mark CatchPhraseDelegate
+-(void) updateText:(NSString *)newText
+{
+    if ([newText isEqualToString:@""]) {
+        catchPhraseHeaderView.titleLabel.text = defaultCatchPhraseHeader;
+        catchPhraseHeaderView.titleLabel.font = [UIFont systemFontOfSize:36];
+    } else {
+        catchPhraseHeaderView.titleLabel.text = newText;
+        catchPhraseHeaderView.titleLabel.font = [UIFont boldSystemFontOfSize:40];
+    }
+    
+    
+}
+
+#pragma mark UIImagePickerControllDelegate
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    UIImage * pickedImage = [info objectForKey:UIImagePickerControllerOriginalImage];
+    catchPhraseViewCell.memeImage = pickedImage;
+    [picker dismissViewControllerAnimated:YES completion:nil];
+
+}
+
+#pragma mark miscallenanous
+
+@end

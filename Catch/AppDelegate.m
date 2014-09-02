@@ -5,8 +5,9 @@
 //  Created by Ian Fox on 8/7/14.
 //  Copyright (c) 2014 Catch Labs. All rights reserved.
 //
-
+#import <Parse/Parse.h>
 #import "AppDelegate.h"
+#import "WelcomeViewController.h"
 
 @interface AppDelegate ()
             
@@ -18,7 +19,22 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    [Parse setApplicationId:@"Nm8AyLxz7pkk5q4mlYjYIMV8HFk61oe2norr6E2H" clientKey:@"XWBmfSAG7dLW2lExJKH5ARGauFH7ko8kLaaOhNDA"];
+    [PFFacebookUtils initializeFacebook];
+
     return YES;
+}
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation {
+    return [FBAppCall handleOpenURL:url
+                  sourceApplication:sourceApplication
+                        withSession:[PFFacebookUtils session]];
+}
+
+- (void)applicationDidBecomeActive:(UIApplication *)application {
+    [FBAppCall handleDidBecomeActiveWithSession:[PFFacebookUtils session]];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
@@ -35,12 +51,10 @@
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
 }
 
-- (void)applicationDidBecomeActive:(UIApplication *)application {
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-}
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    [[PFFacebookUtils session] close];
 }
 
 @end
