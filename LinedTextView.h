@@ -14,6 +14,6 @@
 @property (nonatomic, strong) UIColor *verticalLineColor UI_APPEARANCE_SELECTOR;
 
 @property (nonatomic) UIEdgeInsets margins UI_APPEARANCE_SELECTOR;
-
+-(void) reDrawBorders;
 -(BOOL)sizeFontToFit:(NSString*)aString minSize:(float)aMinFontSize maxSize:(float)aMaxFontSize;
 @end

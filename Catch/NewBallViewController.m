@@ -19,8 +19,9 @@
 #import "CollapsableHeaderView.h"
 #import <AssetsLibrary/AssetsLibrary.h>
 
-#define headerViewHeight 65.0
-#define friendsHeaderHeight 45.0
+#define headerViewHeight 45.0
+
+
 @interface NewBallViewController()
 {
     int defaultHeight;
@@ -47,6 +48,7 @@
 {
     [super viewDidLoad];
     [self setUp];
+    [self setNeedsStatusBarAppearanceUpdate];
     self.addMessageTransitionManager = [[AddMessageTransitionManager alloc] init];
     identifierToSection = [[NSDictionary alloc] init];
     defaultHeight = 30;
@@ -54,40 +56,28 @@
 }
 -(void) setUp
 {
-
+    self.ballTableView.scrollEnabled = YES;
     //setup currentMood
     self.currentMood = HAPPY;
-    
     //setup navigation bar
     [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
     [self.navigationController.navigationBar setBarTintColor:[Utils UIColorFromRGB:0xAC8CFF]];
 
     [self.view setBackgroundColor:[Utils UIColorFromRGB:0xF5F5F5]];
-    [self.messageView setBackgroundColor:[Utils UIColorFromRGB:0xE5F5FF]];
     int height = self.navigationController.navigationBar.frame.size.height + 0;
     int width = self.navigationController.navigationBar.frame.size.width;
     UILabel *newballLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, width, height)];
     newballLabel.backgroundColor = [UIColor clearColor];
     newballLabel.textColor = [UIColor whiteColor];
-    newballLabel.text = @"New Ball";
+    newballLabel.text = @"New Catch";
     newballLabel.shadowColor = [UIColor colorWithWhite:0.0 alpha:0];
     newballLabel.textAlignment = NSTextAlignmentCenter;
     newballLabel.font = [UIFont systemFontOfSize:30];
     self.navigationItem.titleView = newballLabel;
-    //Round the corners of the colorbar picker and text view
-//    self.colorBarPicker.layer.cornerRadius = 5;
-//    self.colorBarPicker.layer.masksToBounds = YES;
-//    self.colorBarPicker.layer.borderColor = [UIColor grayColor].CGColor;
-//    self.colorBarPicker.layer.borderWidth = 1.0;
-    self.messageView.layer.cornerRadius = 5;
-    self.messageView.layer.masksToBounds = YES;
-    self.messageView.layer.borderColor = [UIColor grayColor].CGColor;
-    self.messageView.layer.borderWidth = 1.0;
-    self.defaultText = self.messageView.text;
-    
+    self.ballTableView.delegate = self;
+
     ballRowExpanded = true;
-    
-    //self.ballTableView.frame = CGRectMake(self.ballTableView.frame.origin.x, self.ballTableView.frame.origin.y, self.ballTableView.frame.size.width,[UIScreen mainScreen].bounds.size.height - 64);
+
     self.ballTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 }
 -(void) viewDidAppear:(BOOL)animated
@@ -134,21 +124,13 @@
 }
 
 #pragma mark textView delegate
--(BOOL) textViewShouldBeginEditing:(UITextView *) textView
-{    
-    self.messageView.textColor = [UIColor darkGrayColor];
-    AddMessageViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"AddMessageViewController"];
-    viewController.modalPresentationStyle = UIModalPresentationCustom;
-    viewController.transitioningDelegate  = self.addMessageTransitionManager;
-    [self presentViewController:viewController animated:true completion:^{
-        self.messageView.hidden = YES;
-    }];
-    return false;
-    
-}
+
+
+
 #pragma mark UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
+
     return 2;
     
 }
@@ -158,7 +140,7 @@
 //{
     CGFloat deviceWidth = [[UIScreen mainScreen] bounds].size.width;
    CollapsableHeaderView *headerView =[[CollapsableHeaderView alloc] initWithFrame:CGRectMake(0, 0, deviceWidth,headerViewHeight + 5)];
-    //add tap gesture
+//    //add tap gesture
     headerView.userInteractionEnabled = YES;
     UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(collapseCell:)];
     [headerView addGestureRecognizer:singleTap];
@@ -168,7 +150,18 @@
     title.textColor = [UIColor whiteColor];
     title.font = [UIFont systemFontOfSize:28];
     title.textAlignment = NSTextAlignmentCenter;
-    
+    UIButton *cancelButton = [[UIButton alloc]initWithFrame:CGRectMake(10, 0, headerViewHeight, headerViewHeight)];
+    [cancelButton setTitle: @"✖︎" forState: UIControlStateNormal];
+
+    cancelButton.titleLabel.font = [UIFont systemFontOfSize:30];
+    cancelButton.titleLabel.textColor = [UIColor whiteColor];
+    [cancelButton addTarget:self action:@selector(goToOpenPaper:) forControlEvents:UIControlEventTouchUpInside];
+    UIButton *okButton = [[UIButton alloc]initWithFrame:CGRectMake(deviceWidth - headerViewHeight - 5, 0, headerViewHeight, headerViewHeight)];
+    [okButton setTitle: @"✔︎"forState: UIControlStateNormal];
+    [okButton addTarget:self action:@selector(flingBall:) forControlEvents:UIControlEventTouchUpInside];
+    okButton.titleLabel.textColor = [UIColor whiteColor];
+    okButton.titleLabel.font = [UIFont systemFontOfSize:30];
+
     switch (section) {
         case 0:
             
@@ -177,8 +170,8 @@
                 headerView.backgroundColor = [Utils UIColorFromRGB:0xE8E4D8];
                 ballImageLayer = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"crumpled_paper.png"]];
                 ballImageLayer.alpha = 0.6f;
-                ballImageLayer.frame = CGRectMake(0, 10, defaultHeight + 40, defaultHeight + 40);
-                [ballImageLayer setCenter: CGPointMake(self.view.center.x, defaultHeight)];
+                ballImageLayer.frame = CGRectMake(0, 20, headerViewHeight, headerViewHeight);
+                [ballImageLayer setCenter: CGPointMake(self.view.center.x, 23)];
                 [headerView addSubview:ballSectionView];
                 [headerView addSubview:ballImageLayer];
                 [headerView setFrame:CGRectMake(0,0, deviceWidth, 1)];
@@ -206,16 +199,20 @@
             break;
         case 1:
             headerView.backgroundColor = [Utils UIColorFromRGB:0xE8A731];
-            headerView.frame = CGRectMake(0, 0, deviceWidth, friendsHeaderHeight);
+            headerView.frame = CGRectMake(0, 0, deviceWidth, headerViewHeight);
+            [headerView addSubview:cancelButton];
+            [headerView addSubview:okButton];
             title.text = @"Throw To...";
             headerView.sectionTag = @"1";
             sendToHeaderView = headerView;
             [title setCenter:headerView.center];
+            //initialize as hidden;
+
             break;
         default:
             break;
     }
-    //create border
+//    //create border
     UIView *border = [[UIView alloc] initWithFrame:CGRectMake(0, headerView.frame.size.height - 1, deviceWidth, 0.4f)];
     
     border.backgroundColor = [UIColor lightGrayColor];
@@ -224,7 +221,17 @@
     headerView.titleLabel = title;
     return headerView;
 }
-
+-(void) goToOpenPaper: (UITapGestureRecognizer *) sender
+{
+    self.didPinchPaper = NO;
+    [self openPaper];
+}
+-(void) flingBall: (UITapGestureRecognizer *) sender
+{
+    catchPhraseViewCell.textView.hidden = YES;
+    catchPhraseViewCell.ballGraphic.hidden = NO;
+     [self openPaper];
+}
 -(void) presentPhotoAlbum: (UIButton*) sender
 {
     UIImagePickerController * picker = [[UIImagePickerController alloc] init];
@@ -242,8 +249,10 @@
 }
 -(CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    if (ballRowExpanded && section == 0) return 0.1;
-    if (section == 1) return friendsHeaderHeight;
+    
+    if (section == 0 && !self.didPinchPaper) {
+       return 0.1;
+    }
     return headerViewHeight;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -253,11 +262,14 @@
     CGRect frame;
     switch (indexPath.section) {
         case 0:
-            catchPhraseViewCell = [self.ballTableView dequeueReusableCellWithIdentifier:@"CatchPhraseCell"];
-            catchPhraseViewCell.delegate = self;
+            if (!catchPhraseHeaderView)
+            {
+                catchPhraseViewCell = [self.ballTableView dequeueReusableCellWithIdentifier:@"CatchPhraseCell"];
+                catchPhraseViewCell.delegate = self;
 
-            frame = catchPhraseViewCell.addPictureButton.frame;
-            catchPhraseViewCell.addPictureButton.frame = CGRectMake(frame.origin.x, [self tableView:tableView heightForRowAtIndexPath:indexPath] - frame.size.height - 5, frame.size.width, frame.size.height);
+                frame = catchPhraseViewCell.addPictureButton.frame;
+                catchPhraseViewCell.addPictureButton.frame = CGRectMake(frame.origin.x, [self tableView:tableView heightForRowAtIndexPath:indexPath] - frame.size.height - 5, frame.size.width, frame.size.height);
+            }
             cell = catchPhraseViewCell;
             break;
         case 1:
@@ -285,11 +297,17 @@
 
 -(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
     CGFloat height;
+    UITableView *t = tableView;
     switch (indexPath.section){
             
             default:
-            height = [UIScreen mainScreen].bounds.size.height -headerViewHeight - friendsHeaderHeight + 5;
+            if (!self.didPinchPaper && indexPath.section == 0) {
+                height = [UIScreen mainScreen].bounds.size.height - headerViewHeight - 20;
+            } else if (self.didPinchPaper && indexPath.section == 1){
+                height = [UIScreen mainScreen].bounds.size.height - headerViewHeight*2 - 65;
+            }
             break;
     }
     return height;
@@ -298,10 +316,7 @@
     return 1;
 }
 
--(void)tableView:(UITableView *) tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    
-}
+
 
 
 #pragma mark CollapseableDataSource
@@ -346,18 +361,18 @@
         switch ([view.sectionTag intValue]) {
             case 0:
                 
-                ballRowExpanded = true;
-                self.ballTableView.scrollEnabled = false;
+                
+                //self.ballTableView.scrollEnabled = false;
                 
                 break;
             case 1:
                 
-                self.ballTableView.scrollEnabled = false;
+                self.ballTableView.scrollEnabled = TRUE;
                 ballRowExpanded = false;
                 break;
             case 2:
                 ballRowExpanded = false;
-                self.ballTableView.scrollEnabled = false;
+               // self.ballTableView.scrollEnabled = false;
                 break;
             default:
                 break;
@@ -367,6 +382,23 @@
 
     }
 }
+
+-(void) collapsePaper
+{
+    self.didPinchPaper = TRUE;
+    self.ballTableView.scrollEnabled = FALSE;
+    ballRowExpanded = false;
+    [self.ballTableView expandHeader:1];
+
+}
+-(void) openPaper
+{
+    self.didPinchPaper = FALSE;
+    self.ballTableView.scrollEnabled = FALSE;
+    ballRowExpanded = true;
+    [self.ballTableView expandHeader:0];
+    
+}
 #pragma mark CatchPhraseDelegate
 -(void) updateText:(NSString *)newText
 {
@@ -375,7 +407,7 @@
         catchPhraseHeaderView.titleLabel.font = [UIFont systemFontOfSize:36];
     } else {
         catchPhraseHeaderView.titleLabel.text = newText;
-        catchPhraseHeaderView.titleLabel.font = [UIFont boldSystemFontOfSize:40];
+        catchPhraseHeaderView.titleLabel.font = [UIFont boldSystemFontOfSize:36];
     }
     
     
@@ -391,5 +423,7 @@
 }
 
 #pragma mark miscallenanous
-
+-(UIStatusBarStyle)preferredStatusBarStyle{
+    return UIStatusBarStyleLightContent;
+}
 @end

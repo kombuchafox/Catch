@@ -25,7 +25,7 @@
 #define kDefaultHUDColor ([UIColor colorWithWhite:0.0 alpha:0.3])
 #define IS_IPHONE_5 ( fabs( ( double )[ [ UIScreen mainScreen ] bounds ].size.height - ( double )568 ) < DBL_EPSILON )
 
-
+#define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
 #define kMarkerAnimationKey @"MarkerAnimationKey"
 @interface CatchPhraseTableViewCell()
 {
@@ -40,11 +40,16 @@
     int fontSize;
     CGFloat contentOffset;
     UIImageView *imageView;
+    UILabel *characterCount;
+    UIToolbar *_inputAccessoryView;
+    UIButton *doneButton;
+    BOOL didPinch;
 }
 @end
 @implementation CatchPhraseTableViewCell
 
-@synthesize defaultString, memeView,memeImage;
+@synthesize defaultString, memeView,memeImage, pinchLabel;
+
 
 -(void) setMemeImage:(UIImage *)newValue
 {
@@ -110,29 +115,22 @@
 }
 -(void) setUp
 {
-    
-    
-//    self.textView = [[UITextView alloc] initWithFrame:self.contentView.frame];
-//    self.textView.font = [UIFont systemFontOfSize:30];
-//    self.textView.translatesAutoresizingMaskIntoConstraints=NO;
-//    [self.contentView addSubview:self.textView];
-//    
-//    NSDictionary* views = @{@"textView": self.textView};
-//    NSArray* vContrains=[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[textView]-0-|" options:NSLayoutFormatAlignAllLeft metrics:nil views:views];
-//    NSArray* hContrains=[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[textView]-0-|" options:NSLayoutFormatAlignAllLeft metrics:nil views:views];
-//    [self.contentView addConstraints:vContrains];
-//    [self.contentView addConstraints:hContrains];
+    [self.addPictureButton setFrame:CGRectMake(0, 0, 35, 35)];
+    pinchLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.textView.frame.origin.x , 0, self.textView.frame.size.width, 13)];
+    pinchLabel.text = @"Pinch to post";
+    pinchLabel.font = [UIFont systemFontOfSize:13];
+    pinchLabel.textAlignment = NSTextAlignmentCenter;
+
      contentOffset =self.textView.contentOffset.y;
-    [self.addPictureButton setFrame:CGRectMake(self.frame.size.width - [self getOffset].width, self.frame.size.height + [self getOffset].height,CGRectGetWidth(self.addPictureButton.frame), CGRectGetHeight(self.addPictureButton.frame))];
     [self.addPictureButton removeFromSuperview];
-    [self.contentView addSubview:self.addPictureButton];
     [self setSelectionStyle:UITableViewCellSelectionStyleNone];
     boundary = self.ballGraphic.frame.size.height + self.ballGraphic.frame.origin.y * 2;
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(renderTextView:)];
     [self.contentView addGestureRecognizer:tap];
     self.textView.delegate = self;
     self.defaultString = @"Say something playful 👾👅";
-    //self.memeView = [[UIImageView alloc] initWithFrame:self.textView.frame];
+
+    
     layer = [[UIView alloc] initWithFrame:self.textView.frame];
     layer.alpha = 1;
     [self.contentView addSubview:self.memeView ];
@@ -151,10 +149,39 @@
     UIPinchGestureRecognizer *pinchGesture = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(handlePinch:)];
     [self.contentView addGestureRecognizer:pinchGesture];
     //[self.textView addGestureRecognizer:pinchGesture];
-    NSAttributedString *text = [NSAttributedString new];
+        [UIView animateWithDuration:0 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+            [self.textView setFrame:CGRectMake(self.textView.frame.origin.x, 15, self.textView.frame.size.width, self.textView.frame.size.height)];
+            [self.contentView addSubview:pinchLabel];
+        } completion:^(BOOL completed){
+        }];
+
+    self.textView.clipsToBounds = NO;
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didRecognizeTapGesture:)];
+    [self.contentView.superview addGestureRecognizer:tapGesture];
+
     
 
     
+}
+
+- (void)didRecognizeTapGesture:(UITapGestureRecognizer*)gesture
+{
+    CGPoint point = [gesture locationInView:gesture.view];
+
+    if (gesture.state == UIGestureRecognizerStateEnded)
+    {
+        
+        if (CGRectContainsPoint(CGRectMake(doneButton.frame.origin.x - 20, doneButton.frame.origin.y - 20, doneButton.frame.size.width + 20, doneButton.frame.size.height + 20), point))
+        {
+            NSLog(@"lol");
+            [self doneButton:nil];
+        }
+        if (CGRectContainsPoint(CGRectMake(self.addPictureButton.frame.origin.x - 20, self.addPictureButton.frame.origin.y - 20, self.addPictureButton.frame.size.width + 20, self.addPictureButton.frame.size.height + 20), point))
+        {
+            NSLog(@"lol");
+            [self addPicture: nil];
+        }
+    }
 }
 -(CGSize) getOffset
 {
@@ -200,15 +227,17 @@
 -(void) handlePinch: (UIPinchGestureRecognizer *) sender
 {
     CGFloat scale = sender.scale;
+    [self.delegate collapsePaper];
+    didPinch = YES;
+//    if (sender.scale < 1){
+//        self.textView.hidden = YES;
+//        self.ballGraphic.hidden = NO;
+//    }
+//    else {
+//        self.ballGraphic.hidden = YES;
+//        self.textView.hidden = NO;
+//    }
     
-    if (sender.scale < 1){
-        self.textView.hidden = YES;
-        self.ballGraphic.hidden = NO;
-    }
-    else {
-        self.ballGraphic.hidden = YES;
-        self.textView.hidden = NO;
-    }
 }
 -(void) sendBall:(UISwipeGestureRecognizer *) sender
 {
@@ -292,21 +321,85 @@
     // Configure the view for the selected state
 }
 
--(void) toggleContents
-{
-
-    
-}
-
 - (IBAction)addPicture:(UIButton *)sender
 {
+    [_inputAccessoryView removeFromSuperview];
     [self.delegate presentPhotoAlbum:sender];
 }
 #pragma mark UITextViewDelegate
-- (void)textViewDidBeginEditing:(UITextView *)textView
+-(BOOL)textViewShouldBeginEditing:(UITextView *)textView
 {
-    if ([textView.text isEqualToString:defaultString]) textView.text = @"";
-    textView.frame = CGRectMake(textView.frame.origin.x, textView.frame.origin.y, textView.frame.size.width, textView.frame.size.height- 150);
+
+    return YES;
+}
+- (void)keyboardWillShow:(NSNotification *)note {
+    // create custom button
+
+
+
+
+}
+-(void)textViewDidBeginEditing:(UITextView *)textView {
+
+    if ([textView.text isEqualToString: defaultString]) {
+        
+        textView.text = @"";
+    }
+    [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+
+        [self.textView setFrame:CGRectMake(self.textView.frame.origin.x, 0, self.textView.frame.size.width, self.textView.frame.size.height)];
+        [self.pinchLabel setFrame:CGRectMake(pinchLabel.frame.origin.x, -10, pinchLabel.frame.size.width, pinchLabel.frame.size.height)];
+        self.pinchLabel.alpha = 0.2;
+    } completion:^(BOOL completed){
+        [self.pinchLabel removeFromSuperview];
+
+        textView.frame = CGRectMake(textView.frame.origin.x, textView.frame.origin.y, textView.frame.size.width, textView.frame.size.height - 200);
+    }];
+    
+    [self createInputAccessoryView: self.textView];
+    [textView setInputAccessoryView:_inputAccessoryView];
+    self.textView = textView;
+
+
+
+}
+
+-(void)createInputAccessoryView: (UITextView *) textView {
+    if (!_inputAccessoryView)
+    {
+        _inputAccessoryView = [[UIToolbar alloc] init];
+        _inputAccessoryView.translucent = YES;
+        _inputAccessoryView.barTintColor = [UIColor lightGrayColor];
+        UIView *keyBoard = [[[[[UIApplication sharedApplication] windows] lastObject] subviews] firstObject];
+        
+        _inputAccessoryView.frame = CGRectMake(-16, 216 + 27, self.contentView.frame.size.width, 35);
+
+        UIBarButtonItem *cameraItem = [[UIBarButtonItem alloc] initWithCustomView:self.addPictureButton];
+
+        
+        //Use this to put space in between your toolbox buttons
+        UIBarButtonItem *flexItem = [[UIBarButtonItem alloc]
+                                     initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
+                                     target:nil action:nil];
+        
+        doneButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 35)];
+        [doneButton addTarget:self action:@selector(doneButton:) forControlEvents:UIControlEventTouchDown];
+
+        [doneButton setTitle:@"Done" forState:UIControlStateNormal];
+        
+        UIBarButtonItem *doneItem = [[UIBarButtonItem alloc] initWithTitle:@"Done"
+                                                                     style:UIBarButtonItemStyleDone
+                                                                    target:self action:nil];
+        characterCount = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 40, 35)];
+        characterCount.text = @"100";
+        characterCount.textColor = [UIColor whiteColor];
+        UIBarButtonItem *characterLabel = [[UIBarButtonItem alloc] initWithCustomView:characterCount];
+        doneItem.tintColor = [UIColor whiteColor];
+        doneItem.customView = doneButton;
+        NSArray *items = [NSArray arrayWithObjects:cameraItem, flexItem, characterLabel, flexItem, doneItem, nil];
+        [_inputAccessoryView setItems:items animated:YES];
+        [self.textView addSubview:_inputAccessoryView];
+    }
 }
 - (void)textViewDidChange:(UITextView *)textView
 {
@@ -316,6 +409,12 @@
                           lineBreakMode:NSLineBreakByWordWrapping];
     
     [self.delegate updateText:textView.text];
+    if (textView.text.length > 100) {
+        textView.text = [textView.text substringToIndex:100];
+    }
+    
+    characterCount.text = [NSString stringWithFormat:@"%d", 100 - textView.text.length];
+    
 }
 - (void)textViewDidEndEditing:(UITextView *)textView
 {
@@ -323,7 +422,7 @@
         textView.text = defaultString;
     }
 
-    textView.frame = CGRectMake(textView.frame.origin.x, textView.frame.origin.y, textView.frame.size.width, textView.frame.size.height+150);
+    textView.frame = CGRectMake(textView.frame.origin.x, textView.frame.origin.y, textView.frame.size.width, textView.frame.size.height+200);
    // LinedTextView *linedTextView = (LinedTextView *)self.textView;
 
 }
@@ -334,20 +433,15 @@
                                                offset:range.length];
     [input setSelectedTextRange:[input textRangeFromPosition:start toPosition:end]];
 }
-- (void)keyboardWillShow:(NSNotification *)note {
-    // create custom button
+-(void)doneButton: (id) sender
+{
+    [self.textView.inputAccessoryView removeFromSuperview];
+    [self.textView endEditing:YES];
 }
+
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range
  replacementText:(NSString *)text
 {
-    
-    if ([text isEqualToString:@"\n"]) {
-        
-        [self.textView resignFirstResponder];
-        // Return FALSE so that the final '\n' character doesn't get added
-        return NO;
-    }
-    // For any other character return TRUE so that the text gets added to the view
     return YES;
 }
 #pragma mark UICollisionBehaviorDelegate
@@ -363,21 +457,6 @@
 }
 
 #pragma mark UISrollViewDelegate
-- (void)scrollViewDidScroll:(UIScrollView *)sender
-{
 
-
-    
-    
-    // do whatever you need to with scrollDirection here.
-}
--(void) scrollViewDidEndDecelerating:(UIScrollView *)scrollView
-{
-    
-    if (contentOffset < scrollView.contentOffset.y)
-        self.textView.text = [NSString stringWithFormat:@"%@%@", self.textView.text, @"\n\n\n"];
-    
-    contentOffset = scrollView.contentOffset.y;
-}
 
 @end

@@ -9,8 +9,10 @@
 #import <UIKit/UIKit.h>
 @protocol CatchPhaseTableViewCellDelegate
 @property UIView *view;
+@property BOOL didPinchPaper;
 @required
 -(void)updateText:(NSString *) newText;
+-(void) collapsePaper;
 -(void) presentPhotoAlbum: (UIButton*) sender;
 @required
 -(void)updateBallColor:(CGFloat) value;
@@ -24,6 +26,7 @@
 @property UIImage *memeImage;
 @property NSString *defaultString;
 @property id<CatchPhaseTableViewCellDelegate> delegate;
+@property UILabel *pinchLabel;
 - (IBAction)addPicture:(UIButton *)sender;
 @property (strong, nonatomic) IBOutlet UIImageView *ballGraphic;
 @property (strong, nonatomic) IBOutlet UIButton *addPictureButton;

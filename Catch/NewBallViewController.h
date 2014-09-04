@@ -19,12 +19,9 @@ typedef NS_ENUM(NSUInteger, Mood) {
     RANDOM,
 };
 
-@interface NewBallViewController : UIViewController <UITextViewDelegate, BallViewDelegate, CatchPhaseTableViewCellDelegate>
-@property (strong, nonatomic) IBOutlet BallView *ballView;
-@property (strong, nonatomic) IBOutlet ColorBarPicker *colorBarPicker;
-@property (strong, nonatomic) IBOutlet InfColorBarPicker *infColorBarPicker;
-@property (strong, nonatomic) IBOutlet UIImageView *ballImageView;
-@property (strong, nonatomic) IBOutlet UITextView *messageView;
+@interface NewBallViewController : UIViewController <UITextViewDelegate, BallViewDelegate, CatchPhaseTableViewCellDelegate, UIImagePickerControllerDelegate>
+-(void) collapsePaper;
+@property BOOL didPinchPaper;
 @property (nonatomic) Mood currentMood;
 @property NSString *defaultText;
 @property UIDynamicAnimator *animator;

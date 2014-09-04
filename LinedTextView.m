@@ -11,7 +11,9 @@
 #define DEFAULT_VERTICAL_COLOR      [UIColor colorWithRed:0.957f green:0.416f blue:0.365f alpha:0.7f]
 #define DEFAULT_MARGINS             UIEdgeInsetsMake(10.0f, 10.0f, 0.0f, 10.0f)
 #define kMaxFieldHeight 9999
-@interface LinedTextView ()
+@interface LinedTextView (){
+    int hasBeenInstatiated;
+}
 
 @property (nonatomic, assign) UIView *webDocumentView;
 
@@ -132,17 +134,89 @@
         CGContextClosePath(context);
         CGContextStrokePath(context);
     }
+
+        [self reDrawBorders];
+
+    
+    // release the path
+    
     self.layer.cornerRadius = 7;
-    self.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    self.layer.borderColor = [UIColor clearColor].CGColor;
     self.layer.borderWidth = 0.5;
 }
-
+CGMutablePathRef createRoundedCornerPath(CGRect rect, CGFloat cornerRadius) {
+    
+    // create a mutable path
+    CGMutablePathRef path = CGPathCreateMutable();
+    
+    // get the 4 corners of the rect
+    CGPoint topLeft = CGPointMake(rect.origin.x, rect.origin.y);
+    CGPoint topRight = CGPointMake(rect.origin.x + rect.size.width, rect.origin.y);
+    CGPoint bottomRight = CGPointMake(rect.origin.x + rect.size.width, rect.origin.y + rect.size.height);
+    CGPoint bottomLeft = CGPointMake(rect.origin.x, rect.origin.y + rect.size.height);
+    
+    // move to top left
+    CGPathMoveToPoint(path, NULL, topLeft.x + cornerRadius, topLeft.y);
+    
+    // add top line
+    CGPathAddLineToPoint(path, NULL, topRight.x - cornerRadius, topRight.y);
+    
+    // add top right curve
+    CGPathAddQuadCurveToPoint(path, NULL, topRight.x, topRight.y, topRight.x, topRight.y + cornerRadius);
+    
+    // add right line
+    CGPathAddLineToPoint(path, NULL, bottomRight.x, bottomRight.y - cornerRadius);
+    
+    // add bottom right curve
+    CGPathAddQuadCurveToPoint(path, NULL, bottomRight.x, bottomRight.y, bottomRight.x - cornerRadius, bottomRight.y);
+    
+    // add bottom line
+    CGPathAddLineToPoint(path, NULL, bottomLeft.x + cornerRadius, bottomLeft.y);
+    
+    // add bottom left curve
+    CGPathAddQuadCurveToPoint(path, NULL, bottomLeft.x, bottomLeft.y, bottomLeft.x, bottomLeft.y - cornerRadius);
+    
+    // add left line
+    CGPathAddLineToPoint(path, NULL, topLeft.x, topLeft.y + cornerRadius);
+    
+    // add top left curve
+    CGPathAddQuadCurveToPoint(path, NULL, topLeft.x, topLeft.y, topLeft.x + cornerRadius, topLeft.y);
+    
+    // return the path
+    return path;
+}
 - (void)setFont:(UIFont *)font
 {
     [super setFont:font];
     [self setNeedsDisplay];
 }
 
+-(void) reDrawBorders {
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    const CGFloat outlineStrokeWidth = 1;
+    const CGFloat outlineCornerRadius = 7.0f;
+    
+    const CGColorRef redColor = [[UIColor lightGrayColor] CGColor];
+    
+    
+    // inset the rect because half of the stroke applied to this path will be on the outside
+    CGRect insetRect = CGRectInset(CGRectMake(-10, -10, self.frame.size.width, self.contentSize.height + 10), outlineStrokeWidth/2.0f, outlineStrokeWidth/2.0f);
+    
+    // get our rounded rect as a path
+    CGMutablePathRef path = createRoundedCornerPath(insetRect, outlineCornerRadius);
+    
+    // add the path to the context
+    CGContextAddPath(context, path);
+    
+    // set the stroke params
+    CGContextSetStrokeColorWithColor(context, redColor);
+    CGContextSetLineWidth(context, outlineStrokeWidth);
+    
+    // draw the path
+    CGContextDrawPath(context, kCGPathStroke);
+    CGPathRelease(path);
+    hasBeenInstatiated = 1;
+}
 #pragma mark - Property methods
 
 - (void)setHorizontalLineColor:(UIColor *)horizontalLineColor

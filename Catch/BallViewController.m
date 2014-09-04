@@ -170,24 +170,24 @@
                 break;
             case 1:
                 headerView.frame = CGRectMake(0, 0, deviceWidth, 50);
-                headerView.backgroundColor = [Utils UIColorFromRGB:0xFFFFFF];
-                addButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, deviceWidth/3, toolBarButtonSize)];
-                addButton.backgroundColor = [Utils UIColorFromRGB:0xFFFFF];
-                addButton.layer.borderColor = [UIColor whiteColor].CGColor;
-                addButton.layer.borderWidth = 0.8;
-                addButton.backgroundColor = [Utils UIColorFromRGB:0x88CCE8];
-                peopleButton = [[UIButton alloc] initWithFrame:CGRectMake(deviceWidth/3, 0, deviceWidth/3, toolBarButtonSize)];
-                peopleButton.backgroundColor = [Utils UIColorFromRGB:0xFFFFF];
-                peopleButton.layer.borderColor = [UIColor whiteColor].CGColor;
-                peopleButton.layer.borderWidth = 0.8;
-                peopleButton.backgroundColor = [Utils UIColorFromRGB:0x88CCE8];
-                inviteButton = [[UIButton alloc] initWithFrame:CGRectMake(deviceWidth * 2/3, 0, deviceWidth/3, toolBarButtonSize)];
-                inviteButton.layer.borderColor = [UIColor whiteColor].CGColor;
-                inviteButton.layer.borderWidth = 0.8;
-                inviteButton.backgroundColor = [Utils UIColorFromRGB:0x88CCE8];
-                title.textColor = [UIColor whiteColor];
-
-                [headerView addSubview:addButton], [headerView addSubview:inviteButton], [headerView addSubview:peopleButton];
+//                headerView.backgroundColor = [Utils UIColorFromRGB:0xFFFFFF];
+//                addButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, deviceWidth/3, toolBarButtonSize)];
+//                addButton.backgroundColor = [Utils UIColorFromRGB:0xFFFFF];
+//                addButton.layer.borderColor = [UIColor whiteColor].CGColor;
+//                addButton.layer.borderWidth = 0.8;
+//                addButton.backgroundColor = [Utils UIColorFromRGB:0x88CCE8];
+//                peopleButton = [[UIButton alloc] initWithFrame:CGRectMake(deviceWidth/3, 0, deviceWidth/3, toolBarButtonSize)];
+//                peopleButton.backgroundColor = [Utils UIColorFromRGB:0xFFFFF];
+//                peopleButton.layer.borderColor = [UIColor whiteColor].CGColor;
+//                peopleButton.layer.borderWidth = 0.8;
+//                peopleButton.backgroundColor = [Utils UIColorFromRGB:0x88CCE8];
+//                inviteButton = [[UIButton alloc] initWithFrame:CGRectMake(deviceWidth * 2/3, 0, deviceWidth/3, toolBarButtonSize)];
+//                inviteButton.layer.borderColor = [UIColor whiteColor].CGColor;
+//                inviteButton.layer.borderWidth = 0.8;
+//                inviteButton.backgroundColor = [Utils UIColorFromRGB:0x88CCE8];
+//                title.textColor = [UIColor whiteColor];
+//
+//                [headerView addSubview:addButton], [headerView addSubview:inviteButton], [headerView addSubview:peopleButton];
                 headerView.sectionTag = @"1";
                 sendToHeaderView = headerView;
                 [title setCenter:headerView.center];
@@ -255,7 +255,7 @@
     {
         
         switch (indexPath.section) {
-            case 0:
+            case 1:
                 if (indexPath.row == value) {
                     cell = [[UITableViewCell alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 50)];
 
@@ -362,7 +362,7 @@
     if ([section intValue] == 0) {
         return YES;
     } else {
-        return NO;
+        return YES;
     }
 }
 #pragma mark BallViewDelegate
@@ -412,7 +412,7 @@
                 break;
             case 2:
                 ballRowExpanded = true;
-                self.ballTableView.scrollEnabled = false;
+                //self.ballTableView.scrollEnabled = false;
                 break;
             default:
                 break;

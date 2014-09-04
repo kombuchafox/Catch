@@ -252,17 +252,17 @@
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 </imageView>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Say something playful 👾👅" id="LkV-7f-s9A" customClass="LinedTextView">
-                                                    <rect key="frame" x="6" y="0.0" width="320" height="317"/>
+                                                    <rect key="frame" x="6" y="14" width="309" height="276"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <color key="backgroundColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="36"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="33"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                 </textView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="dWR-0S-2T1">
-                                                    <rect key="frame" x="245" y="153" width="60" height="60"/>
+                                                    <rect key="frame" x="269" y="177" width="36" height="36"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <state key="normal" image="picture.png">
+                                                    <state key="normal" image="cameraIcon.png">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                     <connections>
@@ -270,7 +270,7 @@
                                                     </connections>
                                                 </button>
                                             </subviews>
-                                            <color key="backgroundColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </tableViewCellContentView>
                                         <inset key="separatorInset" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <connections>
@@ -578,11 +578,11 @@
     <resources>
         <image name="Cloud.png" width="75" height="35"/>
         <image name="backArrow.png" width="60" height="60"/>
+        <image name="cameraIcon.png" width="256" height="256"/>
         <image name="crumpled_paper.png" width="164" height="153"/>
         <image name="facebook-logo_000.png" width="2100" height="1615"/>
         <image name="friends.png" width="50" height="50"/>
         <image name="paper.png" width="204" height="256"/>
-        <image name="picture.png" width="255" height="256"/>
         <image name="plusSign.png" width="50" height="49"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
