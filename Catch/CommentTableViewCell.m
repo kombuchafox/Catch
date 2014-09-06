@@ -45,6 +45,8 @@
             self.textView.textContainer.exclusionPaths = @[exclusionPath];
             [self.attachedImage removeFromSuperview];
             [self.textView addSubview:self.attachedImage];
+        } else {
+            self.attachedImage = nil;
         }
 
     

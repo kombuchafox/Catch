@@ -156,8 +156,6 @@
         }];
 
     self.textView.clipsToBounds = NO;
-    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didRecognizeTapGesture:)];
-    [self.contentView.superview addGestureRecognizer:tapGesture];
 
     
 
@@ -166,17 +164,17 @@
 
 - (void)didRecognizeTapGesture:(UITapGestureRecognizer*)gesture
 {
-    CGPoint point = [gesture locationInView:gesture.view];
+    CGPoint point = [gesture locationInView:_inputAccessoryView];
 
     if (gesture.state == UIGestureRecognizerStateEnded)
     {
         
-        if (CGRectContainsPoint(CGRectMake(doneButton.frame.origin.x - 20, doneButton.frame.origin.y - 20, doneButton.frame.size.width + 20, doneButton.frame.size.height + 20), point))
+        if (CGRectContainsPoint(CGRectMake(doneButton.frame.origin.x - 20, doneButton.frame.origin.y - 40, doneButton.frame.size.width + 20, doneButton.frame.size.height + 100), point))
         {
             NSLog(@"lol");
             [self doneButton:nil];
         }
-        if (CGRectContainsPoint(CGRectMake(self.addPictureButton.frame.origin.x - 20, self.addPictureButton.frame.origin.y - 20, self.addPictureButton.frame.size.width + 20, self.addPictureButton.frame.size.height + 20), point))
+        if (CGRectContainsPoint(CGRectMake(self.addPictureButton.frame.origin.x - 20, self.addPictureButton.frame.origin.y, self.addPictureButton.frame.size.width + 20, self.addPictureButton.frame.size.height + 100), point))
         {
             NSLog(@"lol");
             [self addPicture: nil];
@@ -367,10 +365,13 @@
 -(void)createInputAccessoryView: (UITextView *) textView {
     if (!_inputAccessoryView)
     {
+        UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didRecognizeTapGesture:)];
+        [_inputAccessoryView addGestureRecognizer:tapGesture];
+
         _inputAccessoryView = [[UIToolbar alloc] init];
         _inputAccessoryView.translucent = YES;
         _inputAccessoryView.barTintColor = [UIColor lightGrayColor];
-        UIView *keyBoard = [[[[[UIApplication sharedApplication] windows] lastObject] subviews] firstObject];
+//        UIView *keyBoard = [[[[[UIApplication sharedApplication] windows] lastObject] subviews] firstObject];
         
         _inputAccessoryView.frame = CGRectMake(-16, 216 + 27, self.contentView.frame.size.width, 35);
 
@@ -382,8 +383,8 @@
                                      initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
                                      target:nil action:nil];
         
-        doneButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 35)];
-        [doneButton addTarget:self action:@selector(doneButton:) forControlEvents:UIControlEventTouchDown];
+        doneButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 300)];
+        [doneButton addTarget:self action:@selector(doneButton:) forControlEvents:UIControlEventTouchUpInside];
 
         [doneButton setTitle:@"Done" forState:UIControlStateNormal];
         
@@ -404,9 +405,9 @@
 - (void)textViewDidChange:(UITextView *)textView
 {
     NSString *content = textView.text;
-    CGSize size = [content sizeWithFont:[UIFont systemFontOfSize:fontSize]
-                      constrainedToSize:CGSizeMake(CGRectGetWidth(self.textView.frame), CGRectGetHeight(self.textView.frame))
-                          lineBreakMode:NSLineBreakByWordWrapping];
+//    CGSize size = [content sizeWithFont:[UIFont systemFontOfSize:fontSize]
+//                      constrainedToSize:CGSizeMake(CGRectGetWidth(self.textView.frame), CGRectGetHeight(self.textView.frame))
+//                          lineBreakMode:NSLineBreakByWordWrapping];
     
     [self.delegate updateText:textView.text];
     if (textView.text.length > 100) {
@@ -423,7 +424,7 @@
     }
 
     textView.frame = CGRectMake(textView.frame.origin.x, textView.frame.origin.y, textView.frame.size.width, textView.frame.size.height+200);
-   // LinedTextView *linedTextView = (LinedTextView *)self.textView;
+
 
 }
 + (void)selectTextForInput:(UITextView *)input atRange:(NSRange)range {

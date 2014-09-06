@@ -20,6 +20,7 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 
 #define headerViewHeight 45.0
+#define navigationTitle  @"New Catch"
 
 
 @interface NewBallViewController()
@@ -33,6 +34,8 @@
     CollapsableHeaderView *catchPhraseHeaderView, *sendToHeaderView;
     CatchPhraseTableViewCell *catchPhraseViewCell;
     UIButton *camera;
+    UIButton *cancelButton;
+    UIButton *okButton;
     
 }
 @property (strong, nonatomic)   NSArray *colorArray;
@@ -57,12 +60,9 @@
 -(void) setUp
 {
     self.ballTableView.scrollEnabled = YES;
-    //setup currentMood
-    self.currentMood = HAPPY;
     //setup navigation bar
     [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
     [self.navigationController.navigationBar setBarTintColor:[Utils UIColorFromRGB:0xAC8CFF]];
-
     [self.view setBackgroundColor:[Utils UIColorFromRGB:0xF5F5F5]];
     int height = self.navigationController.navigationBar.frame.size.height + 0;
     int width = self.navigationController.navigationBar.frame.size.width;
@@ -77,6 +77,8 @@
     self.ballTableView.delegate = self;
 
     ballRowExpanded = true;
+    [self.backButton setContentEdgeInsets:UIEdgeInsetsMake(0, -30, 0, 0)];
+
 
     self.ballTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 }
@@ -92,26 +94,6 @@
 }
 
 
-
--(NSString *)moodToString: (Mood) mood
-{
-    switch (mood) {
-        case HAPPY:
-            return @"Happy";
-            break;
-        case PARTY:
-            return @"Party";
-            break;
-        case ROMANCE:
-            return @"Romance";
-            break;
-        case RANDOM:
-            return @"Random";
-            break;
-        default:
-            break;
-    }
-}
 - (IBAction)pushFriendsViewController:(UIButton *)sender {
     
     FriendsViewController *friends = [self.storyboard instantiateViewControllerWithIdentifier:@"FriendsViewController"];
@@ -150,17 +132,23 @@
     title.textColor = [UIColor whiteColor];
     title.font = [UIFont systemFontOfSize:28];
     title.textAlignment = NSTextAlignmentCenter;
-    UIButton *cancelButton = [[UIButton alloc]initWithFrame:CGRectMake(10, 0, headerViewHeight, headerViewHeight)];
+    if (!cancelButton)
+    {
+    cancelButton = [[UIButton alloc]initWithFrame:CGRectMake(10, 0, headerViewHeight, headerViewHeight)];
     [cancelButton setTitle: @"✖︎" forState: UIControlStateNormal];
 
     cancelButton.titleLabel.font = [UIFont systemFontOfSize:30];
     cancelButton.titleLabel.textColor = [UIColor whiteColor];
     [cancelButton addTarget:self action:@selector(goToOpenPaper:) forControlEvents:UIControlEventTouchUpInside];
-    UIButton *okButton = [[UIButton alloc]initWithFrame:CGRectMake(deviceWidth - headerViewHeight - 5, 0, headerViewHeight, headerViewHeight)];
-    [okButton setTitle: @"✔︎"forState: UIControlStateNormal];
-    [okButton addTarget:self action:@selector(flingBall:) forControlEvents:UIControlEventTouchUpInside];
-    okButton.titleLabel.textColor = [UIColor whiteColor];
-    okButton.titleLabel.font = [UIFont systemFontOfSize:30];
+    }
+    if (!okButton)
+    {
+        okButton = [[UIButton alloc]initWithFrame:CGRectMake(deviceWidth - headerViewHeight - 5, 0, headerViewHeight, headerViewHeight)];
+        [okButton setTitle: @"✔︎"forState: UIControlStateNormal];
+        [okButton addTarget:self action:@selector(flingBall:) forControlEvents:UIControlEventTouchUpInside];
+        okButton.titleLabel.textColor = [UIColor whiteColor];
+        okButton.titleLabel.font = [UIFont systemFontOfSize:30];
+    }
 
     switch (section) {
         case 0:
@@ -224,6 +212,8 @@
 -(void) goToOpenPaper: (UITapGestureRecognizer *) sender
 {
     self.didPinchPaper = NO;
+    catchPhraseViewCell.textView.hidden = NO;
+    catchPhraseViewCell.ballGraphic.hidden = YES;
     [self openPaper];
 }
 -(void) flingBall: (UITapGestureRecognizer *) sender
@@ -238,12 +228,9 @@
     
     // Don't forget to add UIImagePickerControllerDelegate in your .h
     picker.delegate = self;
-    
-//    if((UIButton *) sender == choosePhotoBtn) {
-        picker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
-//    } else {
-//        picker.sourceType = UIImagePickerControllerSourceTypeCamera;
-//    }
+    //link to photo album right now
+    picker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+
     
     [self presentViewController:picker animated:YES completion:nil];
 }
@@ -299,17 +286,21 @@
 {
     
     CGFloat height;
-    UITableView *t = tableView;
-    switch (indexPath.section){
-            
-            default:
-            if (!self.didPinchPaper && indexPath.section == 0) {
-                height = [UIScreen mainScreen].bounds.size.height - headerViewHeight - 20;
-            } else if (self.didPinchPaper && indexPath.section == 1){
-                height = [UIScreen mainScreen].bounds.size.height - headerViewHeight*2 - 65;
-            }
-            break;
+
+    if (!self.didPinchPaper && indexPath.section == 0 &&  catchPhraseViewCell.textView.hidden) {
+        height = [UIScreen mainScreen].bounds.size.height - headerViewHeight - 65;
+        cancelButton.hidden = YES;
+        okButton.hidden = YES;
+    } else if (!self.didPinchPaper && indexPath.section == 0) {
+        height = [UIScreen mainScreen].bounds.size.height - headerViewHeight - 20;
+        cancelButton.hidden = NO;
+        okButton.hidden = NO;
+    } else if (indexPath.section == 1){
+        cancelButton.hidden = NO;
+        okButton.hidden = NO;
+        height = [UIScreen mainScreen].bounds.size.height - headerViewHeight*2 - 65;
     }
+
     return height;
 }
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -339,12 +330,6 @@
     self.navigationController.navigationBar.shadowImage = [UIImage new];
     self.navigationItem.titleView = nil;
     self.navigationController.navigationBar.translucent = YES;
-    
-
-    //[self changeOriginYBy:self.ballTableView.frame.origin.y - 64 for:self.ballTableView];
-//    catchPhraseHeaderView.alpha = 0.2f;
-//    sendToHeaderView.alpha = 0.2f;
-
 }
 
 -(void) changeOriginYBy: (CGFloat) newY for:(UIView *) view;
@@ -361,13 +346,14 @@
         switch ([view.sectionTag intValue]) {
             case 0:
                 
-                
+                self.didPinchPaper = NO;
+                [self openPaper];
                 //self.ballTableView.scrollEnabled = false;
-                
+                ballRowExpanded = true;
                 break;
             case 1:
                 
-                self.ballTableView.scrollEnabled = TRUE;
+                self.ballTableView.scrollEnabled = FALSE;
                 ballRowExpanded = false;
                 break;
             case 2:

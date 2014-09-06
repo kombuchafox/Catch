@@ -51,6 +51,7 @@
 		70B67D7519AE964D00197B46 /* camera.png in Resources */ = {isa = PBXBuildFile; fileRef = 70B67D7419AE964D00197B46 /* camera.png */; };
 		70B67D7B19AF032C00197B46 /* BallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70B67D7A19AF032C00197B46 /* BallViewController.m */; };
 		70B67D7E19AF03BB00197B46 /* BallTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 70B67D7D19AF03BB00197B46 /* BallTableView.m */; };
+		70C2D23519BAE79D004E6EBD /* eye.png in Resources */ = {isa = PBXBuildFile; fileRef = 70C2D23419BAE79D004E6EBD /* eye.png */; };
 		70D492E719988C0300357DA8 /* basic-settings-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 70D492E619988C0300357DA8 /* basic-settings-icon.png */; };
 		70D492EB19989BC700357DA8 /* roundabout-bg-shadow.png in Resources */ = {isa = PBXBuildFile; fileRef = 70D492EA19989BC700357DA8 /* roundabout-bg-shadow.png */; };
 		70D492EF1998AA7D00357DA8 /* group.png in Resources */ = {isa = PBXBuildFile; fileRef = 70D492EE1998AA7D00357DA8 /* group.png */; };
@@ -163,6 +164,7 @@
 		70B67D7A19AF032C00197B46 /* BallViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BallViewController.m; sourceTree = "<group>"; };
 		70B67D7C19AF03BA00197B46 /* BallTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BallTableView.h; path = Catch/BallTableView.h; sourceTree = "<group>"; };
 		70B67D7D19AF03BB00197B46 /* BallTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BallTableView.m; path = Catch/BallTableView.m; sourceTree = "<group>"; };
+		70C2D23419BAE79D004E6EBD /* eye.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = eye.png; path = ../eye.png; sourceTree = "<group>"; };
 		70D492E619988C0300357DA8 /* basic-settings-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "basic-settings-icon.png"; path = "Catch/basic-settings-icon.png"; sourceTree = "<group>"; };
 		70D492EA19989BC700357DA8 /* roundabout-bg-shadow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "roundabout-bg-shadow.png"; path = "Catch/roundabout-bg-shadow.png"; sourceTree = "<group>"; };
 		70D492EE1998AA7D00357DA8 /* group.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = group.png; sourceTree = "<group>"; };
@@ -485,6 +487,7 @@
 		70FEE82A19999C79006829ED /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				70C2D23419BAE79D004E6EBD /* eye.png */,
 				70DD6F0F19B272E900820124 /* Images */,
 				70F93161199F1ECC0015A64A /* gear.png */,
 				70F93163199F1F7E0015A64A /* plusSign.png */,
@@ -606,6 +609,7 @@
 				70D5FDE119AACCEC0074DB15 /* yck4KBboi.png in Resources */,
 				70ABBB001995D8DC00761B84 /* Graduated_Blue_Background.png in Resources */,
 				70D5FDE519AACE1A0074DB15 /* tumblr_mnxid4jaQc1rf2f7ho1_400.png in Resources */,
+				70C2D23519BAE79D004E6EBD /* eye.png in Resources */,
 				70F8486A19AC427300073556 /* Shadow.png in Resources */,
 				70F8486E19AC7E0600073556 /* bokeh.png in Resources */,
 			);

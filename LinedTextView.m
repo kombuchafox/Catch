@@ -7,10 +7,12 @@
 //
 
 #import "LinedTextView.h"
+#import "Utils.h"
 #define DEFAULT_HORIZONTAL_COLOR    [UIColor colorWithRed:0.722f green:0.910f blue:0.980f alpha:0.7f]
 #define DEFAULT_VERTICAL_COLOR      [UIColor colorWithRed:0.957f green:0.416f blue:0.365f alpha:0.7f]
-#define DEFAULT_MARGINS             UIEdgeInsetsMake(10.0f, 10.0f, 0.0f, 10.0f)
+#define DEFAULT_MARGINS             UIEdgeInsetsMake(5.0f, 10.0f, 0.0f, -10.0f)
 #define kMaxFieldHeight 9999
+
 @interface LinedTextView (){
     int hasBeenInstatiated;
 }
@@ -103,7 +105,7 @@
         
         // Create un-mutated floats outside of the for loop.
         // Reduces memory access.
-        CGFloat baseOffset = 7.0f + self.font.descender;
+        CGFloat baseOffset = 8 + self.font.descender;
         CGFloat screenScale = [UIScreen mainScreen].scale;
         CGFloat boundsX = self.bounds.origin.x;
         CGFloat boundsWidth = self.bounds.size.width;
@@ -135,7 +137,7 @@
         CGContextStrokePath(context);
     }
 
-        [self reDrawBorders];
+        //[self reDrawBorders];
 
     
     // release the path
@@ -196,11 +198,11 @@ CGMutablePathRef createRoundedCornerPath(CGRect rect, CGFloat cornerRadius) {
     const CGFloat outlineStrokeWidth = 1;
     const CGFloat outlineCornerRadius = 7.0f;
     
-    const CGColorRef redColor = [[UIColor lightGrayColor] CGColor];
+    const CGColorRef redColor = [[Utils UIColorFromRGB:0x8CAEFF] CGColor];
     
     
     // inset the rect because half of the stroke applied to this path will be on the outside
-    CGRect insetRect = CGRectInset(CGRectMake(-10, -10, self.frame.size.width, self.contentSize.height + 10), outlineStrokeWidth/2.0f, outlineStrokeWidth/2.0f);
+    CGRect insetRect = CGRectInset(CGRectMake(-10, -5, self.frame.size.width, self.contentSize.height + 5), outlineStrokeWidth/2.0f, outlineStrokeWidth/2.0f);
     
     // get our rounded rect as a path
     CGMutablePathRef path = createRoundedCornerPath(insetRect, outlineCornerRadius);
@@ -236,9 +238,9 @@ CGMutablePathRef createRoundedCornerPath(CGRect rect, CGFloat cornerRadius) {
     _margins = margins;
     self.contentInset = (UIEdgeInsets) {
         .top = self.margins.top,
-        .left = self.margins.left,
+        .left = self.margins.left ,
         .bottom = self.margins.bottom,
-        .right = self.margins.right - self.margins.left
+        .right = self.margins.right
     };
     [self setContentSize:self.contentSize];
 }

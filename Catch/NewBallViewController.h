@@ -12,17 +12,11 @@
 #import "CollapsebleTableView.h"
 #import "BallGraphicTableViewCell.h"
 #import "CatchPhraseTableViewCell.h"
-typedef NS_ENUM(NSUInteger, Mood) {
-    HAPPY = 0,
-    PARTY,
-    ROMANCE,
-    RANDOM,
-};
 
-@interface NewBallViewController : UIViewController <UITextViewDelegate, BallViewDelegate, CatchPhaseTableViewCellDelegate, UIImagePickerControllerDelegate>
+@interface NewBallViewController : UIViewController <UITextViewDelegate, BallViewDelegate, CatchPhaseTableViewCellDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@property (strong, nonatomic) IBOutlet UIButton *backButton;
 -(void) collapsePaper;
 @property BOOL didPinchPaper;
-@property (nonatomic) Mood currentMood;
 @property NSString *defaultText;
 @property UIDynamicAnimator *animator;
 @end
