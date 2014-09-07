@@ -13,5 +13,6 @@
 - (void) drawCircle:(UIColor *)color;
 -(void) updateColor: (UIColor *) color;
 -(void) setupEmitter;
+-(void) drawSeparator;
 @property (nonatomic, strong) CAShapeLayer *circleLayer;
 @end

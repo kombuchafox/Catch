@@ -6,14 +6,14 @@
 //  Copyright (c) 2014 Catch Labs. All rights reserved.
 //
 
-#import "BallViewController.h"
+#import "CatchViewController.h"
 #import "CollapsableHeaderView.h"
 #import "Utils.h"
 #import "CommentsTableViewCell.h"
 #import "CommentTableViewCell.h"
 #import "ImageInspectorViewController.h"
 #define toolBarButtonSize 45
-@interface BallViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface CatchViewController () <UITableViewDataSource, UITableViewDelegate>
 {
     int defaultHeight;
     float sectionBallHue;
@@ -28,12 +28,17 @@
     int value;
     UITextView *ballTitleTextView;
     UIButton *peopleButton, *inviteButton, *addButton;
+    NSString *defaultString;
+    UIToolbar *_inputAccessoryView;
+    UIButton *addPictureButton;
+    UIButton *doneButton;
+    UILabel *characterCount;
 }
 //@property AddMessageTransitionManager *addMessageTransitionManager;
 @property BallView *ballSectionView;
 @end
 
-@implementation BallViewController
+@implementation CatchViewController
 @synthesize ballSectionView;
 -(void) viewDidLoad
 {
@@ -53,18 +58,23 @@
     self.navigationController.navigationBar.translucent = YES;
     self.navigationController.navigationBarHidden = YES;
 
-    [dismiss setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
-    //[self.view addSubview:dismiss];
     [self.view setBackgroundColor:[Utils UIColorFromRGB:0xF5F5F5]];
-    
     ballRowExpanded = false;
+    self.ballTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    [self.seperatorView drawSeparator];
+    defaultString = @"What's really on your mind?";
+    self.postStatusTextView.text = defaultString;
+}
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationSlide]  ;
     
-    //self.ballTableView.frame = CGRectMake(self.ballTableView.frame.origin.x, self.ballTableView.frame.origin.y, self.ballTableView.frame.size.width,[UIScreen mainScreen].bounds.size.height - 64);
-    defaultCatchPhraseHeader =@"Add Catch Phrase";
-    //self.ballTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    [UIView animateWithDuration:0.1 animations:^{
-        [[UIApplication sharedApplication] setStatusBarHidden:YES];
-    }];
+}
+
+
+- (void)viewWillDisappear:(BOOL)animated{
+    [[UIApplication sharedApplication] setStatusBarHidden:NO];
+    [super viewWillDisappear:animated];
 }
 -(void) viewDidAppear:(BOOL)animated
 {
@@ -74,6 +84,7 @@
 }
 
 - (IBAction)dismissNewBall:(id)sender {
+
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -82,27 +93,10 @@
 
 
 
-#pragma mark textView delegate
--(BOOL) textViewShouldBeginEditing:(UITextView *) textView
-{
-//    self.messageView.textColor = [UIColor darkGrayColor];
-//    AddMessageViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"AddMessageViewController"];
-//    viewController.modalPresentationStyle = UIModalPresentationCustom;
-//    viewController.transitioningDelegate  = self.addMessageTransitionManager;
-//    [self presentViewController:viewController animated:true completion:^{
-//        self.messageView.hidden = YES;
-//    }];
-    return false;
-    
-}
 #pragma mark UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    BallTableView *table = (BallTableView *) tableView;
-    if ([table.stringIdentifier isEqualToString:@"commentsTableView"]){
-        return 1;
-    }
-    return 2;
+    return 1;
     
 }
 #pragma mark UITableViewDelegateMethods
@@ -206,11 +200,11 @@
 }
 -(CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 0.8;
+    return 0.1;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    printf("%d", indexPath.section);
+    printf("%d", indexPath.row);
     UITableViewCell *cell;
 //    UIView *ballView;
 //    BallTableView *table = (BallTableView *) tableView;
@@ -254,32 +248,16 @@
 //        if (indexPath.row == value)
 //        {
     cell = [self.ballTableView dequeueReusableCellWithIdentifier:@"commentTableViewCell"];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showPicture:)];
+    [cell addGestureRecognizer:tap];
+    // Do your cell customisation
+    // cell.titleLabel.text = data.title;
     
-//            ballView = [[UIView alloc] initWithFrame:CGRectMake(0,0, 100, 35)];
-//            ballView.center = cell.center;
-//            ballView.layer.cornerRadius = 2;
-//            [ballView setBackgroundColor:[UIColor clearColor]];
-//            ballView.layer.borderWidth = 0.7;
-//            [cell.contentView addSubview:ballView];
-//            UILabel *loadMore = [[UILabel alloc] initWithFrame:CGRectMake(0,0, 100, 35)];
-//            loadMore.text = @"load more";
-//            loadMore.textColor = [UIColor darkGrayColor];
-//            loadMore.textAlignment = NSTextAlignmentCenter;
-//            [ballView addSubview:loadMore];
-//            [cell.contentView setBackgroundColor:[UIColor clearColor]];
-//            UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(loadMore:)];
-//            [ballView addGestureRecognizer:tap];
-//        } else {
-//            cell = [commentsTableViewCell dequeueReusableCellWithIdentifier:@"commentTableViewCell"];
-//            UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showPicture:)];
-//            [cell addGestureRecognizer:tap];
-//            
-//        }
-//        
-//    }
-//    
-//    NSLog(@"e");
-//
+    if (indexPath.row == value - 1)
+    {
+        
+        [self loadMore:nil];
+    }
     return cell;
 }
 -(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -302,15 +280,12 @@
 //                break;
 //        }
 //    }
-    CommentTableViewCell *comment = (CommentTableViewCell*)[self tableView:self.ballTableView cellForRowAtIndexPath:indexPath];
-    
-    if (comment.imageView) {
-        return 215;
-    }
-    return 110;
+
+        return 160;
+
 }
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 4;
+    return value;
 }
 
 -(void)tableView:(UITableView *) tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -426,5 +401,111 @@
             [self.navigationController pushViewController:imageInspector animated:YES];
         }
     }
+}
+
+#pragma mark UITextViewDelegate
+
+-(BOOL)textViewShouldBeginEditing:(UITextView *)textView
+{
+    
+    return YES;
+}
+- (void)keyboardWillShow:(NSNotification *)note {
+    // create custom button
+    
+    
+    
+    
+}
+-(void)textViewDidBeginEditing:(UITextView *)textView {
+    
+    NSString *text = textView.text;
+    
+    if ([textView.text isEqualToString: defaultString]) {
+        
+        textView.text = @"";
+    }
+    [self createInputAccessoryView: textView];
+    [textView setInputAccessoryView:_inputAccessoryView];
+    CGRect bFrame = self.ballTableView.frame;
+    CGRect sFrame = self.seperatorView.frame;
+    CGRect tFrame = self.postStatusTextView.frame;
+    [self.seperatorView setFrame:CGRectMake(sFrame.origin.x, sFrame.origin.y, bFrame.size.width, sFrame.size.height + 150)];
+    [self.seperatorView drawSeparator];
+    [self.ballTableView setFrame:CGRectMake(bFrame.origin.x, bFrame.origin.y + 150, bFrame.size.width, bFrame.size.height)];
+    
+    [self.postStatusTextView setFrame:CGRectMake(tFrame.origin.x, tFrame.origin.y, tFrame.size.width, tFrame.size.height)];
+    
+
+    
+    
+}
+
+-(void)createInputAccessoryView: (UITextView *) textView {
+        //UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didRecognizeTapGesture:)];
+        //[_inputAccessoryView addGestureRecognizer:tapGesture];
+        
+        _inputAccessoryView = [[UIToolbar alloc] init];
+        _inputAccessoryView.translucent = YES;
+        _inputAccessoryView.barTintColor = [UIColor lightGrayColor];
+        UIView *keyBoard = [[[[[UIApplication sharedApplication] windows] lastObject] subviews] firstObject];
+        
+        _inputAccessoryView.frame = CGRectMake(0, keyBoard.frame.origin.y - 35, self.view.frame.size.width, 35);
+        
+        UIBarButtonItem *cameraItem = [[UIBarButtonItem alloc] initWithCustomView:addPictureButton];
+        
+        
+        //Use this to put space in between your toolbox buttons
+        UIBarButtonItem *flexItem = [[UIBarButtonItem alloc]
+                                     initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
+                                     target:nil action:nil];
+        
+        doneButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 300)];
+        [doneButton addTarget:self action:@selector(doneButton:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [doneButton setTitle:@"Done" forState:UIControlStateNormal];
+        
+        UIBarButtonItem *doneItem = [[UIBarButtonItem alloc] initWithTitle:@"Done"
+                                                                     style:UIBarButtonItemStyleDone
+                                                                    target:self action:nil];
+        characterCount = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 40, 35)];
+        characterCount.text = @"100";
+        characterCount.textColor = [UIColor whiteColor];
+        UIBarButtonItem *characterLabel = [[UIBarButtonItem alloc] initWithCustomView:characterCount];
+        doneItem.tintColor = [UIColor whiteColor];
+        doneItem.customView = doneButton;
+        NSArray *items = [NSArray arrayWithObjects:cameraItem, flexItem, characterLabel, flexItem, doneItem, nil];
+        [_inputAccessoryView setItems:items animated:YES];
+        [self.view addSubview:_inputAccessoryView];
+ 
+}
+-(void) doneButton: (UITapGestureRecognizer *) sender
+{
+    [_inputAccessoryView removeFromSuperview];
+    [self.postStatusTextView endEditing:YES];
+}
+- (void)textViewDidChange:(UITextView *)textView
+{
+    NSString *content = textView.text;
+    //    CGSize size = [content sizeWithFont:[UIFont systemFontOfSize:fontSize]
+    //                      constrainedToSize:CGSizeMake(CGRectGetWidth(self.textView.frame), CGRectGetHeight(self.textView.frame))
+    //                          lineBreakMode:NSLineBreakByWordWrapping];
+    
+    if (textView.text.length > 100) {
+        textView.text = [textView.text substringToIndex:100];
+    }
+    
+    characterCount.text = [NSString stringWithFormat:@"%d", 100 - textView.text.length];
+    
+}
+- (void)textViewDidEndEditing:(UITextView *)textView
+{
+    if ([textView.text isEqualToString: @"" ]){
+        textView.text = defaultString;
+    }
+    
+    textView.frame = CGRectMake(textView.frame.origin.x, textView.frame.origin.y, textView.frame.size.width, textView.frame.size.height+200);
+    
+    
 }
 @end

@@ -13,7 +13,7 @@
 #import "BallGraphicTableViewCell.h"
 #import "CatchPhraseTableViewCell.h"
 
-@interface NewBallViewController : UIViewController <UITextViewDelegate, BallViewDelegate, CatchPhaseTableViewCellDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface NewCatchViewController : UIViewController <UITextViewDelegate, BallViewDelegate, CatchPhaseTableViewCellDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 @property (strong, nonatomic) IBOutlet UIButton *backButton;
 -(void) collapsePaper;
 @property BOOL didPinchPaper;

@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Catch Labs. All rights reserved.
 //
 
-#import "NewBallViewController.h"
+#import "NewCatchViewController.h"
 #import "AppNavigationController.h"
 #import "AddMessageViewController.h"
 #import "AddMessageTransitionManager.h"
@@ -23,7 +23,7 @@
 #define navigationTitle  @"New Catch"
 
 
-@interface NewBallViewController()
+@interface NewCatchViewController()
 {
     int defaultHeight;
     float sectionBallHue;
@@ -45,7 +45,7 @@
 
 
 @end
-@implementation NewBallViewController
+@implementation NewCatchViewController
 @synthesize ballSectionView, ballTableView, animator;
 -(void) viewDidLoad
 {

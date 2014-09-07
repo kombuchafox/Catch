@@ -9,7 +9,7 @@
 #import "AddMessageTransitionManager.h"
 #import "AddMessageViewController.h"
 #import "AppNavigationController.h"
-#import "NewBallViewController.h"
+#import "NewCatchViewController.h"
 
 @interface AddMessageTransitionManager()
 @property BOOL toAddMessageVC;

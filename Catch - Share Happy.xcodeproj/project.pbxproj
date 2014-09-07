@@ -49,7 +49,7 @@
 		70B67D7119AE835300197B46 /* transparent.png in Resources */ = {isa = PBXBuildFile; fileRef = 70B67D7019AE835300197B46 /* transparent.png */; };
 		70B67D7319AE848600197B46 /* transparentShadow.png in Resources */ = {isa = PBXBuildFile; fileRef = 70B67D7219AE848600197B46 /* transparentShadow.png */; };
 		70B67D7519AE964D00197B46 /* camera.png in Resources */ = {isa = PBXBuildFile; fileRef = 70B67D7419AE964D00197B46 /* camera.png */; };
-		70B67D7B19AF032C00197B46 /* BallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70B67D7A19AF032C00197B46 /* BallViewController.m */; };
+		70B67D7B19AF032C00197B46 /* CatchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70B67D7A19AF032C00197B46 /* CatchViewController.m */; };
 		70B67D7E19AF03BB00197B46 /* BallTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 70B67D7D19AF03BB00197B46 /* BallTableView.m */; };
 		70C2D23519BAE79D004E6EBD /* eye.png in Resources */ = {isa = PBXBuildFile; fileRef = 70C2D23419BAE79D004E6EBD /* eye.png */; };
 		70D492E719988C0300357DA8 /* basic-settings-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 70D492E619988C0300357DA8 /* basic-settings-icon.png */; };
@@ -69,7 +69,7 @@
 		70E0BCE819B530F400C9633A /* ImageInspectorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70E0BCE719B530F400C9633A /* ImageInspectorViewController.m */; };
 		70E2AE2D19AAC151006F3C33 /* writeIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 70E2AE2C19AAC151006F3C33 /* writeIcon.png */; };
 		70E5C50A199839E500D16D1C /* FriendsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70E5C509199839E500D16D1C /* FriendsViewController.m */; };
-		70E5C50D199840B400D16D1C /* NewBallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70E5C50C199840B400D16D1C /* NewBallViewController.m */; };
+		70E5C50D199840B400D16D1C /* NewCatchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70E5C50C199840B400D16D1C /* NewCatchViewController.m */; };
 		70E5C513199841A300D16D1C /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70E5C512199841A300D16D1C /* SettingsViewController.m */; };
 		70E777EA19A7DF4F00A4E563 /* CollapsebleHeaderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70E777E919A7DF4F00A4E563 /* CollapsebleHeaderViewController.m */; };
 		70E777F219A7E86200A4E563 /* NewBallTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 70E777F119A7E86200A4E563 /* NewBallTableView.m */; };
@@ -160,8 +160,8 @@
 		70B67D7019AE835300197B46 /* transparent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = transparent.png; path = "Catch - Share Happy.xcodeproj/transparent.png"; sourceTree = "<group>"; };
 		70B67D7219AE848600197B46 /* transparentShadow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = transparentShadow.png; path = Catch/transparentShadow.png; sourceTree = "<group>"; };
 		70B67D7419AE964D00197B46 /* camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = camera.png; path = Catch/camera.png; sourceTree = "<group>"; };
-		70B67D7919AF032C00197B46 /* BallViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BallViewController.h; sourceTree = "<group>"; };
-		70B67D7A19AF032C00197B46 /* BallViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BallViewController.m; sourceTree = "<group>"; };
+		70B67D7919AF032C00197B46 /* CatchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CatchViewController.h; sourceTree = "<group>"; };
+		70B67D7A19AF032C00197B46 /* CatchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CatchViewController.m; sourceTree = "<group>"; };
 		70B67D7C19AF03BA00197B46 /* BallTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BallTableView.h; path = Catch/BallTableView.h; sourceTree = "<group>"; };
 		70B67D7D19AF03BB00197B46 /* BallTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BallTableView.m; path = Catch/BallTableView.m; sourceTree = "<group>"; };
 		70C2D23419BAE79D004E6EBD /* eye.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = eye.png; path = ../eye.png; sourceTree = "<group>"; };
@@ -187,8 +187,8 @@
 		70E2AE2C19AAC151006F3C33 /* writeIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = writeIcon.png; path = Catch/writeIcon.png; sourceTree = "<group>"; };
 		70E5C508199839E500D16D1C /* FriendsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendsViewController.h; sourceTree = "<group>"; };
 		70E5C509199839E500D16D1C /* FriendsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendsViewController.m; sourceTree = "<group>"; };
-		70E5C50B199840B400D16D1C /* NewBallViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewBallViewController.h; sourceTree = "<group>"; };
-		70E5C50C199840B400D16D1C /* NewBallViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewBallViewController.m; sourceTree = "<group>"; };
+		70E5C50B199840B400D16D1C /* NewCatchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewCatchViewController.h; sourceTree = "<group>"; };
+		70E5C50C199840B400D16D1C /* NewCatchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewCatchViewController.m; sourceTree = "<group>"; };
 		70E5C511199841A300D16D1C /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		70E5C512199841A300D16D1C /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		70E777E819A7DF4F00A4E563 /* CollapsebleHeaderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollapsebleHeaderViewController.h; sourceTree = "<group>"; };
@@ -259,10 +259,10 @@
 		7036915319980CEA0088C41C /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				70B67D7919AF032C00197B46 /* BallViewController.h */,
-				70B67D7A19AF032C00197B46 /* BallViewController.m */,
-				70E5C50B199840B400D16D1C /* NewBallViewController.h */,
-				70E5C50C199840B400D16D1C /* NewBallViewController.m */,
+				70B67D7919AF032C00197B46 /* CatchViewController.h */,
+				70B67D7A19AF032C00197B46 /* CatchViewController.m */,
+				70E5C50B199840B400D16D1C /* NewCatchViewController.h */,
+				70E5C50C199840B400D16D1C /* NewCatchViewController.m */,
 				704460A319948DE000E65E93 /* WelcomeViewController.h */,
 				704460A419948DE000E65E93 /* WelcomeViewController.m */,
 				707D3EEF199843D800EEF372 /* AppNavigationController.h */,
@@ -643,7 +643,7 @@
 				70E5C50A199839E500D16D1C /* FriendsViewController.m in Sources */,
 				70A1AD1319B17A0C007F0A5A /* LinedTextView.m in Sources */,
 				70E0BCE219B4EA2600C9633A /* CommentsTableViewCell.m in Sources */,
-				70E5C50D199840B400D16D1C /* NewBallViewController.m in Sources */,
+				70E5C50D199840B400D16D1C /* NewCatchViewController.m in Sources */,
 				7059ABE719B03A3A00213B9C /* BallUpdateTableViewCell.m in Sources */,
 				70369156199813F80088C41C /* TransitionHomeManager.m in Sources */,
 				704A94771995E62800BCEC06 /* Utils.m in Sources */,
@@ -655,7 +655,7 @@
 				70E777F519A84ECE00A4E563 /* BallGraphicTableViewCell.m in Sources */,
 				70E0BCE519B51A8600C9633A /* CommentTableViewCell.m in Sources */,
 				70B67D7E19AF03BB00197B46 /* BallTableView.m in Sources */,
-				70B67D7B19AF032C00197B46 /* BallViewController.m in Sources */,
+				70B67D7B19AF032C00197B46 /* CatchViewController.m in Sources */,
 				7036915219980CE20088C41C /* HomeViewController.m in Sources */,
 				70D8859A19AD5A9F00BDB079 /* AnimatingBallGraphicView.m in Sources */,
 				70A9909919A40D88003EEF82 /* CollapsebleTableView.m in Sources */,

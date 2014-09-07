@@ -137,7 +137,7 @@
         CGContextStrokePath(context);
     }
 
-        //[self reDrawBorders];
+        [self reDrawBorders];
 
     
     // release the path
@@ -198,7 +198,7 @@ CGMutablePathRef createRoundedCornerPath(CGRect rect, CGFloat cornerRadius) {
     const CGFloat outlineStrokeWidth = 1;
     const CGFloat outlineCornerRadius = 7.0f;
     
-    const CGColorRef redColor = [[Utils UIColorFromRGB:0x8CAEFF] CGColor];
+    const CGColorRef redColor = [[Utils UIColorFromRGB:0xDCE8E0] CGColor];
     
     
     // inset the rect because half of the stroke applied to this path will be on the outside

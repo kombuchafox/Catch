@@ -182,10 +182,10 @@
             </objects>
             <point key="canvasLocation" x="-1257" y="-658"/>
         </scene>
-        <!--New Ball View Controller-->
+        <!--New Catch View Controller-->
         <scene sceneID="CAl-kh-Zmu">
             <objects>
-                <viewController storyboardIdentifier="NewBallViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="btR-9B-fYI" customClass="NewBallViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="NewCatchViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="btR-9B-fYI" customClass="NewCatchViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="O03-Nj-sz8">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -328,10 +328,10 @@
             </objects>
             <point key="canvasLocation" x="-981" y="906"/>
         </scene>
-        <!--Ball View Controller-->
+        <!--Catch View Controller-->
         <scene sceneID="y59-BG-lvf">
             <objects>
-                <viewController storyboardIdentifier="BallViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="1CS-jF-byD" customClass="BallViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CatchViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="1CS-jF-byD" customClass="CatchViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3Vm-Tj-17y">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -355,6 +355,9 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="dismissNewBall:" destination="1CS-jF-byD" eventType="touchUpInside" id="mre-3Y-4VL"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="mp8-p8-wr0">
                                         <rect key="frame" x="7" y="7" width="33" height="44"/>
@@ -364,22 +367,14 @@
                                         </state>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="0.69803923368453979" green="0.48235297203063965" blue="0.086274512112140656" alpha="1" colorSpace="deviceRGB"/>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" id="aXL-bP-uKt">
                                 <rect key="frame" x="0.0" y="58" width="320" height="510"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="What's really on your mind? " id="5LG-Dz-gw1" customClass="LinedTextView">
-                                        <rect key="frame" x="6" y="3" width="279" height="46"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        <color key="textColor" red="0.70196080207824707" green="0.70196080207824707" blue="0.70196080207824707" alpha="1" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                    </textView>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="217" sectionHeaderHeight="22" sectionFooterHeight="22" id="HoL-qc-g3X" customClass="BallTableView">
-                                        <rect key="frame" x="0.0" y="57" width="326" height="453"/>
+                                        <rect key="frame" x="0.0" y="55" width="326" height="483"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <prototypes>
@@ -390,7 +385,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="326" height="216"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut " id="J9z-RS-kHO" customClass="LinedTextView">
+                                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut " id="J9z-RS-kHO" customClass="LinedTextView">
                                                             <rect key="frame" x="6" y="6" width="280" height="210"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -416,6 +411,24 @@
                                             <outlet property="delegate" destination="1CS-jF-byD" id="SfV-fB-qfy"/>
                                         </connections>
                                     </tableView>
+                                    <view contentMode="scaleToFill" id="BUA-z6-nfT" customClass="BallView">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="55"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <subviews>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="What's really on your mind?" id="5LG-Dz-gw1" customClass="LinedTextView">
+                                                <rect key="frame" x="6" y="4" width="280" height="46"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="textColor" red="0.70196080207824707" green="0.70196080207824707" blue="0.70196080207824707" alpha="1" colorSpace="calibratedRGB"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                <connections>
+                                                    <outlet property="delegate" destination="1CS-jF-byD" id="Zo4-Tg-vxQ"/>
+                                                </connections>
+                                            </textView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
@@ -425,6 +438,8 @@
                     <navigationItem key="navigationItem" id="IyN-sf-AI0"/>
                     <connections>
                         <outlet property="ballTableView" destination="HoL-qc-g3X" id="y4k-GE-pm3"/>
+                        <outlet property="postStatusTextView" destination="5LG-Dz-gw1" id="lS0-N8-qF9"/>
+                        <outlet property="seperatorView" destination="BUA-z6-nfT" id="Fwl-fJ-HAd"/>
                         <segue destination="f3t-yK-iNA" kind="push" id="pwh-uP-iYc"/>
                     </connections>
                 </viewController>

@@ -355,7 +355,7 @@
     }];
     
     [self createInputAccessoryView: self.textView];
-    [textView setInputAccessoryView:_inputAccessoryView];
+    //[textView setInputAccessoryView:_inputAccessoryView];
     self.textView = textView;
 
 
@@ -363,17 +363,17 @@
 }
 
 -(void)createInputAccessoryView: (UITextView *) textView {
-    if (!_inputAccessoryView)
-    {
+
+
         UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didRecognizeTapGesture:)];
         [_inputAccessoryView addGestureRecognizer:tapGesture];
 
         _inputAccessoryView = [[UIToolbar alloc] init];
         _inputAccessoryView.translucent = YES;
         _inputAccessoryView.barTintColor = [UIColor lightGrayColor];
-//        UIView *keyBoard = [[[[[UIApplication sharedApplication] windows] lastObject] subviews] firstObject];
+        UIView *keyBoard = [[[[[UIApplication sharedApplication] windows] lastObject] subviews] firstObject];
         
-        _inputAccessoryView.frame = CGRectMake(-16, 216 + 27, self.contentView.frame.size.width, 35);
+        _inputAccessoryView.frame = CGRectMake(0, keyBoard.frame.origin.y - 35, self.contentView.frame.size.width, 35);
 
         UIBarButtonItem *cameraItem = [[UIBarButtonItem alloc] initWithCustomView:self.addPictureButton];
 
@@ -399,8 +399,8 @@
         doneItem.customView = doneButton;
         NSArray *items = [NSArray arrayWithObjects:cameraItem, flexItem, characterLabel, flexItem, doneItem, nil];
         [_inputAccessoryView setItems:items animated:YES];
-        [self.textView addSubview:_inputAccessoryView];
-    }
+        [self.delegate.view addSubview:_inputAccessoryView];
+   // }
 }
 - (void)textViewDidChange:(UITextView *)textView
 {
@@ -436,7 +436,7 @@
 }
 -(void)doneButton: (id) sender
 {
-    [self.textView.inputAccessoryView removeFromSuperview];
+    [_inputAccessoryView removeFromSuperview];
     [self.textView endEditing:YES];
 }
 

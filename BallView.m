@@ -8,9 +8,11 @@
 
 #import "BallView.h"
 #import <QuartzCore/QuartzCore.h>
+#import "Utils.h"
 @interface BallView()
 {
     CAEmitterLayer *lineEmitter;
+    UIView *separator;
 }
 
 @end
@@ -70,6 +72,14 @@
     [self.layer addSublayer:self.circleLayer];
     //[self.layer insertSublayer:self.circleLayer atIndex:0];
 }
+-(void) drawSeparator
+{
+    [separator removeFromSuperview];
+    separator = [[UIView alloc] initWithFrame:CGRectMake(0, self.frame.size.height - 1, self.frame.size.width, 0.7)];
+    separator.backgroundColor = [UIColor darkGrayColor];
+    [self addSubview:separator];
+}
+
 -(void) updateColor: (UIColor*) color
 {
     self.color = color;

@@ -12,8 +12,8 @@
 #import "SettingsViewController.h"
 #import "FriendsViewController.h"
 #import "CatchTableViewCell.h"
-#import "NewBallViewController.h"
-#import "BallViewController.h"
+#import "NewCatchViewController.h"
+#import "CatchViewController.h"
 
 @interface HomeViewController()
 @property (strong, nonatomic) IBOutlet CircleButton *inTheAirButton;
@@ -132,7 +132,7 @@
 }
 
 - (IBAction)test:(id)sender {
-    NewBallViewController *newBallView = [self.storyboard instantiateViewControllerWithIdentifier:@"NewBallViewController"];
+    NewCatchViewController *newBallView = [self.storyboard instantiateViewControllerWithIdentifier:@"NewCatchViewController"];
     
 
     [self.navigationController pushViewController:newBallView animated:YES];
@@ -145,7 +145,7 @@
 #pragma  mark CatchTableViewCellDelegate
 -(void) catchBall:(CatchTableViewCell *)cell
 {
-    BallViewController *ballViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"BallViewController"];
+    CatchViewController *ballViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"CatchViewController"];
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:ballViewController];
     [self presentViewController:navigationController animated:YES completion:nil];
 

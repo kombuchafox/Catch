@@ -8,7 +8,7 @@
 
 #import "TransitionHomeManager.h"
 #import "AddMessageViewController.h"
-#import "NewBallViewController.h"
+#import "NewCatchViewController.h"
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
 #import <CoreGraphics/CoreGraphics.h>
