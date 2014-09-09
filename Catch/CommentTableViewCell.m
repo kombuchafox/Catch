@@ -30,14 +30,6 @@
     self.attachedImage.layer.masksToBounds = YES;
     self.attachedImage.layer.borderWidth = 2;
     self.attachedImage.layer.borderColor = [UIColor clearColor].CGColor;
-    int random = arc4random_uniform(3);
-    if (random == 2) {
-        self.textView.text = @"2222222222222222 ";
-    } else if (random == 1) {
-        self.textView.text = @"11111111111111111111111111 11111111111111111111111111 11111111111111111111111111";
-    } else {
-        self.textView.text = @"0000000000  ";
-    }
    // if (arc4random() % 2 == 0) {
         self.attachedImage.hidden = YES;
     self.attachedImage = nil;

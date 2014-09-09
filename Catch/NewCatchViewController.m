@@ -18,7 +18,7 @@
 #import "CatchPhraseTableViewCell.h"
 #import "CollapsableHeaderView.h"
 #import <AssetsLibrary/AssetsLibrary.h>
-
+#import "PickFriendsTableViewCell.h"
 #define headerViewHeight 45.0
 #define navigationTitle  @"New Catch"
 
@@ -36,6 +36,8 @@
     UIButton *camera;
     UIButton *cancelButton;
     UIButton *okButton;
+    PickFriendsTableViewCell *friendsTableViewCell;
+
     
 }
 @property (strong, nonatomic)   NSArray *colorArray;
@@ -75,9 +77,10 @@
     newballLabel.font = [UIFont systemFontOfSize:30];
     self.navigationItem.titleView = newballLabel;
     self.ballTableView.delegate = self;
-
     ballRowExpanded = true;
     [self.backButton setContentEdgeInsets:UIEdgeInsetsMake(0, -30, 0, 0)];
+    
+    
 
 
     self.ballTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -261,6 +264,9 @@
             break;
         case 1:
             cell = [self.ballTableView dequeueReusableCellWithIdentifier:@"friendsTableViewCell"];
+            friendsTableViewCell = (PickFriendsTableViewCell *) cell;
+            friendsTableViewCell.friendsTableView.delegate = friendsTableViewCell;
+            friendsTableViewCell.friendsTableView.dataSource = friendsTableViewCell;
             break;
         case 2:
             if (!tCell) {

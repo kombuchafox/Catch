@@ -133,7 +133,11 @@
     CommentTableViewCell *comment = (CommentTableViewCell *) cell;
     [tableViewCellReferences setObject:comment forKey:[NSNumber numberWithInt:indexPath.row]];
 
-
+    if (indexPath.row % 3 == 1) {
+        comment.textView.text = @"11111111111111111111111111 11111111111111111111111111 11111111111111111111111111";
+    } else {
+        comment.textView.text = @"0000000000  ";
+    }
     if (indexPath.row == value - 1)
     {
         
@@ -144,9 +148,12 @@
 -(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     CommentTableViewCell  *cell = [tableViewCellReferences objectForKey:[NSNumber numberWithInt:indexPath.row]];
-    if (cell.attachedImage) {
-        return cell.textView.contentSize.height + 150;
+    tableViewCellReferences;
+    if (cell)
+    {
+        
     }
+    if (!cell) return 5;
     return cell.textView.contentSize.height + 10;
 
 }

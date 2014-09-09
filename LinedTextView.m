@@ -139,7 +139,6 @@
         CGContextStrokePath(context);
     }
 
-
     
     // release the path
     
