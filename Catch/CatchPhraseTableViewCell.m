@@ -9,6 +9,7 @@
 #import "CatchPhraseTableViewCell.h"
 #import "Utils.h"
 #import "LinedTextView.h"
+#import "ToolbarSingleton.h"
 #import <UIKit/UIKit.h>
 
 #define kDefaultNumberOfSpinnerMarkers 12
@@ -155,7 +156,7 @@
         } completion:^(BOOL completed){
         }];
 
-    self.textView.clipsToBounds = NO;
+    self.textView.clipsToBounds = YES;
 
     
 
@@ -172,7 +173,7 @@
         if (CGRectContainsPoint(CGRectMake(doneButton.frame.origin.x - 20, doneButton.frame.origin.y - 40, doneButton.frame.size.width + 20, doneButton.frame.size.height + 100), point))
         {
             NSLog(@"lol");
-            [self doneButton:nil];
+            [self doneButton];
         }
         if (CGRectContainsPoint(CGRectMake(self.addPictureButton.frame.origin.x - 20, self.addPictureButton.frame.origin.y, self.addPictureButton.frame.size.width + 20, self.addPictureButton.frame.size.height + 100), point))
         {
@@ -354,8 +355,9 @@
         textView.frame = CGRectMake(textView.frame.origin.x, textView.frame.origin.y, textView.frame.size.width, textView.frame.size.height - 200);
     }];
     
-    [self createInputAccessoryView: self.textView];
-    //[textView setInputAccessoryView:_inputAccessoryView];
+    ToolbarSingleton *toolbBarManager = [ToolbarSingleton sharedManager];
+    toolbBarManager.delegate = self;
+    [self.delegate.view addSubview:toolbBarManager.keyboardToolbar];
     self.textView = textView;
 
 
@@ -434,9 +436,11 @@
                                                offset:range.length];
     [input setSelectedTextRange:[input textRangeFromPosition:start toPosition:end]];
 }
--(void)doneButton: (id) sender
+-(void)doneButton
 {
     [_inputAccessoryView removeFromSuperview];
+    ToolbarSingleton *toolbBarManager = [ToolbarSingleton sharedManager];
+    [toolbBarManager.keyboardToolbar removeFromSuperview];
     [self.textView endEditing:YES];
 }
 

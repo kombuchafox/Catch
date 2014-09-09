@@ -30,24 +30,32 @@
     self.attachedImage.layer.masksToBounds = YES;
     self.attachedImage.layer.borderWidth = 2;
     self.attachedImage.layer.borderColor = [UIColor clearColor].CGColor;
-    self.textView.text = @"lromm urmfk omkji gjkhfk kjglkdfj mkl; lorum lmdol mjlolj jkldoomkglk lsjdkjlooe row,llmfdlk gfjglkdfsoro kdfjlgdkj";
+    int random = arc4random_uniform(3);
+    if (random == 2) {
+        self.textView.text = @"2222222222222222 ";
+    } else if (random == 1) {
+        self.textView.text = @"11111111111111111111111111 11111111111111111111111111 11111111111111111111111111";
+    } else {
+        self.textView.text = @"0000000000  ";
+    }
    // if (arc4random() % 2 == 0) {
-        self.attachedImage.hidden = NO;
-        if (arc4random() % 2 == 0)
-        {
-            if (arc4random() % 2 == 0) {
-                self.attachedImage.image = [UIImage imageNamed:@"tumblr_mnxid4jaQc1rf2f7ho1_400.png"];
-            } else {
-                self.attachedImage.image = [UIImage imageNamed:@"photo-6-768x1024.jpg"];
-            }
-            [self.attachedImage setFrame:CGRectMake([UIScreen mainScreen].bounds.size.width/2, self.textView.frame.size.height/2, self.attachedImage.frame.size.width, self.attachedImage.frame.size.height)];
-            UIBezierPath *exclusionPath = [UIBezierPath bezierPathWithRect: CGRectMake(0, self.textView.frame.size.height/2, [UIScreen mainScreen].bounds.size.width, self.attachedImage.frame.size.height)];
-            self.textView.textContainer.exclusionPaths = @[exclusionPath];
-            [self.attachedImage removeFromSuperview];
-            [self.textView addSubview:self.attachedImage];
-        } else {
-            self.attachedImage = nil;
-        }
+        self.attachedImage.hidden = YES;
+    self.attachedImage = nil;
+//        if (arc4random() % 2 == 0)
+//        {
+//            if (arc4random() % 2 == 0) {
+//                self.attachedImage.image = [UIImage imageNamed:@"tumblr_mnxid4jaQc1rf2f7ho1_400.png"];
+//            } else {
+//                self.attachedImage.image = [UIImage imageNamed:@"photo-6-768x1024.jpg"];
+//            }
+//            [self.attachedImage setFrame:CGRectMake([UIScreen mainScreen].bounds.size.width/2, self.textView.frame.size.height/2, self.attachedImage.frame.size.width, self.attachedImage.frame.size.height)];
+//            UIBezierPath *exclusionPath = [UIBezierPath bezierPathWithRect: CGRectMake(0, self.textView.frame.size.height/2, [UIScreen mainScreen].bounds.size.width, self.attachedImage.frame.size.height)];
+//            self.textView.textContainer.exclusionPaths = @[exclusionPath];
+//            [self.attachedImage removeFromSuperview];
+//            [self.textView addSubview:self.attachedImage];
+//        } else {
+//            self.attachedImage = nil;
+//        }
 
     
     //}

@@ -39,7 +39,9 @@
     self = [super initWithFrame:frame];
     if (self)
     {
-
+        if ([self.text isEqualToString:@""]) {
+            self.text = @"h";
+        }
         // Recycling the font is necessary
         // For proper line/text alignment
         UIFont *font = self.font;
@@ -137,14 +139,13 @@
         CGContextStrokePath(context);
     }
 
-        [self reDrawBorders];
 
     
     // release the path
     
-    self.layer.cornerRadius = 7;
-    self.layer.borderColor = [UIColor clearColor].CGColor;
-    self.layer.borderWidth = 0.5;
+    self.layer.cornerRadius = 5;
+    self.layer.borderColor = [[Utils UIColorFromRGB:0xDCE8E0] CGColor];
+    self.layer.borderWidth = 1;
 }
 CGMutablePathRef createRoundedCornerPath(CGRect rect, CGFloat cornerRadius) {
     
@@ -187,6 +188,27 @@ CGMutablePathRef createRoundedCornerPath(CGRect rect, CGFloat cornerRadius) {
     // return the path
     return path;
 }
+
+CGMutablePathRef createRect(CGRect rect, CGFloat cornerRadius)
+{
+    // create a mutable path
+    CGMutablePathRef path = CGPathCreateMutable();
+    
+    // get the 4 corners of the rect
+    CGPoint topLeft = CGPointMake(rect.origin.x+3, rect.origin.y - 10);
+    CGPoint topRight = CGPointMake(rect.origin.x + rect.size.width, rect.origin.y);
+    CGPoint bottomRight = CGPointMake(rect.origin.x + rect.size.width, rect.origin.y + rect.size.height);
+    CGPoint bottomLeft = CGPointMake(rect.origin.x, rect.origin.y + rect.size.height);
+    
+    // move to top left
+    CGPathMoveToPoint(path, NULL, topLeft.x, -10);
+    CGPathAddLineToPoint(path, NULL, topLeft.x, bottomLeft.y);
+    CGPathAddLineToPoint(path, NULL, bottomRight.x, bottomRight.y);
+    CGPathAddLineToPoint(path, NULL, topRight.x, topRight.y);
+    return path;
+
+    
+}
 - (void)setFont:(UIFont *)font
 {
     [super setFont:font];
@@ -195,8 +217,8 @@ CGMutablePathRef createRoundedCornerPath(CGRect rect, CGFloat cornerRadius) {
 
 -(void) reDrawBorders {
     CGContextRef context = UIGraphicsGetCurrentContext();
-    const CGFloat outlineStrokeWidth = 1;
-    const CGFloat outlineCornerRadius = 7.0f;
+    const CGFloat outlineStrokeWidth = 1.5;
+    const CGFloat outlineCornerRadius = 5.0f;
     
     const CGColorRef redColor = [[Utils UIColorFromRGB:0xDCE8E0] CGColor];
     
@@ -217,7 +239,31 @@ CGMutablePathRef createRoundedCornerPath(CGRect rect, CGFloat cornerRadius) {
     // draw the path
     CGContextDrawPath(context, kCGPathStroke);
     CGPathRelease(path);
-    hasBeenInstatiated = 1;
+}
+-(void) reDrawRectBorders {
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    const CGFloat outlineStrokeWidth = 4;
+    const CGFloat outlineCornerRadius = 7.0f;
+    
+    const CGColorRef redColor = [[Utils UIColorFromRGB:0xDCE8E0] CGColor];
+    
+    
+    // inset the rect because half of the stroke applied to this path will be on the outside
+    CGRect insetRect = CGRectInset(CGRectMake(-10, -5, self.frame.size.width, self.contentSize.height + 5), outlineStrokeWidth/2.0f, outlineStrokeWidth/2.0f);
+    
+    // get our rounded rect as a path
+    CGMutablePathRef path = createRect(self.bounds, outlineCornerRadius);
+    
+    // add the path to the context
+    CGContextAddPath(context, path);
+    
+    // set the stroke params
+    CGContextSetStrokeColorWithColor(context, redColor);
+    CGContextSetLineWidth(context, outlineStrokeWidth);
+    
+    // draw the path
+    CGContextDrawPath(context, kCGPathStroke);
+    CGPathRelease(path);
 }
 #pragma mark - Property methods
 

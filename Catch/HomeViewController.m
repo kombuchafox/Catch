@@ -40,7 +40,7 @@
 
     //for testing
     _testArray = [NSArray arrayWithObjects:@"obj1",@"obj1",@"obj1",nil];
-    _labelArray = [NSArray arrayWithObjects:@"Dopest pick up line from last night",@"Best effin kittens", @"I wanna seee the erryones selfie game",nil];
+    _labelArray = [NSArray arrayWithObjects:@"#whatTheFuck",@"#selfies", @"#bestSex",nil];
 
 
     [self.view setBackgroundColor:[Utils UIColorFromRGB:0xFCFCEB]];
