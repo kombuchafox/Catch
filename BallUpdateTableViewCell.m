@@ -29,7 +29,7 @@
 -(void) setUp
 {
 
-    self.ballStoryScrollView.delegate = self;
+    
     self.ballStoryScrollView.scrollEnabled = YES;
     self.ballStoryScrollView.contentSize = CGSizeMake(500, 150);
     [self drawSeparator];

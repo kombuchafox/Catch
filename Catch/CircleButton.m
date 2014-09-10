@@ -31,22 +31,24 @@
     
     [self.circleLayer setStrokeColor:[color CGColor]];
     
-    [self.circleLayer setLineWidth:0.5f];
-    [self.circleLayer setFillColor:self.color.CGColor];
+    [self.circleLayer setLineWidth:2.0f];
+    [self.circleLayer setFillColor:[UIColor whiteColor].CGColor];
     
     [self.layer insertSublayer:self.circleLayer atIndex:0];
 }
-- (void)setHighlighted:(BOOL)highlighted
+
+
+-(void) setSelected:(BOOL)selected
 {
-    if (highlighted)
+    NSLog(@"here");
+    if (selected)
     {
-        self.titleLabel.textColor = [UIColor whiteColor];
-        [self.circleLayer setFillColor:[UIColor whiteColor].CGColor];
+        [self.circleLayer setFillColor:self.color.CGColor];
     }
     else
     {
-        [self.circleLayer setFillColor:self.color.CGColor];
-
+        self.titleLabel.textColor = [UIColor whiteColor];
+        [self.circleLayer setFillColor:[UIColor whiteColor].CGColor];
     }
 }
 

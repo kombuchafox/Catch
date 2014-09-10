@@ -148,11 +148,6 @@
 -(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     CommentTableViewCell  *cell = [tableViewCellReferences objectForKey:[NSNumber numberWithInt:indexPath.row]];
-    tableViewCellReferences;
-    if (cell)
-    {
-        
-    }
     if (!cell) return 5;
     return cell.textView.contentSize.height + 10;
 
@@ -179,7 +174,7 @@
 #pragma mark BallViewDelegate
 -(void) updateBallColor:(CGFloat)value
 {
-    [ballSectionView updateColor:[UIColor colorWithHue:value saturation:1 brightness:1 alpha:1]];
+    //[ballSectionView updateColor:[UIColor colorWithHue:value saturation:1 brightness:1 alpha:1]];
 }
 -(void)setAllViewToZeroAlpha
 {
@@ -250,7 +245,6 @@
     [picker dismissViewControllerAnimated:YES completion:nil];
     UIImage * pickedImage = [info objectForKey:UIImagePickerControllerOriginalImage];
     catchPhraseViewCell.memeImage = pickedImage;
-    [catchPhraseViewCell toggleContents];
 
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
@@ -292,7 +286,7 @@
 }
 -(void)textViewDidBeginEditing:(UITextView *)textView {
     
-    NSString *text = textView.text;
+
     
     if ([textView.text isEqualToString: defaultString]) {
         
@@ -300,6 +294,10 @@
     }
     ToolbarSingleton *toolbBarManager = [ToolbarSingleton sharedManager];
     [toolbBarManager changeDoneButtonTitle:@"Post"];
+    CGRect frame = toolbBarManager.keyboardToolbar.frame;
+
+    frame.origin = CGPointMake(0, 317);
+    toolbBarManager.keyboardToolbar.frame = frame;
     [self.view addSubview:toolbBarManager.keyboardToolbar];
     toolbBarManager.delegate = self;
     CGRect bFrame = self.ballTableView.frame;
@@ -326,7 +324,7 @@
 }
 - (void)textViewDidChange:(UITextView *)textView
 {
-    NSString *content = textView.text;
+
     if (textView.text.length > 100) {
         textView.text = [textView.text substringToIndex:100];
     }

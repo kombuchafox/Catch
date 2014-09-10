@@ -63,7 +63,7 @@
     realDelegate = newDelegate;
 }
 
-- (void) setDataSource:(id <UITableViewDataSource>) newDataSource
+- (void) setDataSource:(id <UITableViewDataSource, CollapsebleDataSource>) newDataSource
 {
     [super setDataSource:self];
     realDataSource = newDataSource;

@@ -13,7 +13,7 @@
 #import "BallTableView.h"
 #import "LinedTextView.h"
 
-@interface CatchViewController : UIViewController <UITextViewDelegate, BallViewDelegate, CatchPhaseTableViewCellDelegate>
+@interface CatchViewController : UIViewController <UITextViewDelegate, BallViewDelegate, CatchPhaseTableViewCellDelegate, ToolbarSingletonDelegate>
 @property (strong, nonatomic) IBOutlet BallTableView *ballTableView;
 @property (strong, nonatomic) IBOutlet BallView *seperatorView;
 @property (strong, nonatomic) IBOutlet LinedTextView *postStatusTextView;

@@ -13,9 +13,10 @@
 #import "BallGraphicTableViewCell.h"
 #import "CatchPhraseTableViewCell.h"
 
-@interface NewCatchViewController : UIViewController <UITextViewDelegate, BallViewDelegate, CatchPhaseTableViewCellDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface NewCatchViewController : UIViewController <UITextViewDelegate, BallViewDelegate, CatchPhaseTableViewCellDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITableViewDelegate>
 @property (strong, nonatomic) IBOutlet UIButton *backButton;
 -(void) collapsePaper;
+@property BOOL checkKeyBoardHeight;
 @property BOOL didPinchPaper;
 @property NSString *defaultText;
 @property UIDynamicAnimator *animator;

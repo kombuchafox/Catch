@@ -11,7 +11,5 @@
 @interface Utils : NSObject 
 
 + (UIColor *) UIColorFromRGB:(int) rgbValue;
-+ (UIImage *)imageWithImage:(UIImage *)image scaledToFillSize:(CGSize)size;
-+(UIImage *)squareAndSmall: (UIImage *) image;
-+ (UIImage *)generatePhotoThumbnail:(UIImage *)image withRatio:(float)ratio;
+
 @end

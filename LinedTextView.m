@@ -239,32 +239,7 @@ CGMutablePathRef createRect(CGRect rect, CGFloat cornerRadius)
     CGContextDrawPath(context, kCGPathStroke);
     CGPathRelease(path);
 }
--(void) reDrawRectBorders {
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    const CGFloat outlineStrokeWidth = 4;
-    const CGFloat outlineCornerRadius = 7.0f;
-    
-    const CGColorRef redColor = [[Utils UIColorFromRGB:0xDCE8E0] CGColor];
-    
-    
-    // inset the rect because half of the stroke applied to this path will be on the outside
-    CGRect insetRect = CGRectInset(CGRectMake(-10, -5, self.frame.size.width, self.contentSize.height + 5), outlineStrokeWidth/2.0f, outlineStrokeWidth/2.0f);
-    
-    // get our rounded rect as a path
-    CGMutablePathRef path = createRect(self.bounds, outlineCornerRadius);
-    
-    // add the path to the context
-    CGContextAddPath(context, path);
-    
-    // set the stroke params
-    CGContextSetStrokeColorWithColor(context, redColor);
-    CGContextSetLineWidth(context, outlineStrokeWidth);
-    
-    // draw the path
-    CGContextDrawPath(context, kCGPathStroke);
-    CGPathRelease(path);
-}
-#pragma mark - Property methods
+
 
 - (void)setHorizontalLineColor:(UIColor *)horizontalLineColor
 {

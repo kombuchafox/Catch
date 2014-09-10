@@ -57,11 +57,12 @@
     homeLabel.textAlignment = NSTextAlignmentCenter;
     homeLabel.font = [UIFont systemFontOfSize:35];
     self.navigationItem.titleView = homeLabel;
-    
+    [self.navigationController.navigationBar setBarTintColor:[Utils UIColorFromRGB:0xD73033]];
     [self.toolBar setBackgroundColor:[Utils UIColorFromRGB:0xD73033]];
     [self.statusBarView setBackgroundColor:[Utils UIColorFromRGB:0xD73033]];
     [self.settingsButton setContentEdgeInsets:UIEdgeInsetsMake(0, -30, 0, 0)];
     [self.friendsButton setContentEdgeInsets:UIEdgeInsetsMake(0, 20, 0, -15)];
+
 }
 -(void)viewDidAppear:(BOOL)animated
 {
@@ -106,14 +107,14 @@
         
             cell.delegate = self;
         [cell setUp];
-        const CGFloat fontSize = 25;
-        UIFont *boldFont = [UIFont boldSystemFontOfSize:fontSize];
-        UIFont *regFont = [UIFont systemFontOfSize:fontSize];
+//        const CGFloat fontSize = 25;
+//        UIFont *boldFont = [UIFont boldSystemFontOfSize:fontSize];
+//        UIFont *regFont = [UIFont systemFontOfSize:fontSize];
         cell.ballTitle.text = _labelArray[indexPath.row - 1];
-        NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:regFont, NSFontAttributeName,nil];
+//        NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:regFont, NSFontAttributeName,nil];
         //NSDictionary *subattributes = [NSDictionary dictionaryWithObjectsAndKeys:boldFont,NSFontAttributeName, nil];
         //NSRange range = NSMakeRange(10, 5);
-        NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:_labelArray[0] attributes:attributes];
+//        NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:_labelArray[0] attributes:attributes];
         //[string setAttributes:subattributes range:range];
     }
     return cell;
@@ -132,11 +133,11 @@
 }
 
 - (IBAction)test:(id)sender {
-    NewCatchViewController *newBallView = [self.storyboard instantiateViewControllerWithIdentifier:@"NewCatchViewController"];
-    
+    [self.navigationController.navigationBar setBarTintColor:[Utils UIColorFromRGB:0xAC8CFF]];
+    NewCatchViewController *rootVC = [self.storyboard instantiateViewControllerWithIdentifier:@"NewCatchViewController"];
+    rootVC.checkKeyBoardHeight = YES;
+    [self.navigationController pushViewController:rootVC animated:YES];
 
-    [self.navigationController pushViewController:newBallView animated:YES];
-    
 }
 - (IBAction)pushFriendsViewController:(UIButton *)sender {
     

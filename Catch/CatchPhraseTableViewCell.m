@@ -225,7 +225,7 @@
 
 -(void) handlePinch: (UIPinchGestureRecognizer *) sender
 {
-    CGFloat scale = sender.scale;
+
     [self.delegate collapsePaper];
     didPinch = YES;
 //    if (sender.scale < 1){
@@ -259,7 +259,7 @@
             self.backgroundView = nil;
             } completion:
          ^(BOOL completed) {
-             CGPoint point = CGPointMake(self.ballGraphic.frame.origin.x, -810);
+
              CGPoint actual = CGPointMake(self.ballGraphic.frame.origin.x, self.ballGraphic.frame.origin.y);
              if (actual.y > 0) {
                  [UIView animateWithDuration:0.5 animations:^{
@@ -357,6 +357,17 @@
     
     ToolbarSingleton *toolbBarManager = [ToolbarSingleton sharedManager];
     toolbBarManager.delegate = self;
+    CGRect frame = toolbBarManager.keyboardToolbar.frame;
+    if (self.delegate.checkKeyBoardHeight)
+    {
+        frame.origin = CGPointMake(0, 253);
+    } else {
+        frame.origin = CGPointMake(0, 317);
+    }
+    toolbBarManager.keyboardToolbar.frame = frame;
+    CGRect delegateFrame = self.delegate.view.frame;
+    delegateFrame.size = [UIScreen mainScreen].bounds.size;
+    [self.delegate.view setFrame: delegateFrame];
     [self.delegate.view addSubview:toolbBarManager.keyboardToolbar];
     self.textView = textView;
 
@@ -366,47 +377,11 @@
 
 -(void)createInputAccessoryView: (UITextView *) textView {
 
-
-        UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didRecognizeTapGesture:)];
-        [_inputAccessoryView addGestureRecognizer:tapGesture];
-
-        _inputAccessoryView = [[UIToolbar alloc] init];
-        _inputAccessoryView.translucent = YES;
-        _inputAccessoryView.barTintColor = [UIColor lightGrayColor];
-        UIView *keyBoard = [[[[[UIApplication sharedApplication] windows] lastObject] subviews] firstObject];
-        
-        _inputAccessoryView.frame = CGRectMake(0, keyBoard.frame.origin.y - 35, self.contentView.frame.size.width, 35);
-
-        UIBarButtonItem *cameraItem = [[UIBarButtonItem alloc] initWithCustomView:self.addPictureButton];
-
-        
-        //Use this to put space in between your toolbox buttons
-        UIBarButtonItem *flexItem = [[UIBarButtonItem alloc]
-                                     initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
-                                     target:nil action:nil];
-        
-        doneButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 300)];
-        [doneButton addTarget:self action:@selector(doneButton:) forControlEvents:UIControlEventTouchUpInside];
-
-        [doneButton setTitle:@"Done" forState:UIControlStateNormal];
-        
-        UIBarButtonItem *doneItem = [[UIBarButtonItem alloc] initWithTitle:@"Done"
-                                                                     style:UIBarButtonItemStyleDone
-                                                                    target:self action:nil];
-        characterCount = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 40, 35)];
-        characterCount.text = @"100";
-        characterCount.textColor = [UIColor whiteColor];
-        UIBarButtonItem *characterLabel = [[UIBarButtonItem alloc] initWithCustomView:characterCount];
-        doneItem.tintColor = [UIColor whiteColor];
-        doneItem.customView = doneButton;
-        NSArray *items = [NSArray arrayWithObjects:cameraItem, flexItem, characterLabel, flexItem, doneItem, nil];
-        [_inputAccessoryView setItems:items animated:YES];
-        [self.delegate.view addSubview:_inputAccessoryView];
    // }
 }
 - (void)textViewDidChange:(UITextView *)textView
 {
-    NSString *content = textView.text;
+
 //    CGSize size = [content sizeWithFont:[UIFont systemFontOfSize:fontSize]
 //                      constrainedToSize:CGSizeMake(CGRectGetWidth(self.textView.frame), CGRectGetHeight(self.textView.frame))
 //                          lineBreakMode:NSLineBreakByWordWrapping];

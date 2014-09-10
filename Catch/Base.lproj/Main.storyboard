@@ -14,9 +14,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="oa0-EM-4Jf">
-                                <rect key="frame" x="-69" y="339" width="46" height="30"/>
+                                <rect key="frame" x="0.0" y="339" width="46" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button">
+                                <state key="normal">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
@@ -29,7 +29,7 @@
                                 </state>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="904-iS-M7e">
-                                <rect key="frame" x="0.0" y="61" width="320" height="507"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
@@ -160,12 +160,14 @@
                         <outlet property="inTheAirButton" destination="gmg-4z-LnU" id="fMh-oP-bbn"/>
                         <outlet property="settingsButton" destination="W4X-BV-w9c" id="a4Q-aQ-Z1K"/>
                         <segue destination="uyK-26-dql" kind="push" identifier="segueAppHome" id="7vq-y7-vte"/>
-                        <segue destination="btR-9B-fYI" kind="push" identifier="pushNewBallViewController" id="14O-sb-QT5"/>
+                        <segue destination="3Hc-2O-MPW" kind="modal" id="sDN-Fj-NvE"/>
+                        <segue destination="mVK-Zp-ly9" kind="push" id="r7X-DH-nak"/>
+                        <segue destination="OPT-64-XHO" kind="push" id="k8g-ei-sas"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZy-Mw-w7e" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1013" y="90"/>
+            <point key="canvasLocation" x="-1236" y="-688"/>
         </scene>
         <!--Settings View Controller - SettingsViewController-->
         <scene sceneID="h5C-i8-A4b">
@@ -180,7 +182,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2oK-Vo-UKU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1257" y="-658"/>
+            <point key="canvasLocation" x="-1196" y="-1398"/>
         </scene>
         <!--New Catch View Controller-->
         <scene sceneID="CAl-kh-Zmu">
@@ -195,42 +197,8 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="interactiveBallGraphic" rowHeight="300" id="vbF-g5-IGJ" customClass="BallGraphicTableViewCell">
-                                        <rect key="frame" x="0.0" y="66" width="320" height="300"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="vbF-g5-IGJ" id="tbS-KS-ip6">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="299"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <view contentMode="scaleToFill" id="a3q-by-L7X" customClass="ColorBarPicker">
-                                                    <rect key="frame" x="283" y="46" width="13" height="150"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                                </view>
-                                                <view contentMode="scaleToFill" id="RBg-J0-Sea" customClass="InfColorBarPicker">
-                                                    <rect key="frame" x="276" y="46" width="24" height="150"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                    <connections>
-                                                        <action selector="ballColorChanged:" destination="vbF-g5-IGJ" eventType="valueChanged" id="JLT-FX-uvB"/>
-                                                    </connections>
-                                                </view>
-                                                <view contentMode="scaleToFill" id="nyE-bK-SQi" customClass="BallView">
-                                                    <rect key="frame" x="77" y="42" width="158" height="154"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                </view>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <connections>
-                                            <outlet property="ballView" destination="nyE-bK-SQi" id="dfr-ha-rM4"/>
-                                            <outlet property="colorBarPicker" destination="a3q-by-L7X" id="hWR-Hg-Jz0"/>
-                                            <outlet property="infColorBarPicker" destination="RBg-J0-Sea" id="ELB-W4-gtc"/>
-                                        </connections>
-                                    </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CatchPhraseCell" rowHeight="318" id="SwI-CU-aFY" customClass="CatchPhraseTableViewCell">
-                                        <rect key="frame" x="0.0" y="366" width="320" height="318"/>
+                                        <rect key="frame" x="0.0" y="66" width="320" height="318"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="SwI-CU-aFY" id="UPv-V5-QyL">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="317"/>
@@ -245,31 +213,20 @@
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <color key="backgroundColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="33"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="33"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                 </textView>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="dWR-0S-2T1">
-                                                    <rect key="frame" x="269" y="177" width="36" height="36"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <state key="normal" image="cameraIcon.png">
-                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                    </state>
-                                                    <connections>
-                                                        <action selector="addPicture:" destination="SwI-CU-aFY" eventType="touchUpInside" id="tOe-IX-vQD"/>
-                                                    </connections>
-                                                </button>
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </tableViewCellContentView>
                                         <inset key="separatorInset" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <connections>
-                                            <outlet property="addPictureButton" destination="dWR-0S-2T1" id="3ZB-6h-958"/>
                                             <outlet property="ballGraphic" destination="heD-8G-sSh" id="Wdr-q6-3WI"/>
                                             <outlet property="textView" destination="LkV-7f-s9A" id="ctI-5D-KHn"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="friendsTableViewCell" rowHeight="237" id="2za-dU-9g8" customClass="PickFriendsTableViewCell">
-                                        <rect key="frame" x="0.0" y="684" width="320" height="237"/>
+                                        <rect key="frame" x="0.0" y="384" width="320" height="237"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2za-dU-9g8" id="70M-f9-Gvr">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="236"/>
@@ -355,11 +312,12 @@
                     <connections>
                         <outlet property="backButton" destination="n2v-1T-XVf" id="DlZ-HI-DaG"/>
                         <outlet property="ballTableView" destination="Auz-ir-CmK" id="eZH-TU-Hlu"/>
+                        <segue destination="d5b-DE-Nyo" kind="push" id="iuT-Va-bfh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="s2T-8v-faC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-981" y="906"/>
+            <point key="canvasLocation" x="-1067" y="90"/>
         </scene>
         <!--Catch View Controller-->
         <scene sceneID="y59-BG-lvf">
@@ -487,7 +445,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="huF-lo-asj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-82" y="147"/>
+            <point key="canvasLocation" x="-366" y="-688"/>
         </scene>
         <!--Friends View Controller-->
         <scene sceneID="9ba-NH-DI4">
@@ -502,7 +460,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iOd-Fn-XlH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-812" y="-679"/>
+            <point key="canvasLocation" x="-757" y="-1379"/>
         </scene>
         <!--Image Inspector View Controller-->
         <scene sceneID="ESg-09-4Ki">
@@ -540,7 +498,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OYE-tc-9Jp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="352" y="-114"/>
+            <point key="canvasLocation" x="148" y="-688"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ohh-1M-ddy">
@@ -555,7 +513,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Iyl-Nn-ofP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-486" y="-114"/>
+            <point key="canvasLocation" x="-734" y="-688"/>
         </scene>
         <!--Welcome View Controller-->
         <scene sceneID="vxW-wi-6Ps">
@@ -632,18 +590,17 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="d5b-DE-Nyo" kind="relationship" relationship="rootViewController" id="AqJ-7i-dym"/>
+                        <segue destination="btR-9B-fYI" kind="relationship" relationship="rootViewController" id="dtl-oT-Tht"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jRR-aX-zRa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1577" y="90"/>
+            <point key="canvasLocation" x="-1529" y="90"/>
         </scene>
     </scenes>
     <resources>
         <image name="Cloud.png" width="75" height="35"/>
         <image name="backArrow.png" width="60" height="60"/>
-        <image name="cameraIcon.png" width="256" height="256"/>
         <image name="crumpled_paper.png" width="164" height="153"/>
         <image name="facebook-logo_000.png" width="2100" height="1615"/>
         <image name="paper.png" width="204" height="256"/>

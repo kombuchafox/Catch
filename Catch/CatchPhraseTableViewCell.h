@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ToolbarSingleton.h"
 @protocol CatchPhaseTableViewCellDelegate
 @property UIView *view;
 @property BOOL didPinchPaper;
+@property BOOL checkKeyBoardHeight;
 @required
 -(void)updateText:(NSString *) newText;
 -(void) collapsePaper;
@@ -20,7 +22,7 @@
 -(void)setAllViewToZeroAlpha;
 @end
 
-@interface CatchPhraseTableViewCell : UITableViewCell <UITextViewDelegate>
+@interface CatchPhraseTableViewCell : UITableViewCell <UITextViewDelegate, ToolbarSingletonDelegate, UICollisionBehaviorDelegate>
 @property UITextView *textView;
 @property UIImageView *memeView;
 @property UIImage *memeImage;
@@ -30,5 +32,4 @@
 - (IBAction)addPicture:(UIButton *)sender;
 @property (strong, nonatomic) IBOutlet UIImageView *ballGraphic;
 @property (strong, nonatomic) IBOutlet UIButton *addPictureButton;
--(void) toggleContents;
 @end

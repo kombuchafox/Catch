@@ -19,6 +19,7 @@
 #import "CollapsableHeaderView.h"
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "PickFriendsTableViewCell.h"
+#import "HomeViewController.h"
 #define headerViewHeight 45.0
 #define navigationTitle  @"New Catch"
 
@@ -54,13 +55,13 @@
     [super viewDidLoad];
     [self setUp];
     [self setNeedsStatusBarAppearanceUpdate];
-    self.addMessageTransitionManager = [[AddMessageTransitionManager alloc] init];
     identifierToSection = [[NSDictionary alloc] init];
     defaultHeight = 30;
     
 }
 -(void) setUp
 {
+
     self.ballTableView.scrollEnabled = YES;
     //setup navigation bar
     [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
@@ -79,17 +80,12 @@
     self.ballTableView.delegate = self;
     ballRowExpanded = true;
     [self.backButton setContentEdgeInsets:UIEdgeInsetsMake(0, -30, 0, 0)];
-    
-    
-
-
     self.ballTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 }
 -(void) viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    
-    
+    [self setUp];
 }
 
 - (IBAction)dismissNewBall:(id)sender {
@@ -98,24 +94,25 @@
 
 
 - (IBAction)pushFriendsViewController:(UIButton *)sender {
-    
+    [self.navigationController.navigationBar setBarTintColor:[Utils UIColorFromRGB:0xD73033]];
     FriendsViewController *friends = [self.storyboard instantiateViewControllerWithIdentifier:@"FriendsViewController"];
     [self.navigationController pushViewController:friends animated:YES];
 }
 - (IBAction)popViewController:(id)sender {
-    [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
+    
     [self.navigationController.navigationBar setBarTintColor:[Utils UIColorFromRGB:0xD73033]];
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    [self.navigationController.navigationBar setTranslucent:NO];
+    HomeViewController *rootVC = [self.storyboard instantiateViewControllerWithIdentifier:@"HomeViewController"];
+    NSMutableArray *vcs = [[NSMutableArray alloc] initWithArray:@[self]];
+    [vcs insertObject:rootVC atIndex:0];
+    [self.navigationController setViewControllers:vcs animated:NO];
+    [self.navigationController popViewControllerAnimated:YES];
+
 }
-
-#pragma mark textView delegate
-
-
 
 #pragma mark UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-
     return 2;
     
 }
@@ -228,13 +225,10 @@
 -(void) presentPhotoAlbum: (UIButton*) sender
 {
     UIImagePickerController * picker = [[UIImagePickerController alloc] init];
-    
     // Don't forget to add UIImagePickerControllerDelegate in your .h
     picker.delegate = self;
     //link to photo album right now
     picker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
-
-    
     [self presentViewController:picker animated:YES completion:nil];
 }
 -(CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section

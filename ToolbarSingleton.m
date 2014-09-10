@@ -10,6 +10,7 @@
 @interface ToolbarSingleton()
 {
     NSString *defaultCharacterCount;
+    int defaultHeight;
 }
 @end
 @implementation ToolbarSingleton
@@ -42,8 +43,8 @@
     self.keyboardToolbar.translucent = YES;
     self.keyboardToolbar.barTintColor = [UIColor lightGrayColor];
     UIView *keyBoard = [[[[[UIApplication sharedApplication] windows] lastObject] subviews] firstObject];
-
-    self.keyboardToolbar.frame = CGRectMake(0, keyBoard.frame.origin.y - 35, [UIScreen mainScreen].bounds.size.width, 35);
+    
+    self.keyboardToolbar.frame = CGRectMake(0, [UIScreen mainScreen].bounds.size.height - keyBoard.frame.size.height - 35, [UIScreen mainScreen].bounds.size.width, 35);
     self.addPictureButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 35,35)];
     [self.addPictureButton setImage:[UIImage imageNamed:@"cameraIcon.png"] forState:UIControlStateNormal];
     
