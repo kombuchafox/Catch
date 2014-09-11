@@ -25,7 +25,7 @@
 {
 
 
- 
+    [self setSelectionStyle:UITableViewCellSelectionStyleNone];
     self.attachedImage.layer.cornerRadius = 5;
     self.attachedImage.layer.masksToBounds = YES;
     self.attachedImage.layer.borderWidth = 2;
@@ -62,8 +62,7 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
-
-    // Configure the view for the selected state
+    
 }
 
 @end

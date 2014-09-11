@@ -41,6 +41,7 @@
 		707D3EF1199843D800EEF372 /* AppNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 707D3EF0199843D800EEF372 /* AppNavigationController.m */; };
 		70A1AD1319B17A0C007F0A5A /* LinedTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 70A1AD1219B17A0C007F0A5A /* LinedTextView.m */; };
 		70A9909919A40D88003EEF82 /* CollapsebleTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 70A9909819A40D88003EEF82 /* CollapsebleTableView.m */; };
+		70A9BCCC19C18AE50059C3C1 /* triangleTear.png in Resources */ = {isa = PBXBuildFile; fileRef = 70A9BCCB19C18AE50059C3C1 /* triangleTear.png */; };
 		70ABBB001995D8DC00761B84 /* Graduated_Blue_Background.png in Resources */ = {isa = PBXBuildFile; fileRef = 70ABBAFF1995D8DB00761B84 /* Graduated_Blue_Background.png */; };
 		70ABBB031995E13000761B84 /* CircleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 70ABBB021995E13000761B84 /* CircleButton.m */; };
 		70ACD7CA19BC032300942DF9 /* ToolbarSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 70ACD7C919BC032300942DF9 /* ToolbarSingleton.m */; };
@@ -150,6 +151,7 @@
 		70A1AD1219B17A0C007F0A5A /* LinedTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LinedTextView.m; sourceTree = "<group>"; };
 		70A9909719A40D88003EEF82 /* CollapsebleTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollapsebleTableView.h; sourceTree = "<group>"; };
 		70A9909819A40D88003EEF82 /* CollapsebleTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollapsebleTableView.m; sourceTree = "<group>"; };
+		70A9BCCB19C18AE50059C3C1 /* triangleTear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = triangleTear.png; path = ../triangleTear.png; sourceTree = "<group>"; };
 		70ABBAFF1995D8DB00761B84 /* Graduated_Blue_Background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Graduated_Blue_Background.png; path = ../../Graduated_Blue_Background.png; sourceTree = "<group>"; };
 		70ABBB011995E10E00761B84 /* CircleButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CircleButton.h; path = Catch/CircleButton.h; sourceTree = "<group>"; };
 		70ABBB021995E13000761B84 /* CircleButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CircleButton.m; path = Catch/CircleButton.m; sourceTree = "<group>"; };
@@ -418,6 +420,7 @@
 		70DD6F0F19B272E900820124 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				70A9BCCB19C18AE50059C3C1 /* triangleTear.png */,
 				70DAAA6B19B46E29000C756E /* crumpled_paper.png */,
 				70DD6F1019B3D0C700820124 /* paper.png */,
 				70D5FDE019AACCEC0074DB15 /* yck4KBboi.png */,
@@ -615,6 +618,7 @@
 				70D5FDE519AACE1A0074DB15 /* tumblr_mnxid4jaQc1rf2f7ho1_400.png in Resources */,
 				70F8486A19AC427300073556 /* Shadow.png in Resources */,
 				70F8486E19AC7E0600073556 /* bokeh.png in Resources */,
+				70A9BCCC19C18AE50059C3C1 /* triangleTear.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -46,7 +46,7 @@
 }
 -(void) setUp
 {
-    value = 3;
+    value = 6;
     tableViewCellReferences = [[NSMutableDictionary alloc] init];
     [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
                              forBarMetrics:UIBarMetricsDefault];
@@ -134,9 +134,11 @@
     [tableViewCellReferences setObject:comment forKey:[NSNumber numberWithInt:indexPath.row]];
 
     if (indexPath.row % 3 == 1) {
-        comment.textView.text = @"11111111111111111111111111 11111111111111111111111111 11111111111111111111111111";
+        comment.textView.text = @"Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud ";
+    } else if (indexPath.row % 3 == 0) {
+        comment.textView.text = @" quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat";
     } else {
-        comment.textView.text = @"0000000000  ";
+        comment.textView.text = @"factor tum poen legum odioque civiuda.";
     }
     if (indexPath.row == value - 1)
     {
@@ -147,10 +149,68 @@
 }
 -(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CommentTableViewCell  *cell = [tableViewCellReferences objectForKey:[NSNumber numberWithInt:indexPath.row]];
-    if (!cell) return 5;
-    return cell.textView.contentSize.height + 10;
+    CommentTableViewCell *cell = [self.ballTableView dequeueReusableCellWithIdentifier:@"commentTableViewCell"];
+    if (indexPath.row % 3 == 1) {
+        cell.textView.text = @"Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud ";
+    } else if (indexPath.row % 3 == 0) {
+        cell.textView.text = @" quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat";
+    } else {
+        cell.textView.text = @"factor tum poen legum odioque civiuda.";
+    }
+    
+    int height = [self measureHeightOfUITextView:cell.textView];
+    return height + 10;
 
+}- (CGFloat)measureHeightOfUITextView:(UITextView *)textView
+{
+    if (floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_6_1)
+    {
+        // This is the code for iOS 7. contentSize no longer returns the correct value, so
+        // we have to calculate it.
+        //
+        // This is partly borrowed from HPGrowingTextView, but I've replaced the
+        // magic fudge factors with the calculated values (having worked out where
+        // they came from)
+        
+        CGRect frame = textView.bounds;
+        
+        // Take account of the padding added around the text.
+        
+        UIEdgeInsets textContainerInsets = textView.textContainerInset;
+        UIEdgeInsets contentInsets = textView.contentInset;
+        
+        CGFloat leftRightPadding = textContainerInsets.left + textContainerInsets.right + textView.textContainer.lineFragmentPadding * 2 + contentInsets.left + contentInsets.right;
+        CGFloat topBottomPadding = textContainerInsets.top + textContainerInsets.bottom + contentInsets.top + contentInsets.bottom;
+        
+        frame.size.width -= leftRightPadding;
+        frame.size.height -= topBottomPadding;
+        
+        NSString *textToMeasure = textView.text;
+        if ([textToMeasure hasSuffix:@"\n"])
+        {
+            textToMeasure = [NSString stringWithFormat:@"%@-", textView.text];
+        }
+        
+        // NSString class method: boundingRectWithSize:options:attributes:context is
+        // available only on ios7.0 sdk.
+        
+        NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+        [paragraphStyle setLineBreakMode:NSLineBreakByWordWrapping];
+        
+        NSDictionary *attributes = @{ NSFontAttributeName: textView.font, NSParagraphStyleAttributeName : paragraphStyle };
+        
+        CGRect size = [textToMeasure boundingRectWithSize:CGSizeMake(CGRectGetWidth(frame), MAXFLOAT)
+                                                  options:NSStringDrawingUsesLineFragmentOrigin
+                                               attributes:attributes
+                                                  context:nil];
+        
+        CGFloat measuredHeight = ceilf(CGRectGetHeight(size) + topBottomPadding);
+        return measuredHeight;
+    }
+    else
+    {
+        return textView.contentSize.height;
+    }
 }
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return value;

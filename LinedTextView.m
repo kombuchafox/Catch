@@ -143,7 +143,8 @@
     // release the path
     
     self.layer.cornerRadius = 5;
-    self.layer.borderColor = [[Utils UIColorFromRGB:0xDCE8E0] CGColor];
+   // self.layer.borderColor = [[Utils UIColorFromRGB:0xDCE8E0] CGColor];
+    self.layer.borderColor = [UIColor clearColor].CGColor;
     self.layer.borderWidth = 1;
 }
 CGMutablePathRef createRoundedCornerPath(CGRect rect, CGFloat cornerRadius) {
