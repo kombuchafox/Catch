@@ -57,7 +57,7 @@
     homeLabel.textAlignment = NSTextAlignmentCenter;
     homeLabel.font = [UIFont systemFontOfSize:35];
     self.navigationItem.titleView = homeLabel;
-    [self.navigationController.navigationBar setBarTintColor:[Utils UIColorFromRGB:0xD73033]];
+    [self.navigationController.navigationBar setBarTintColor:[Utils UIColorFromRGB:0xc93532]];
     [self.toolBar setBackgroundColor:[Utils UIColorFromRGB:0xD73033]];
     [self.statusBarView setBackgroundColor:[Utils UIColorFromRGB:0xD73033]];
     [self.settingsButton setContentEdgeInsets:UIEdgeInsetsMake(0, -30, 0, 0)];
@@ -74,7 +74,7 @@
                                                self.catchesTableView.frame.origin.y,
                                                self.catchesTableView.frame.size.width,
                                                height)];
-    [self.navigationController.navigationBar setBarTintColor:[Utils UIColorFromRGB:0xD73033]];
+    [self.navigationController.navigationBar setBarTintColor:[Utils UIColorFromRGB:0xc93532]];
     [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
 }
 

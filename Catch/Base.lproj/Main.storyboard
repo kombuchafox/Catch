@@ -233,7 +233,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="BOv-pq-FXr">
-                                                    <rect key="frame" x="0.0" y="20" width="320" height="216"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="236"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <prototypes>
@@ -251,18 +251,16 @@
                                                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
-                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="mbz-0p-jOb" customClass="CircleButton">
-                                                                        <rect key="frame" x="284" y="9" width="26" height="25"/>
+                                                                    <view contentMode="scaleToFill" id="NVM-UK-dvT" customClass="BallView">
+                                                                        <rect key="frame" x="284" y="9" width="26" height="26"/>
                                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                         <color key="backgroundColor" red="0.5682978528" green="0.81473214289999996" blue="0.7811884711" alpha="1" colorSpace="calibratedRGB"/>
-                                                                        <state key="normal">
-                                                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                                        </state>
-                                                                    </button>
+                                                                    </view>
                                                                 </subviews>
                                                             </tableViewCellContentView>
                                                             <connections>
-                                                                <outlet property="pickFriendButton" destination="mbz-0p-jOb" id="lpn-tm-BSw"/>
+                                                                <outlet property="friendName" destination="Pjr-gw-VFn" id="Ryt-rl-QG6"/>
+                                                                <outlet property="pickFriendButton" destination="NVM-UK-dvT" id="fcr-4t-dCq"/>
                                                             </connections>
                                                         </tableViewCell>
                                                     </prototypes>

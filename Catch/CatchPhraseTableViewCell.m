@@ -228,14 +228,13 @@
 
     [self.delegate collapsePaper];
     didPinch = YES;
-//    if (sender.scale < 1){
-//        self.textView.hidden = YES;
-//        self.ballGraphic.hidden = NO;
-//    }
-//    else {
-//        self.ballGraphic.hidden = YES;
-//        self.textView.hidden = NO;
-//    }
+    if (sender.scale < 1){
+        [self.delegate collapsePaper];
+        didPinch = YES;
+    }
+    else {
+        didPinch = NO;
+    }
     
 }
 -(void) sendBall:(UISwipeGestureRecognizer *) sender

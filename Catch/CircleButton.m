@@ -40,7 +40,6 @@
 
 -(void) setSelected:(BOOL)selected
 {
-    NSLog(@"here");
     if (selected)
     {
         [self.circleLayer setFillColor:self.color.CGColor];
