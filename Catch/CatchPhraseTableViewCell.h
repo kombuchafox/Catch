@@ -20,6 +20,8 @@
 -(void)updateBallColor:(CGFloat) value;
 @required
 -(void)setAllViewToZeroAlpha;
+@optional
+-(void) goToOpenPaper: (UITapGestureRecognizer *) sender;
 @end
 
 @interface CatchPhraseTableViewCell : UITableViewCell <UITextViewDelegate, ToolbarSingletonDelegate, UICollisionBehaviorDelegate>

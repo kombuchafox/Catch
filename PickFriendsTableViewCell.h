@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@protocol PickFriendTableViewDelegate
+-(void) updatePickFriendHeaderView: (NSString *) newTitle;
+@end
 @interface PickFriendsTableViewCell : UITableViewCell <UITableViewDelegate, UITableViewDataSource>
 @property (strong, nonatomic) IBOutlet UITableView *friendsTableView;
-
+@property NSMutableArray *pickedIndexes;
+@property id<PickFriendTableViewDelegate> delegate;
 @end

@@ -11,11 +11,10 @@
 @interface PickFriendsTableViewCell()
 {
     NSMutableDictionary *rowToFriend;
-    NSMutableArray *pickedIndexes;
 }
 @end
 @implementation PickFriendsTableViewCell
-
+@synthesize pickedIndexes;
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
@@ -75,22 +74,24 @@
     {
         NSMutableDictionary *friendData = [[NSMutableDictionary alloc] init];
         [friendData setObject:[NSString stringWithFormat:@"First Last (row %i)", indexPath.row] forKey:@"name"];
-        [rowToFriend setObject: friendData forKey:row];
+        [friendData setObject:[NSString stringWithFormat:@"First(%i)", indexPath.row]forKey:@"first_name"];
+        [rowToFriend setObject: friendData forKey:indexPath];
 
     }
+    pickedIndexes;
     if ([pickedIndexes containsObject:indexPath]) {
-        [cell.pickFriendButton.circleLayer setFillColor:[UIColor whiteColor].CGColor];
-    } else {
         [cell.pickFriendButton.circleLayer setFillColor:cell.pickFriendButton.color.CGColor];
+    } else {
+        [cell.pickFriendButton.circleLayer setFillColor:[UIColor whiteColor].CGColor];
     }
     
-    cell.friendName.text = [[rowToFriend objectForKey:row] objectForKey:@"name"];
+    cell.friendName.text = [[rowToFriend objectForKey:indexPath] objectForKey:@"name"];
     return cell;
 }
 
 -(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 150;
+    return 200;
     
 }
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -103,16 +104,31 @@
     
     if (cell.pickFriendButton.circleLayer.fillColor == cell.pickFriendButton.color.CGColor) {
         [cell.pickFriendButton.circleLayer setFillColor:[UIColor whiteColor].CGColor];
-        [pickedIndexes addObject:indexPath];
+        [pickedIndexes removeObject:indexPath];
+        [self updateHeaderViewLabel];
     } else {
         [cell.pickFriendButton.circleLayer setFillColor:cell.pickFriendButton.color.CGColor];
-        [pickedIndexes removeObject:indexPath];
+        [pickedIndexes addObject:indexPath];
+        [self updateHeaderViewLabel];
         
     }
-    
-
-
-
 }
 
+-(void) updateHeaderViewLabel
+{
+    NSString *newTitle = @" ";
+    for (int i = 0; i < [pickedIndexes count]; i++)
+    {
+        NSIndexPath *path = [pickedIndexes objectAtIndex:i];
+        NSMutableDictionary *friendData = [rowToFriend objectForKey:path];
+       if (i == 0)
+       {
+           newTitle = [friendData objectForKey:@"first_name"];
+       } else
+       {
+           newTitle = [newTitle stringByAppendingString:[NSString stringWithFormat:@", %@", [friendData objectForKey:@"first_name"]]];
+       }
+    }
+    [self.delegate updatePickFriendHeaderView:newTitle];
+}
 @end

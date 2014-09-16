@@ -31,7 +31,7 @@
     NSDictionary *identifierToSection;
     BallGraphicTableViewCell *tCell;
     bool ballRowExpanded;
-    NSString *defaultCatchPhraseHeader;
+    NSString *defaultCatchPhraseHeader, *defaultThrowToLabel;
     CollapsableHeaderView *catchPhraseHeaderView, *sendToHeaderView;
     CatchPhraseTableViewCell *catchPhraseViewCell;
     UIButton *camera;
@@ -81,6 +81,7 @@
     ballRowExpanded = true;
     [self.backButton setContentEdgeInsets:UIEdgeInsetsMake(0, -30, 0, 0)];
     self.ballTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    defaultThrowToLabel = @"Throw To...";
 }
 -(void) viewDidAppear:(BOOL)animated
 {
@@ -127,7 +128,7 @@
     UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(collapseCell:)];
     [headerView addGestureRecognizer:singleTap];
     
-    UILabel *title = [[UILabel alloc] initWithFrame: CGRectMake(20, 0, deviceWidth- 20, headerViewHeight - 10)];
+    UILabel *title = [[UILabel alloc] initWithFrame: CGRectMake(92, 0, deviceWidth- 92, headerViewHeight - 10)];
     UIImageView *ballImageLayer;
     title.textColor = [UIColor whiteColor];
     title.font = [UIFont systemFontOfSize:28];
@@ -190,7 +191,7 @@
             headerView.frame = CGRectMake(0, 0, deviceWidth, headerViewHeight);
             [headerView addSubview:cancelButton];
             [headerView addSubview:okButton];
-            title.text = @"Throw To...";
+            title.text = defaultThrowToLabel;
             headerView.sectionTag = @"1";
             sendToHeaderView = headerView;
             [title setCenter:headerView.center];
@@ -211,10 +212,12 @@
 }
 -(void) goToOpenPaper: (UITapGestureRecognizer *) sender
 {
-    self.didPinchPaper = NO;
-    catchPhraseViewCell.textView.hidden = NO;
-    catchPhraseViewCell.ballGraphic.hidden = YES;
-    [self openPaper];
+
+        self.didPinchPaper = NO;
+        catchPhraseViewCell.textView.hidden = NO;
+        catchPhraseViewCell.ballGraphic.hidden = YES;
+        [friendsTableViewCell.pickedIndexes removeAllObjects];
+        [self openPaper];
 }
 -(void) flingBall: (UITapGestureRecognizer *) sender
 {
@@ -246,7 +249,7 @@
     CGRect frame;
     switch (indexPath.section) {
         case 0:
-            if (!catchPhraseHeaderView)
+            if (!catchPhraseViewCell)
             {
                 catchPhraseViewCell = [self.ballTableView dequeueReusableCellWithIdentifier:@"CatchPhraseCell"];
                 catchPhraseViewCell.delegate = self;
@@ -261,6 +264,7 @@
             friendsTableViewCell = (PickFriendsTableViewCell *) cell;
             friendsTableViewCell.friendsTableView.delegate = friendsTableViewCell;
             friendsTableViewCell.friendsTableView.dataSource = friendsTableViewCell;
+            friendsTableViewCell.delegate = self;
             break;
         case 2:
             if (!tCell) {
@@ -355,6 +359,7 @@
                 
                 self.ballTableView.scrollEnabled = FALSE;
                 ballRowExpanded = false;
+                [self collapsePaper];
                 break;
             case 2:
                 ballRowExpanded = false;
@@ -372,17 +377,19 @@
 -(void) collapsePaper
 {
     self.didPinchPaper = TRUE;
-    self.ballTableView.scrollEnabled = FALSE;
+    self.ballTableView.scrollEnabled = TRUE;
     ballRowExpanded = false;
     [self.ballTableView expandHeader:1];
 
 }
 -(void) openPaper
 {
+
     self.didPinchPaper = FALSE;
-    self.ballTableView.scrollEnabled = FALSE;
+    self.ballTableView.scrollEnabled = TRUE;
     ballRowExpanded = true;
     [self.ballTableView expandHeader:0];
+
     
 }
 #pragma mark CatchPhraseDelegate
@@ -411,5 +418,19 @@
 #pragma mark miscallenanous
 -(UIStatusBarStyle)preferredStatusBarStyle{
     return UIStatusBarStyleLightContent;
+}
+
+#pragma mark PickFriendTableViewDelegate
+-(void) updatePickFriendHeaderView: (NSString *) newTitle;
+{
+    if (![newTitle isEqualToString:@" "])
+    {
+        sendToHeaderView.titleLabel.text = newTitle;
+        sendToHeaderView.titleLabel.font = [UIFont systemFontOfSize:20];
+    } else
+    {
+        sendToHeaderView.titleLabel.text = defaultThrowToLabel;
+        sendToHeaderView.titleLabel.font = [UIFont systemFontOfSize:28];
+    }
 }
 @end
