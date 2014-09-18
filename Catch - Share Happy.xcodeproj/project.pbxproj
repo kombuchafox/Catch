@@ -76,7 +76,6 @@
 		70E777F219A7E86200A4E563 /* NewBallTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 70E777F119A7E86200A4E563 /* NewBallTableView.m */; };
 		70E777F519A84ECE00A4E563 /* BallGraphicTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 70E777F419A84ECE00A4E563 /* BallGraphicTableViewCell.m */; };
 		70F8486A19AC427300073556 /* Shadow.png in Resources */ = {isa = PBXBuildFile; fileRef = 70F8486919AC427300073556 /* Shadow.png */; };
-		70F8486D19AC7E0600073556 /* MyParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 70F8486B19AC7E0600073556 /* MyParticle.sks */; };
 		70F8486E19AC7E0600073556 /* bokeh.png in Resources */ = {isa = PBXBuildFile; fileRef = 70F8486C19AC7E0600073556 /* bokeh.png */; };
 		70F93156199C7BAD0015A64A /* friends.png in Resources */ = {isa = PBXBuildFile; fileRef = 70F93155199C7BAD0015A64A /* friends.png */; };
 		70F93158199C8FB70015A64A /* backArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 70F93157199C8FB70015A64A /* backArrow.png */; };
@@ -203,7 +202,6 @@
 		70E777F319A84ECE00A4E563 /* BallGraphicTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BallGraphicTableViewCell.h; path = Catch/BallGraphicTableViewCell.h; sourceTree = "<group>"; };
 		70E777F419A84ECE00A4E563 /* BallGraphicTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BallGraphicTableViewCell.m; path = Catch/BallGraphicTableViewCell.m; sourceTree = "<group>"; };
 		70F8486919AC427300073556 /* Shadow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Shadow.png; path = Catch/Shadow.png; sourceTree = "<group>"; };
-		70F8486B19AC7E0600073556 /* MyParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MyParticle.sks; sourceTree = "<group>"; };
 		70F8486C19AC7E0600073556 /* bokeh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bokeh.png; path = Catch/bokeh.png; sourceTree = "<group>"; };
 		70F93155199C7BAD0015A64A /* friends.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = friends.png; sourceTree = "<group>"; };
 		70F93157199C8FB70015A64A /* backArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = backArrow.png; path = Catch/backArrow.png; sourceTree = "<group>"; };
@@ -318,7 +316,6 @@
 				70F9315C199E980C0015A64A /* AddMessageTransitionManager.h */,
 				70F9315D199E980C0015A64A /* AddMessageTransitionManager.m */,
 				704460A619948DE000E65E93 /* Main.storyboard */,
-				70F8486B19AC7E0600073556 /* MyParticle.sks */,
 				70FEE82A19999C79006829ED /* Images */,
 				70FEE82919999C61006829ED /* Views */,
 				70E84F331995AE6E0038AC92 /* ViewControllers */,
@@ -593,7 +590,6 @@
 				704460A819948DE000E65E93 /* Main.storyboard in Resources */,
 				701EACEB19AC80AE000EF225 /* line.png in Resources */,
 				70E2AE2D19AAC151006F3C33 /* writeIcon.png in Resources */,
-				70F8486D19AC7E0600073556 /* MyParticle.sks in Resources */,
 				70F93158199C8FB70015A64A /* backArrow.png in Resources */,
 				70B113DB19AB169000C01A5B /* cameraIcon.png in Resources */,
 				70F93164199F1F7E0015A64A /* plusSign.png in Resources */,

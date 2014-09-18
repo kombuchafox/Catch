@@ -392,6 +392,52 @@
                                                     <outlet property="textView" destination="J9z-RS-kHO" id="ioG-Ur-rvb"/>
                                                 </connections>
                                             </tableViewCell>
+                                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="friendsTableViewCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="friendsTableViewCell" id="ohF-BV-yOr" customClass="PickFriendsTableViewCell">
+                                                <rect key="frame" x="0.0" y="220" width="326" height="198"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ohF-BV-yOr" id="SvH-ne-T19">
+                                                    <rect key="frame" x="0.0" y="0.0" width="326" height="197"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="g1U-aF-iCi">
+                                                            <rect key="frame" x="0.0" y="0.0" width="321" height="197"/>
+                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <prototypes>
+                                                                <tableViewCell contentMode="scaleToFill" restorationIdentifier="pickFriendTableViewCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="pickFriendTableViewCell" id="s8b-uw-gW1" customClass="PickFriendTableViewCell">
+                                                                    <rect key="frame" x="0.0" y="22" width="321" height="44"/>
+                                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                    <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="s8b-uw-gW1" id="x4k-cS-SvY">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="321" height="43"/>
+                                                                        <autoresizingMask key="autoresizingMask"/>
+                                                                        <subviews>
+                                                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Jerome Ruffin" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="GyJ-Eq-DWi">
+                                                                                <rect key="frame" x="20" y="11" width="250" height="21"/>
+                                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                                                <nil key="highlightedColor"/>
+                                                                            </label>
+                                                                            <view contentMode="scaleToFill" id="Cdy-zm-TkT" customClass="BallView">
+                                                                                <rect key="frame" x="284" y="9" width="26" height="26"/>
+                                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                                <color key="backgroundColor" red="0.5682978528" green="0.81473214289999996" blue="0.7811884711" alpha="1" colorSpace="calibratedRGB"/>
+                                                                            </view>
+                                                                        </subviews>
+                                                                    </tableViewCellContentView>
+                                                                    <connections>
+                                                                        <outlet property="friendName" destination="GyJ-Eq-DWi" id="fYW-e8-Wdr"/>
+                                                                        <outlet property="pickFriendButton" destination="Cdy-zm-TkT" id="Mpz-Ao-01u"/>
+                                                                    </connections>
+                                                                </tableViewCell>
+                                                            </prototypes>
+                                                        </tableView>
+                                                    </subviews>
+                                                </tableViewCellContentView>
+                                                <connections>
+                                                    <outlet property="friendsTableView" destination="g1U-aF-iCi" id="bW3-Bk-iyH"/>
+                                                </connections>
+                                            </tableViewCell>
                                         </prototypes>
                                         <connections>
                                             <outlet property="dataSource" destination="1CS-jF-byD" id="pR5-bd-xx9"/>

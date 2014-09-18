@@ -11,5 +11,5 @@
 @interface Utils : NSObject 
 
 + (UIColor *) UIColorFromRGB:(int) rgbValue;
-
++ (CGFloat)measureHeightOfUITextView:(UITextView *)textView;
 @end

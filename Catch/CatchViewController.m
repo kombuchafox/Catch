@@ -13,6 +13,7 @@
 #import "CommentTableViewCell.h"
 #import "ImageInspectorViewController.h"
 #import "ToolbarSingleton.h"
+#import "PickFriendsTableViewCell.h"
 #define toolBarButtonSize 45
 @interface CatchViewController () <UITableViewDataSource, UITableViewDelegate>
 {
@@ -57,6 +58,8 @@
     [self.view setBackgroundColor:[Utils UIColorFromRGB:0xF5F5F5]];
     ballRowExpanded = false;
     self.ballTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    UIPinchGestureRecognizer *pinch = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(pinchedTableView:)];
+    [self.view addGestureRecognizer:pinch];
     [self.seperatorView drawSeparator];
     defaultString = @"What's really on your mind?";
     self.postStatusTextView.text = defaultString;
@@ -67,6 +70,10 @@
     
 }
 
+-(void) pinchedTableView: (UIPinchGestureRecognizer *) sender
+{
+    [self.ballTableView expandHeader:1];
+}
 
 - (void)viewWillDisappear:(BOOL)animated{
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
@@ -92,7 +99,7 @@
 #pragma mark UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return 2;
     
 }
 #pragma mark UITableViewDelegateMethods
@@ -125,25 +132,31 @@
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    printf("%d", indexPath.row);
     UITableViewCell *cell;
-    cell = [self.ballTableView dequeueReusableCellWithIdentifier:@"commentTableViewCell"];
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showPicture:)];
-    [cell addGestureRecognizer:tap];
-    CommentTableViewCell *comment = (CommentTableViewCell *) cell;
-    [tableViewCellReferences setObject:comment forKey:[NSNumber numberWithInt:indexPath.row]];
-
-    if (indexPath.row % 3 == 1) {
-        comment.textView.text = @"Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud ";
-    } else if (indexPath.row % 3 == 0) {
-        comment.textView.text = @" quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat";
-    } else {
-        comment.textView.text = @"factor tum poen legum odioque civiuda.";
-    }
-    if (indexPath.row == value - 1)
+    if (indexPath.section == 0)
     {
+        cell = [self.ballTableView dequeueReusableCellWithIdentifier:@"commentTableViewCell"];
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showPicture:)];
+        [cell addGestureRecognizer:tap];
+        CommentTableViewCell *comment = (CommentTableViewCell *) cell;
+        [tableViewCellReferences setObject:comment forKey:[NSNumber numberWithInt:indexPath.row]];
+
+        if (indexPath.row % 3 == 1) {
+            comment.textView.text = @"Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud ";
+        } else if (indexPath.row % 3 == 0) {
+            comment.textView.text = @" quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat";
+        } else {
+            comment.textView.text = @"factor tum poen legum odioque civiuda.";
+        }
+        if (indexPath.row == value - 1)
+        {
+            
+            [self loadMore:nil];
+        }
+    } else {
+        cell = (PickFriendsTableViewCell *) cell;
+        cell = [self.ballTableView dequeueReusableCellWithIdentifier:@"friendsTableViewCell"];
         
-        [self loadMore:nil];
     }
     return cell;
 }
@@ -158,62 +171,21 @@
         cell.textView.text = @"factor tum poen legum odioque civiuda.";
     }
     
-    int height = [self measureHeightOfUITextView:cell.textView];
+    int height = [Utils measureHeightOfUITextView:cell.textView];
     return height + 10;
 
-}- (CGFloat)measureHeightOfUITextView:(UITextView *)textView
-{
-    if (floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_6_1)
-    {
-        // This is the code for iOS 7. contentSize no longer returns the correct value, so
-        // we have to calculate it.
-        //
-        // This is partly borrowed from HPGrowingTextView, but I've replaced the
-        // magic fudge factors with the calculated values (having worked out where
-        // they came from)
-        
-        CGRect frame = textView.bounds;
-        
-        // Take account of the padding added around the text.
-        
-        UIEdgeInsets textContainerInsets = textView.textContainerInset;
-        UIEdgeInsets contentInsets = textView.contentInset;
-        
-        CGFloat leftRightPadding = textContainerInsets.left + textContainerInsets.right + textView.textContainer.lineFragmentPadding * 2 + contentInsets.left + contentInsets.right;
-        CGFloat topBottomPadding = textContainerInsets.top + textContainerInsets.bottom + contentInsets.top + contentInsets.bottom;
-        
-        frame.size.width -= leftRightPadding;
-        frame.size.height -= topBottomPadding;
-        
-        NSString *textToMeasure = textView.text;
-        if ([textToMeasure hasSuffix:@"\n"])
-        {
-            textToMeasure = [NSString stringWithFormat:@"%@-", textView.text];
-        }
-        
-        // NSString class method: boundingRectWithSize:options:attributes:context is
-        // available only on ios7.0 sdk.
-        
-        NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-        [paragraphStyle setLineBreakMode:NSLineBreakByWordWrapping];
-        
-        NSDictionary *attributes = @{ NSFontAttributeName: textView.font, NSParagraphStyleAttributeName : paragraphStyle };
-        
-        CGRect size = [textToMeasure boundingRectWithSize:CGSizeMake(CGRectGetWidth(frame), MAXFLOAT)
-                                                  options:NSStringDrawingUsesLineFragmentOrigin
-                                               attributes:attributes
-                                                  context:nil];
-        
-        CGFloat measuredHeight = ceilf(CGRectGetHeight(size) + topBottomPadding);
-        return measuredHeight;
-    }
-    else
-    {
-        return textView.contentSize.height;
-    }
 }
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return value;
+    switch (section) {
+        case 0:
+            return value;
+            break;
+        case 1:
+            return 1;
+        default:
+            return 1;
+            break;
+    }
 }
 
 -(void)tableView:(UITableView *) tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -228,7 +200,7 @@
     if ([section intValue] == 0) {
         return YES;
     } else {
-        return YES;
+        return NO;
     }
 }
 #pragma mark BallViewDelegate
@@ -242,11 +214,6 @@
     self.navigationController.navigationBar.shadowImage = [UIImage new];
     self.navigationItem.titleView = nil;
     self.navigationController.navigationBar.translucent = YES;
-    
-    
-    //[self changeOriginYBy:self.ballTableView.frame.origin.y - 64 for:self.ballTableView];
-    //    catchPhraseHeaderView.alpha = 0.2f;
-    //    sendToHeaderView.alpha = 0.2f;
     
 }
 

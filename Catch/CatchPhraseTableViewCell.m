@@ -225,7 +225,6 @@
 
 -(void) handlePinch: (UIPinchGestureRecognizer *) sender
 {
-
     [self.delegate collapsePaper];
     didPinch = YES;
     if (sender.scale < 1){

@@ -67,7 +67,7 @@
     
     [self.circleLayer setStrokeColor:[color CGColor]];
     
-    [self.circleLayer setLineWidth:0.5f];
+    [self.circleLayer setLineWidth:2.0f];
     [self.circleLayer setFillColor:self.color.CGColor];
     [self.layer addSublayer:self.circleLayer];
     //[self.layer insertSublayer:self.circleLayer atIndex:0];
