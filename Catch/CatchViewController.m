@@ -15,6 +15,9 @@
 #import "ToolbarSingleton.h"
 #import "PickFriendsTableViewCell.h"
 #define toolBarButtonSize 45
+#define headerViewHeight 45.0
+#define defaultThrowToLabel @"Throw To..."
+
 @interface CatchViewController () <UITableViewDataSource, UITableViewDelegate>
 {
     int defaultHeight;
@@ -30,6 +33,8 @@
     UIButton *peopleButton, *inviteButton, *addButton, *dismiss;
     NSMutableDictionary *tableViewCellReferences;
     NSString *defaultString;
+    UIButton *cancelButton;
+    UIButton *okButton;
 }
 
 @property BallView *ballSectionView;
@@ -72,7 +77,18 @@
 
 -(void) pinchedTableView: (UIPinchGestureRecognizer *) sender
 {
-    [self.ballTableView expandHeader:1];
+//    if (!self.didPinchPaper)
+//    {
+        self.didPinchPaper = TRUE;
+        [self.ballTableView expandHeader:1];
+    [UIView animateWithDuration:0.2 animations:
+     ^{
+         self.seperatorView.hidden = TRUE;
+         self.ballTableView.frame = CGRectMake(0, self.seperatorView.frame.origin.y, [UIScreen mainScreen].bounds.size.width,
+                                               [UIScreen mainScreen].bounds.size.height - self.seperatorView.frame.origin.y);
+     }
+     ];
+
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
@@ -105,9 +121,43 @@
 #pragma mark UITableViewDelegateMethods
 -(UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    CGFloat deviceWidth = [[UIScreen mainScreen] bounds].size.width;
-    CollapsableHeaderView *headerView =[[CollapsableHeaderView alloc] initWithFrame:CGRectMake(0, 0, deviceWidth, 45)];
-    headerView.backgroundColor = [UIColor lightGrayColor];
+    CGFloat deviceWidth = [UIScreen mainScreen].bounds.size.width;
+    CollapsableHeaderView *headerView = [[CollapsableHeaderView alloc] initWithFrame:CGRectMake(0, 0, deviceWidth, 30)];
+    UILabel *title = [[UILabel alloc] initWithFrame: CGRectMake(92, 0, deviceWidth- 92, headerViewHeight - 10)];
+    UIImageView *ballImageLayer;
+    title.textColor = [UIColor whiteColor];
+    title.font = [UIFont systemFontOfSize:28];
+    title.textAlignment = NSTextAlignmentCenter;
+
+    if (!cancelButton)
+    {
+        cancelButton = [[UIButton alloc]initWithFrame:CGRectMake(10, 0, headerViewHeight, headerViewHeight)];
+        [cancelButton setTitle: @"✖︎" forState: UIControlStateNormal];
+        
+        cancelButton.titleLabel.font = [UIFont systemFontOfSize:30];
+        cancelButton.titleLabel.textColor = [UIColor whiteColor];
+        [cancelButton addTarget:self action:@selector(goToOpenPaper:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    if (!okButton)
+    {
+        okButton = [[UIButton alloc]initWithFrame:CGRectMake(deviceWidth - headerViewHeight - 5, 0, headerViewHeight, headerViewHeight)];
+        [okButton setTitle: @"✔︎"forState: UIControlStateNormal];
+        [okButton addTarget:self action:@selector(flingBall:) forControlEvents:UIControlEventTouchUpInside];
+        okButton.titleLabel.textColor = [UIColor whiteColor];
+        okButton.titleLabel.font = [UIFont systemFontOfSize:30];
+    }
+    if (section == 1) {
+        headerView.backgroundColor = [Utils UIColorFromRGB:0xE8A731];
+        headerView.frame = CGRectMake(0, 0, deviceWidth, headerViewHeight);
+        [headerView addSubview:cancelButton];
+        [headerView addSubview:okButton];
+        title.text = defaultThrowToLabel;
+        headerView.sectionTag = @"1";
+        sendToHeaderView = headerView;
+        [title setCenter:headerView.center];
+        [headerView addSubview:title];
+        //initialize as hidden;
+    }
     return headerView;
 
 }
@@ -117,6 +167,17 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 
     
+}
+-(void) goToOpenPaper:(UITapGestureRecognizer *)sender
+{
+    self.didPinchPaper = FALSE;
+    [self.ballTableView expandHeader:0];
+    [UIView animateWithDuration:0.2 animations:
+     ^{
+         self.seperatorView.hidden = FALSE;
+         self.ballTableView.frame = CGRectMake(0, self.seperatorView.frame.size.height + self.seperatorView.frame.origin.y, [UIScreen mainScreen].bounds.size.width,self.ballTableView.frame.size.height - self.seperatorView.frame.size.height - self.seperatorView.frame.origin.y);
+     }
+     ];
 }
 -(void) presentPhotoAlbum: (UIButton*) sender
 {
@@ -128,7 +189,14 @@
 }
 -(CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
+    if (!self.didPinchPaper)
+    {
     return 0.1;
+    } else
+    {
+        if (section == 1) return 45;
+        return 0.1;
+    }
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -162,17 +230,22 @@
 }
 -(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CommentTableViewCell *cell = [self.ballTableView dequeueReusableCellWithIdentifier:@"commentTableViewCell"];
-    if (indexPath.row % 3 == 1) {
-        cell.textView.text = @"Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud ";
-    } else if (indexPath.row % 3 == 0) {
-        cell.textView.text = @" quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat";
+    if (!self.didPinchPaper)
+    {
+        CommentTableViewCell *cell = [self.ballTableView dequeueReusableCellWithIdentifier:@"commentTableViewCell"];
+        if (indexPath.row % 3 == 1) {
+            cell.textView.text = @"Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud ";
+        } else if (indexPath.row % 3 == 0) {
+            cell.textView.text = @" quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat";
+        } else {
+            cell.textView.text = @"factor tum poen legum odioque civiuda.";
+        }
+        
+        int height = [Utils measureHeightOfUITextView:cell.textView];
+        return height + 10;
     } else {
-        cell.textView.text = @"factor tum poen legum odioque civiuda.";
+        return self.ballTableView.frame.size.height - 100;
     }
-    
-    int height = [Utils measureHeightOfUITextView:cell.textView];
-    return height + 10;
 
 }
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{

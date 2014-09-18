@@ -445,11 +445,11 @@
                                         </connections>
                                     </tableView>
                                     <view contentMode="scaleToFill" id="BUA-z6-nfT" customClass="BallView">
-                                        <rect key="frame" x="0.0" y="45" width="320" height="55"/>
+                                        <rect key="frame" x="0.0" y="45" width="320" height="56"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="What's really on your mind?" id="5LG-Dz-gw1" customClass="LinedTextView">
-                                                <rect key="frame" x="6" y="4" width="280" height="46"/>
+                                                <rect key="frame" x="6" y="5" width="280" height="46"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="textColor" red="0.70196080207824707" green="0.70196080207824707" blue="0.70196080207824707" alpha="1" colorSpace="calibratedRGB"/>

@@ -17,5 +17,5 @@
 @property (strong, nonatomic) IBOutlet BallTableView *ballTableView;
 @property (strong, nonatomic) IBOutlet BallView *seperatorView;
 @property (strong, nonatomic) IBOutlet LinedTextView *postStatusTextView;
-
+@property BOOL didPinchPaper;
 @end

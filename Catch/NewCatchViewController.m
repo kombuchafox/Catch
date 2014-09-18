@@ -22,7 +22,7 @@
 #import "HomeViewController.h"
 #define headerViewHeight 45.0
 #define navigationTitle  @"New Catch"
-
+#define defaultThrowToLabel @"Throw To..."
 
 @interface NewCatchViewController()
 {
@@ -31,7 +31,7 @@
     NSDictionary *identifierToSection;
     BallGraphicTableViewCell *tCell;
     bool ballRowExpanded;
-    NSString *defaultCatchPhraseHeader, *defaultThrowToLabel;
+    NSString *defaultCatchPhraseHeader;
     CollapsableHeaderView *catchPhraseHeaderView, *sendToHeaderView;
     CatchPhraseTableViewCell *catchPhraseViewCell;
     UIButton *camera;
@@ -81,7 +81,6 @@
     ballRowExpanded = true;
     [self.backButton setContentEdgeInsets:UIEdgeInsetsMake(0, -30, 0, 0)];
     self.ballTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    defaultThrowToLabel = @"Throw To...";
 }
 -(void) viewDidAppear:(BOOL)animated
 {
