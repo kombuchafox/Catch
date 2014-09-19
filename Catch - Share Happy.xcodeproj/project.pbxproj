@@ -43,6 +43,7 @@
 		70A9909919A40D88003EEF82 /* CollapsebleTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 70A9909819A40D88003EEF82 /* CollapsebleTableView.m */; };
 		70A9BCD019C2651F0059C3C1 /* triangleTear.png in Resources */ = {isa = PBXBuildFile; fileRef = 70A9BCCF19C2651F0059C3C1 /* triangleTear.png */; };
 		70A9BCD219C2653B0059C3C1 /* crumpled_paper.png in Resources */ = {isa = PBXBuildFile; fileRef = 70A9BCD119C2653B0059C3C1 /* crumpled_paper.png */; };
+		70A9BCD519CCC4220059C3C1 /* PaperBallTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 70A9BCD419CCC4220059C3C1 /* PaperBallTableViewCell.m */; };
 		70ABBB001995D8DC00761B84 /* Graduated_Blue_Background.png in Resources */ = {isa = PBXBuildFile; fileRef = 70ABBAFF1995D8DB00761B84 /* Graduated_Blue_Background.png */; };
 		70ABBB031995E13000761B84 /* CircleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 70ABBB021995E13000761B84 /* CircleButton.m */; };
 		70ACD7CA19BC032300942DF9 /* ToolbarSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 70ACD7C919BC032300942DF9 /* ToolbarSingleton.m */; };
@@ -152,6 +153,8 @@
 		70A9909819A40D88003EEF82 /* CollapsebleTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollapsebleTableView.m; sourceTree = "<group>"; };
 		70A9BCCF19C2651F0059C3C1 /* triangleTear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = triangleTear.png; sourceTree = "<group>"; };
 		70A9BCD119C2653B0059C3C1 /* crumpled_paper.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = crumpled_paper.png; sourceTree = "<group>"; };
+		70A9BCD319CCC4220059C3C1 /* PaperBallTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaperBallTableViewCell.h; sourceTree = "<group>"; };
+		70A9BCD419CCC4220059C3C1 /* PaperBallTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaperBallTableViewCell.m; sourceTree = "<group>"; };
 		70ABBAFF1995D8DB00761B84 /* Graduated_Blue_Background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Graduated_Blue_Background.png; path = ../../Graduated_Blue_Background.png; sourceTree = "<group>"; };
 		70ABBB011995E10E00761B84 /* CircleButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CircleButton.h; path = Catch/CircleButton.h; sourceTree = "<group>"; };
 		70ABBB021995E13000761B84 /* CircleButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CircleButton.m; path = Catch/CircleButton.m; sourceTree = "<group>"; };
@@ -386,6 +389,8 @@
 				70E0BCE119B4EA2600C9633A /* CommentsTableViewCell.m */,
 				70B113D519AB122100C01A5B /* CatchPhraseTableViewCell.h */,
 				70B113D619AB122100C01A5B /* CatchPhraseTableViewCell.m */,
+				70A9BCD319CCC4220059C3C1 /* PaperBallTableViewCell.h */,
+				70A9BCD419CCC4220059C3C1 /* PaperBallTableViewCell.m */,
 				70E777F319A84ECE00A4E563 /* BallGraphicTableViewCell.h */,
 				70E777F419A84ECE00A4E563 /* BallGraphicTableViewCell.m */,
 				70FEE82B19999DC2006829ED /* CatchTableViewCell.h */,
@@ -633,6 +638,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				70E0BCE819B530F400C9633A /* ImageInspectorViewController.m in Sources */,
+				70A9BCD519CCC4220059C3C1 /* PaperBallTableViewCell.m in Sources */,
 				704460A519948DE000E65E93 /* WelcomeViewController.m in Sources */,
 				704460A219948DE000E65E93 /* AppDelegate.m in Sources */,
 				70FEE8301999FFFB006829ED /* BallView.m in Sources */,

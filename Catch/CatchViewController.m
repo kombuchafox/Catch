@@ -14,6 +14,7 @@
 #import "ImageInspectorViewController.h"
 #import "ToolbarSingleton.h"
 #import "PickFriendsTableViewCell.h"
+#import "PaperBallTableViewCell.h"
 #define toolBarButtonSize 45
 #define headerViewHeight 45.0
 #define defaultThrowToLabel @"Throw To..."
@@ -35,6 +36,7 @@
     NSString *defaultString;
     UIButton *cancelButton;
     UIButton *okButton;
+    bool renderCrumpledBall;
 }
 
 @property BallView *ballSectionView;
@@ -164,7 +166,8 @@
 }
 -(void) flingBall:(UITapGestureRecognizer *) sender
 {
-    
+    renderCrumpledBall = YES;
+    [self goToCrumpledBall];
 }
 -(void) dismissSelf: (UIButton *) sender
 {
@@ -184,6 +187,10 @@
      }
      ];
     
+}
+-(void) goToCrumpledBall
+{
+    [self.ballTableView expandHeader:0];
 }
 -(void) presentPhotoAlbum: (UIButton*) sender
 {
@@ -209,23 +216,30 @@
     UITableViewCell *cell;
     if (indexPath.section == 0)
     {
-        cell = [self.ballTableView dequeueReusableCellWithIdentifier:@"commentTableViewCell"];
-        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showPicture:)];
-        [cell addGestureRecognizer:tap];
-        CommentTableViewCell *comment = (CommentTableViewCell *) cell;
-        [tableViewCellReferences setObject:comment forKey:[NSNumber numberWithInt:indexPath.row]];
-
-        if (indexPath.row % 3 == 1) {
-            comment.textView.text = @"Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud ";
-        } else if (indexPath.row % 3 == 0) {
-            comment.textView.text = @" quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat";
-        } else {
-            comment.textView.text = @"factor tum poen legum odioque civiuda.";
-        }
-        if (indexPath.row == value - 1)
+        if (renderCrumpledBall)
         {
+            cell = [self.ballTableView dequeueReusableCellWithIdentifier:@"crumpledPaperCell"];
+            PaperBallTableViewCell *paperCell = (PaperBallTableViewCell *) cell;
+            [paperCell setUp];
+        } else {
+            cell = [self.ballTableView dequeueReusableCellWithIdentifier:@"commentTableViewCell"];
+            UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showPicture:)];
+            [cell addGestureRecognizer:tap];
+            CommentTableViewCell *comment = (CommentTableViewCell *) cell;
+            [tableViewCellReferences setObject:comment forKey:[NSNumber numberWithInt:indexPath.row]];
             
-            [self loadMore:nil];
+            if (indexPath.row % 3 == 1) {
+                comment.textView.text = @"Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud ";
+            } else if (indexPath.row % 3 == 0) {
+                comment.textView.text = @" quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat";
+            } else {
+                comment.textView.text = @"factor tum poen legum odioque civiuda.";
+            }
+            if (indexPath.row == value - 1)
+            {
+                
+                [self loadMore:nil];
+            }
         }
     } else {
         cell = [self.ballTableView dequeueReusableCellWithIdentifier:@"friendsTableViewCell"];
@@ -258,6 +272,7 @@
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     switch (section) {
         case 0:
+            if (renderCrumpledBall) return 1;
             return value;
             break;
         case 1:

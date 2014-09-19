@@ -116,7 +116,6 @@
 }
 -(void) setUp
 {
-    [self.addPictureButton setFrame:CGRectMake(0, 0, 35, 35)];
     pinchLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.textView.frame.origin.x , 0, self.textView.frame.size.width, 13)];
     pinchLabel.text = @"Pinch to post";
     pinchLabel.font = [UIFont systemFontOfSize:13];

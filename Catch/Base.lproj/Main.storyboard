@@ -438,7 +438,7 @@
                                                     <outlet property="friendsTableView" destination="g1U-aF-iCi" id="bW3-Bk-iyH"/>
                                                 </connections>
                                             </tableViewCell>
-                                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="crumpledPaperTableViewCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="crumpledPaperCell" id="nNV-Bw-UPt">
+                                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="crumpledPaperTableViewCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="crumpledPaperCell" id="nNV-Bw-UPt" customClass="PaperBallTableViewCell">
                                                 <rect key="frame" x="0.0" y="418" width="326" height="198"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nNV-Bw-UPt" id="Atb-7X-AVd">
@@ -451,6 +451,9 @@
                                                         </imageView>
                                                     </subviews>
                                                 </tableViewCellContentView>
+                                                <connections>
+                                                    <outlet property="ballGraphic" destination="cO4-ye-D6K" id="hdm-Dm-Ixe"/>
+                                                </connections>
                                             </tableViewCell>
                                         </prototypes>
                                         <connections>
