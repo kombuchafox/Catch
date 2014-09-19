@@ -438,6 +438,20 @@
                                                     <outlet property="friendsTableView" destination="g1U-aF-iCi" id="bW3-Bk-iyH"/>
                                                 </connections>
                                             </tableViewCell>
+                                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="crumpledPaperTableViewCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="crumpledPaperCell" id="nNV-Bw-UPt">
+                                                <rect key="frame" x="0.0" y="418" width="326" height="198"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nNV-Bw-UPt" id="Atb-7X-AVd">
+                                                    <rect key="frame" x="0.0" y="0.0" width="326" height="197"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="crumpled_paper.png" id="cO4-ye-D6K">
+                                                            <rect key="frame" x="85" y="75" width="140" height="88"/>
+                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                        </imageView>
+                                                    </subviews>
+                                                </tableViewCellContentView>
+                                            </tableViewCell>
                                         </prototypes>
                                         <connections>
                                             <outlet property="dataSource" destination="1CS-jF-byD" id="pR5-bd-xx9"/>

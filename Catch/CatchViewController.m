@@ -154,12 +154,17 @@
         title.text = defaultThrowToLabel;
         headerView.sectionTag = @"1";
         sendToHeaderView = headerView;
+        sendToHeaderView.titleLabel = title;
+        [sendToHeaderView addSubview:sendToHeaderView.titleLabel];
         [title setCenter:headerView.center];
-        [headerView addSubview:title];
         //initialize as hidden;
     }
     return headerView;
 
+}
+-(void) flingBall:(UITapGestureRecognizer *) sender
+{
+    
 }
 -(void) dismissSelf: (UIButton *) sender
 {
@@ -175,9 +180,10 @@
     [UIView animateWithDuration:0.2 animations:
      ^{
          self.seperatorView.hidden = FALSE;
-         self.ballTableView.frame = CGRectMake(0, self.seperatorView.frame.size.height + self.seperatorView.frame.origin.y, [UIScreen mainScreen].bounds.size.width,self.ballTableView.frame.size.height - self.seperatorView.frame.size.height - self.seperatorView.frame.origin.y);
+         self.ballTableView.frame = CGRectMake(0, self.seperatorView.frame.size.height + self.seperatorView.frame.origin.y, [UIScreen mainScreen].bounds.size.width,self.ballTableView.frame.size.height - self.seperatorView.frame.size.height);
      }
      ];
+    
 }
 -(void) presentPhotoAlbum: (UIButton*) sender
 {
@@ -222,8 +228,9 @@
             [self loadMore:nil];
         }
     } else {
-        cell = (PickFriendsTableViewCell *) cell;
         cell = [self.ballTableView dequeueReusableCellWithIdentifier:@"friendsTableViewCell"];
+        PickFriendsTableViewCell *pickFriendsCell = (PickFriendsTableViewCell *) cell;
+        pickFriendsCell.delegate = self;
         
     }
     return cell;
@@ -447,5 +454,18 @@
     [self.postStatusTextView setFrame:CGRectMake(tFrame.origin.x, tFrame.origin.y, tFrame.size.width, tFrame.size.height - 150)];
     [self.postStatusTextView setFont:[UIFont systemFontOfSize:17]];
     
+}
+#pragma mark PickFriendTableViewDelegate
+-(void) updatePickFriendHeaderView: (NSString *) newTitle;
+{
+    if (![newTitle isEqualToString:@" "])
+    {
+        sendToHeaderView.titleLabel.text = newTitle;
+        sendToHeaderView.titleLabel.font = [UIFont systemFontOfSize:20];
+    } else
+    {
+        sendToHeaderView.titleLabel.text = defaultThrowToLabel;
+        sendToHeaderView.titleLabel.font = [UIFont systemFontOfSize:28];
+    }
 }
 @end
