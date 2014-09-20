@@ -14,7 +14,7 @@
 
 #define kDefaultNumberOfSpinnerMarkers 12
 #define kDefaultSpread 35.0
-#define kDefaultColor ([Utils UIColorFromRGB:0xE8240C])
+#define kDefaultColor ([Utils UIColorFromRGB:0xFFFFFF])
 #define kDefaultThickness 8.0
 #define kDefaultLength 25.0
 #define kDefaultSpeed 1.0
@@ -34,10 +34,6 @@
     UITextView *bottomTextView;
     UIView *layer;
     BOOL toggleTextBoxes;
-    UISwipeGestureRecognizer *send;
-    UITapGestureRecognizer *ballTap;
-    UIDynamicAnimator *animator;
-    CGFloat boundary;
     int fontSize;
     CGFloat contentOffset;
     UIImageView *imageView;
@@ -50,7 +46,7 @@
 @implementation CatchPhraseTableViewCell
 
 @synthesize defaultString, memeView,memeImage, pinchLabel;
-
+@synthesize animator, boundary, send, ballTap;
 
 -(void) setMemeImage:(UIImage *)newValue
 {
@@ -116,6 +112,7 @@
 }
 -(void) setUp
 {
+    [super setUp];
     pinchLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.textView.frame.origin.x , 0, self.textView.frame.size.width, 13)];
     pinchLabel.text = @"Pinch to post";
     pinchLabel.font = [UIFont systemFontOfSize:13];
@@ -137,13 +134,6 @@
     [layer addSubview:topTextView];
     [layer addSubview:bottomTextView];
     self.memeView.hidden = YES;
-    
-    self.ballGraphic.userInteractionEnabled = YES;
-    send = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(sendBall:)];
-    send.direction = UISwipeGestureRecognizerDirectionUp;
-    [self.ballGraphic addGestureRecognizer:send];
-    ballTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(bounceBall:)];
-    [self.ballGraphic addGestureRecognizer:ballTap];
     animator = [[UIDynamicAnimator alloc] initWithReferenceView:self.delegate.view];
     
     UIPinchGestureRecognizer *pinchGesture = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(handlePinch:)];
@@ -190,37 +180,8 @@
         return CGSizeMake(kAddPictureXOffset, -20);
     }
 }
--(void) bounceBall: (UITapGestureRecognizer *) sender
-{
-    //[self.ballGraphic removeFromSuperview];
-    [self.contentView addSubview:self.ballGraphic];
-    
-    [UIView animateWithDuration:0.4 animations:^{
-        self.ballGraphic.frame = CGRectMake(self.ballGraphic.frame.origin.x, self.ballGraphic.frame.origin.y - 60, self.ballGraphic.frame.size.width, self.ballGraphic.frame.size.height);
-    } completion:^(BOOL completed){
-        [self setUpBallAnimation:0];
-        
-    }];
-}
--(void) setUpBallAnimation: (int) tap
-{
-    [animator removeAllBehaviors];
-    
-    UIGravityBehavior *gravityBehavior = [[UIGravityBehavior alloc] initWithItems:@[self.ballGraphic]];
-    [animator addBehavior:gravityBehavior];
-    UICollisionBehavior *collisionBehavior = [[UICollisionBehavior alloc] initWithItems:@[self.ballGraphic]];
-    
-    [collisionBehavior addBoundaryWithIdentifier:@"floor"
-                                       fromPoint:CGPointMake([UIScreen mainScreen].bounds.origin.x, boundary)
-                                         toPoint:CGPointMake([UIScreen mainScreen].bounds.origin.x + [UIScreen mainScreen].bounds.size.width,boundary)];
-    [animator addBehavior:collisionBehavior];
-    collisionBehavior.collisionDelegate = self;
-    UIDynamicItemBehavior *ballBehavior = [[UIDynamicItemBehavior alloc] initWithItems:@[self.ballGraphic]];
-    ballBehavior.elasticity = 0.4;
-    ballBehavior.resistance = 0.0;
-    ballBehavior.friction = 0.0;
-    [animator addBehavior:ballBehavior];
-}
+
+
 
 -(void) handlePinch: (UIPinchGestureRecognizer *) sender
 {

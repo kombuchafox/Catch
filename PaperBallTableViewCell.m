@@ -21,16 +21,9 @@
 // HUD defaults
 #define kDefaultHUDSide 160.0
 #define kDefaultHUDColor ([UIColor colorWithWhite:0.0 alpha:0.3])
-@interface PaperBallTableViewCell()
-{
-    UIDynamicAnimator *animator;
-    CGFloat boundary;
-    UISwipeGestureRecognizer *send;
-    UITapGestureRecognizer *ballTap;
-}
-@end
-@implementation PaperBallTableViewCell
 
+@implementation PaperBallTableViewCell
+@synthesize animator, boundary, send, ballTap;
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];

@@ -62,7 +62,7 @@
 -(void) setUp
 {
 
-    self.ballTableView.scrollEnabled = YES;
+    self.ballTableView.scrollEnabled = FALSE;
     //setup navigation bar
     [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
     [self.navigationController.navigationBar setBarTintColor:[Utils UIColorFromRGB:0xAC8CFF]];
@@ -146,8 +146,9 @@
         okButton = [[UIButton alloc]initWithFrame:CGRectMake(deviceWidth - headerViewHeight - 5, 0, headerViewHeight, headerViewHeight)];
         [okButton setTitle: @"✔︎"forState: UIControlStateNormal];
         [okButton addTarget:self action:@selector(flingBall:) forControlEvents:UIControlEventTouchUpInside];
-        okButton.titleLabel.textColor = [UIColor whiteColor];
+        okButton.userInteractionEnabled = FALSE;
         okButton.titleLabel.font = [UIFont systemFontOfSize:30];
+        okButton.titleLabel.textColor = [UIColor lightGrayColor];
     }
 
     switch (section) {
@@ -351,7 +352,7 @@
                 
                 self.didPinchPaper = NO;
                 [self openPaper];
-                //self.ballTableView.scrollEnabled = false;
+                self.ballTableView.scrollEnabled = false;
                 ballRowExpanded = true;
                 break;
             case 1:
@@ -362,7 +363,7 @@
                 break;
             case 2:
                 ballRowExpanded = false;
-               // self.ballTableView.scrollEnabled = false;
+                self.ballTableView.scrollEnabled = false;
                 break;
             default:
                 break;
@@ -376,7 +377,7 @@
 -(void) collapsePaper
 {
     self.didPinchPaper = TRUE;
-    self.ballTableView.scrollEnabled = TRUE;
+
     ballRowExpanded = false;
     [self.ballTableView expandHeader:1];
 
@@ -385,7 +386,7 @@
 {
 
     self.didPinchPaper = FALSE;
-    self.ballTableView.scrollEnabled = TRUE;
+
     ballRowExpanded = true;
     [self.ballTableView expandHeader:0];
 
@@ -426,8 +427,12 @@
     {
         sendToHeaderView.titleLabel.text = newTitle;
         sendToHeaderView.titleLabel.font = [UIFont systemFontOfSize:20];
+        [okButton.titleLabel setTextColor:[UIColor whiteColor]];
+        okButton.userInteractionEnabled = TRUE;
     } else
     {
+        [okButton.titleLabel setTextColor:[UIColor lightGrayColor]];
+        okButton.userInteractionEnabled = FALSE;
         sendToHeaderView.titleLabel.text = defaultThrowToLabel;
         sendToHeaderView.titleLabel.font = [UIFont systemFontOfSize:28];
     }

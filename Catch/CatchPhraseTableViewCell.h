@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "ToolbarSingleton.h"
+#import "PaperBallTableViewCell.h"
 @protocol CatchPhaseTableViewCellDelegate
 @property UIView *view;
 @property BOOL didPinchPaper;
@@ -24,7 +25,7 @@
 -(void) goToOpenPaper: (UITapGestureRecognizer *) sender;
 @end
 
-@interface CatchPhraseTableViewCell : UITableViewCell <UITextViewDelegate, ToolbarSingletonDelegate, UICollisionBehaviorDelegate>
+@interface CatchPhraseTableViewCell : PaperBallTableViewCell <UITextViewDelegate, ToolbarSingletonDelegate, UICollisionBehaviorDelegate>
 @property UITextView *textView;
 @property UIImageView *memeView;
 @property UIImage *memeImage;

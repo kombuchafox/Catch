@@ -145,8 +145,9 @@
         okButton = [[UIButton alloc]initWithFrame:CGRectMake(deviceWidth - headerViewHeight - 5, 0, headerViewHeight, headerViewHeight)];
         [okButton setTitle: @"✔︎"forState: UIControlStateNormal];
         [okButton addTarget:self action:@selector(flingBall:) forControlEvents:UIControlEventTouchUpInside];
-        okButton.titleLabel.textColor = [UIColor whiteColor];
         okButton.titleLabel.font = [UIFont systemFontOfSize:30];
+        okButton.titleLabel.textColor = [UIColor lightGrayColor];
+        okButton.userInteractionEnabled = FALSE;
     }
     if (section == 1) {
         headerView.backgroundColor = [Utils UIColorFromRGB:0xE8A731];
@@ -330,17 +331,17 @@
                 catchPhraseHeaderView.frame = CGRectMake(catchPhraseHeaderView.frame.origin.x, catchPhraseHeaderView.frame.origin.y, catchPhraseHeaderView.frame.size.width, catchPhraseHeaderView.frame.size.height + 100);
 
                 ballRowExpanded = false;
-                self.ballTableView.scrollEnabled = YES;
+                self.ballTableView.scrollEnabled = FALSE;
                 
                 break;
             case 1:
 
-                self.ballTableView.scrollEnabled = true;
+                self.ballTableView.scrollEnabled = FALSE;
                 ballRowExpanded = false;
                 break;
             case 2:
                 ballRowExpanded = true;
-                //self.ballTableView.scrollEnabled = false;
+                self.ballTableView.scrollEnabled = false;
                 break;
             default:
                 break;
@@ -477,8 +478,12 @@
     {
         sendToHeaderView.titleLabel.text = newTitle;
         sendToHeaderView.titleLabel.font = [UIFont systemFontOfSize:20];
+        [okButton.titleLabel setTextColor:[UIColor whiteColor]];
+        okButton.userInteractionEnabled = TRUE;
     } else
     {
+        [okButton.titleLabel setTextColor:[UIColor lightGrayColor]];
+        okButton.userInteractionEnabled = FALSE;
         sendToHeaderView.titleLabel.text = defaultThrowToLabel;
         sendToHeaderView.titleLabel.font = [UIFont systemFontOfSize:28];
     }

@@ -11,4 +11,8 @@
 @interface PaperBallTableViewCell : UITableViewCell
 @property (strong, nonatomic) IBOutlet UIImageView *ballGraphic;
 -(void) setUp;
+@property UIDynamicAnimator *animator;
+@property CGFloat boundary;
+@property UISwipeGestureRecognizer *send;
+@property UITapGestureRecognizer *ballTap;
 @end
