@@ -38,6 +38,7 @@
     UIButton *okButton;
     bool renderCrumpledBall;
     PickFriendsTableViewCell *pickFriendsCell;
+    NSMutableArray *chosenFriends;
 }
 
 @property BallView *ballSectionView;
@@ -155,7 +156,12 @@
         headerView.frame = CGRectMake(0, 0, deviceWidth, headerViewHeight);
         [headerView addSubview:cancelButton];
         [headerView addSubview:okButton];
-        title.text = defaultThrowToLabel;
+        if ([chosenFriends count] > 0)
+        {
+            title.text = [self titleFromFriendList];
+        } else {
+            title.text = defaultThrowToLabel;
+        }
         headerView.sectionTag = @"1";
         sendToHeaderView = headerView;
         sendToHeaderView.titleLabel = title;
@@ -190,6 +196,7 @@
      }
      ];
     [pickFriendsCell clearData];
+    chosenFriends = nil;
     self.ballTableView.scrollEnabled = YES;
     okButton.userInteractionEnabled = NO;
     okButton.titleLabel.textColor = [UIColor lightGrayColor];
@@ -479,21 +486,10 @@
 #pragma mark PickFriendTableViewDelegate
 -(void) updatePickFriendHeaderView: (NSMutableArray *) friends;
 {
-    NSString *newTitle = @" ";
-    for (int i = 0; i < [friends count]; i++)
+    chosenFriends = friends;
+    if ([friends count] > 0)
     {
-        NSMutableDictionary *friendData = [friends objectAtIndex:i];
-        if (i == 0)
-        {
-            newTitle = [friendData objectForKey:@"first_name"];
-        } else
-        {
-            newTitle = [newTitle stringByAppendingString:[NSString stringWithFormat:@", %@", [friendData objectForKey:@"first_name"]]];
-        }
-    }
-    if (![newTitle isEqualToString:@" "])
-    {
-        sendToHeaderView.titleLabel.text = newTitle;
+        sendToHeaderView.titleLabel.text = [self titleFromFriendList];
         sendToHeaderView.titleLabel.font = [UIFont systemFontOfSize:20];
         [okButton.titleLabel setTextColor:[UIColor whiteColor]];
         okButton.userInteractionEnabled = TRUE;
@@ -504,5 +500,21 @@
         sendToHeaderView.titleLabel.text = defaultThrowToLabel;
         sendToHeaderView.titleLabel.font = [UIFont systemFontOfSize:28];
     }
+}
+-(NSString*) titleFromFriendList
+{
+    NSString *newTitle = @" ";
+    for (int i = 0; i < [chosenFriends count]; i++)
+    {
+        NSMutableDictionary *friendData = [chosenFriends objectAtIndex:i];
+        if (i == 0)
+        {
+            newTitle = [friendData objectForKey:@"first_name"];
+        } else
+        {
+            newTitle = [newTitle stringByAppendingString:[NSString stringWithFormat:@", %@", [friendData objectForKey:@"first_name"]]];
+        }
+    }
+    return newTitle;
 }
 @end
