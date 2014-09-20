@@ -212,12 +212,14 @@
 }
 -(void) goToOpenPaper: (UITapGestureRecognizer *) sender
 {
-
-        self.didPinchPaper = NO;
-        catchPhraseViewCell.textView.hidden = NO;
-        catchPhraseViewCell.ballGraphic.hidden = YES;
-        [friendsTableViewCell.pickedIndexes removeAllObjects];
-        [self openPaper];
+    self.didPinchPaper = NO;
+    catchPhraseViewCell.textView.hidden = NO;
+    catchPhraseViewCell.ballGraphic.hidden = YES;
+    [friendsTableViewCell.pickedIndexes removeAllObjects];
+    [self openPaper];
+    [friendsTableViewCell clearData];
+    okButton.userInteractionEnabled = NO;
+    okButton.titleLabel.textColor = [UIColor lightGrayColor];
 }
 -(void) flingBall: (UITapGestureRecognizer *) sender
 {
@@ -261,6 +263,7 @@
             break;
         case 1:
             cell = [self.ballTableView dequeueReusableCellWithIdentifier:@"friendsTableViewCell"];
+            
             friendsTableViewCell = (PickFriendsTableViewCell *) cell;
             friendsTableViewCell.friendsTableView.delegate = friendsTableViewCell;
             friendsTableViewCell.friendsTableView.dataSource = friendsTableViewCell;
@@ -421,8 +424,20 @@
 }
 
 #pragma mark PickFriendTableViewDelegate
--(void) updatePickFriendHeaderView: (NSString *) newTitle;
+-(void) updatePickFriendHeaderView: (NSMutableArray *) friends
 {
+    NSString *newTitle = @" ";
+    for (int i = 0; i < [friends count]; i++)
+    {
+        NSMutableDictionary *friendData = [friends objectAtIndex:i];
+        if (i == 0)
+        {
+            newTitle = [friendData objectForKey:@"first_name"];
+        } else
+        {
+            newTitle = [newTitle stringByAppendingString:[NSString stringWithFormat:@", %@", [friendData objectForKey:@"first_name"]]];
+        }
+    }
     if (![newTitle isEqualToString:@" "])
     {
         sendToHeaderView.titleLabel.text = newTitle;

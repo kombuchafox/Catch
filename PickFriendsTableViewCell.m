@@ -117,10 +117,12 @@
 -(void) updateHeaderViewLabel
 {
     NSString *newTitle = @" ";
+    NSMutableArray *friends = [[NSMutableArray alloc] init];
     for (int i = 0; i < [pickedIndexes count]; i++)
     {
         NSIndexPath *path = [pickedIndexes objectAtIndex:i];
         NSMutableDictionary *friendData = [rowToFriend objectForKey:path];
+        [friends addObject:friendData];
        if (i == 0)
        {
            newTitle = [friendData objectForKey:@"first_name"];
@@ -129,6 +131,12 @@
            newTitle = [newTitle stringByAppendingString:[NSString stringWithFormat:@", %@", [friendData objectForKey:@"first_name"]]];
        }
     }
-    [self.delegate updatePickFriendHeaderView:newTitle];
+    [self.delegate updatePickFriendHeaderView:friends];
+}
+-(void) clearData
+{
+    pickedIndexes = [[NSMutableArray alloc] init];
+    [self.friendsTableView reloadData];
+    
 }
 @end

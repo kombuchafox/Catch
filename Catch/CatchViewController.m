@@ -37,6 +37,7 @@
     UIButton *cancelButton;
     UIButton *okButton;
     bool renderCrumpledBall;
+    PickFriendsTableViewCell *pickFriendsCell;
 }
 
 @property BallView *ballSectionView;
@@ -168,6 +169,7 @@
 -(void) flingBall:(UITapGestureRecognizer *) sender
 {
     renderCrumpledBall = YES;
+    self.ballTableView.scrollEnabled = FALSE;
     [self goToCrumpledBall];
 }
 -(void) dismissSelf: (UIButton *) sender
@@ -187,7 +189,10 @@
          self.ballTableView.frame = CGRectMake(0, self.seperatorView.frame.size.height + self.seperatorView.frame.origin.y, [UIScreen mainScreen].bounds.size.width,self.ballTableView.frame.size.height - self.seperatorView.frame.size.height);
      }
      ];
-    
+    [pickFriendsCell clearData];
+    self.ballTableView.scrollEnabled = YES;
+    okButton.userInteractionEnabled = NO;
+    okButton.titleLabel.textColor = [UIColor lightGrayColor];
 }
 -(void) goToCrumpledBall
 {
@@ -244,7 +249,7 @@
         }
     } else {
         cell = [self.ballTableView dequeueReusableCellWithIdentifier:@"friendsTableViewCell"];
-        PickFriendsTableViewCell *pickFriendsCell = (PickFriendsTableViewCell *) cell;
+        pickFriendsCell = (PickFriendsTableViewCell *) cell;
         pickFriendsCell.delegate = self;
         
     }
@@ -472,8 +477,20 @@
     
 }
 #pragma mark PickFriendTableViewDelegate
--(void) updatePickFriendHeaderView: (NSString *) newTitle;
+-(void) updatePickFriendHeaderView: (NSMutableArray *) friends;
 {
+    NSString *newTitle = @" ";
+    for (int i = 0; i < [friends count]; i++)
+    {
+        NSMutableDictionary *friendData = [friends objectAtIndex:i];
+        if (i == 0)
+        {
+            newTitle = [friendData objectForKey:@"first_name"];
+        } else
+        {
+            newTitle = [newTitle stringByAppendingString:[NSString stringWithFormat:@", %@", [friendData objectForKey:@"first_name"]]];
+        }
+    }
     if (![newTitle isEqualToString:@" "])
     {
         sendToHeaderView.titleLabel.text = newTitle;
