@@ -85,6 +85,7 @@
 		70F93162199F1ECC0015A64A /* gear.png in Resources */ = {isa = PBXBuildFile; fileRef = 70F93161199F1ECC0015A64A /* gear.png */; };
 		70F93164199F1F7E0015A64A /* plusSign.png in Resources */ = {isa = PBXBuildFile; fileRef = 70F93163199F1F7E0015A64A /* plusSign.png */; };
 		70F93166199F20920015A64A /* Cloud.png in Resources */ = {isa = PBXBuildFile; fileRef = 70F93165199F20920015A64A /* Cloud.png */; };
+		70FA536819D0A762005C6327 /* LinedPaperView.m in Sources */ = {isa = PBXBuildFile; fileRef = 70FA536719D0A762005C6327 /* LinedPaperView.m */; };
 		70FEE82D19999DC2006829ED /* CatchTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 70FEE82C19999DC2006829ED /* CatchTableViewCell.m */; };
 		70FEE8301999FFFB006829ED /* BallView.m in Sources */ = {isa = PBXBuildFile; fileRef = 70FEE82F1999FFFB006829ED /* BallView.m */; };
 		70FEE833199A0767006829ED /* ColorBarPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 70FEE832199A0767006829ED /* ColorBarPicker.m */; };
@@ -215,6 +216,8 @@
 		70F93161199F1ECC0015A64A /* gear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gear.png; sourceTree = "<group>"; };
 		70F93163199F1F7E0015A64A /* plusSign.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = plusSign.png; sourceTree = "<group>"; };
 		70F93165199F20920015A64A /* Cloud.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Cloud.png; sourceTree = "<group>"; };
+		70FA536619D0A762005C6327 /* LinedPaperView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LinedPaperView.h; path = Catch/LinedPaperView.h; sourceTree = "<group>"; };
+		70FA536719D0A762005C6327 /* LinedPaperView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LinedPaperView.m; path = Catch/LinedPaperView.m; sourceTree = "<group>"; };
 		70FEE82B19999DC2006829ED /* CatchTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CatchTableViewCell.h; path = Catch/CatchTableViewCell.h; sourceTree = "<group>"; };
 		70FEE82C19999DC2006829ED /* CatchTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CatchTableViewCell.m; path = Catch/CatchTableViewCell.m; sourceTree = "<group>"; };
 		70FEE82E1999FFFB006829ED /* BallView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BallView.h; sourceTree = "<group>"; };
@@ -491,6 +494,8 @@
 				70FEE82F1999FFFB006829ED /* BallView.m */,
 				70A1AD1119B17A0C007F0A5A /* LinedTextView.h */,
 				70A1AD1219B17A0C007F0A5A /* LinedTextView.m */,
+				70FA536619D0A762005C6327 /* LinedPaperView.h */,
+				70FA536719D0A762005C6327 /* LinedPaperView.m */,
 			);
 			name = Views;
 			path = ..;
@@ -655,6 +660,7 @@
 				70E0BCE219B4EA2600C9633A /* CommentsTableViewCell.m in Sources */,
 				70E5C50D199840B400D16D1C /* NewCatchViewController.m in Sources */,
 				7059ABE719B03A3A00213B9C /* BallUpdateTableViewCell.m in Sources */,
+				70FA536819D0A762005C6327 /* LinedPaperView.m in Sources */,
 				70369156199813F80088C41C /* TransitionHomeManager.m in Sources */,
 				704A94771995E62800BCEC06 /* Utils.m in Sources */,
 				70ABBB031995E13000761B84 /* CircleButton.m in Sources */,

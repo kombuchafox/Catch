@@ -45,8 +45,8 @@
         AppNavigationController *homeView = [self.storyboard instantiateViewControllerWithIdentifier:@"AppNavigationController"];
 //        HomeViewController *homeView = [self.storyboard instantiateViewControllerWithIdentifier:@"HomeViewController"];
         //homeView.transitioningDelegate = self.transitionHomeDelegate;
-        homeView.modalPresentationStyle = UIModalPresentationNone;
-        [self presentViewController:homeView animated:NO completion:^{}];
+        //homeView.modalPresentationStyle = UIModalPresentationNone;
+        //[self presentViewController:homeView animated:NO completion:^{}];
         
         //        homeView.transitioningDelegate = (TransitionHomeManager *)self.transitioningDelegate;
         //        homeView.modalPresentationStyle = UIModalPresentationCustom;
