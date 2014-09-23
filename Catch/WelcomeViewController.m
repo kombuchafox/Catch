@@ -45,8 +45,8 @@
         //if user is already signed in, segue to homeView
         AppNavigationController *homeView = [self.storyboard instantiateViewControllerWithIdentifier:@"AppNavigationController"];
 ////        HomeViewController *homeView = [self.storyboard instantiateViewControllerWithIdentifier:@"HomeViewController"];
-//        homeView.modalPresentationStyle = UIModalPresentationNone;
-//        [self presentViewController:homeView animated:NO completion:^{}];
+        homeView.modalPresentationStyle = UIModalPresentationNone;
+        [self presentViewController:homeView animated:NO completion:^{}];
         
     } else {
        

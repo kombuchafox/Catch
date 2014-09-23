@@ -286,7 +286,22 @@
 #pragma mark UITextViewDelegate
 -(BOOL)textViewShouldBeginEditing:(UITextView *)textView
 {
-
+    ToolbarSingleton *toolbBarManager = [ToolbarSingleton sharedManager];
+    toolbBarManager.delegate = self;
+    //    CGRect frame = toolbBarManager.keyboardToolbar.frame;
+    //    if (self.delegate.checkKeyBoardHeight)
+    //    {
+    //        frame.origin = CGPointMake(0, 253);
+    //    } else {
+    //        frame.origin = CGPointMake(0, 317);
+    //    }
+    //toolbBarManager.keyboardToolbar.frame = frame;
+    CGRect delegateFrame = self.delegate.view.frame;
+    delegateFrame.size = [UIScreen mainScreen].bounds.size;
+    [self.delegate.view setFrame: delegateFrame];
+    //[self.delegate.view addSubview:toolbBarManager.keyboardToolbar];
+    self.textView = textView;
+    self.textView.inputAccessoryView = toolbBarManager.keyboardToolbar;
     return YES;
 }
 - (void)keyboardWillShow:(NSNotification *)note {
@@ -296,6 +311,7 @@
 
 
 }
+
 -(void)textViewDidBeginEditing:(UITextView *)textView {
 
     if ([textView.text isEqualToString: defaultString]) {
@@ -313,21 +329,7 @@
         textView.frame = CGRectMake(textView.frame.origin.x, textView.frame.origin.y, textView.frame.size.width, textView.frame.size.height - 200);
     }];
     
-    ToolbarSingleton *toolbBarManager = [ToolbarSingleton sharedManager];
-    toolbBarManager.delegate = self;
-    CGRect frame = toolbBarManager.keyboardToolbar.frame;
-    if (self.delegate.checkKeyBoardHeight)
-    {
-        frame.origin = CGPointMake(0, 253);
-    } else {
-        frame.origin = CGPointMake(0, 317);
-    }
-    toolbBarManager.keyboardToolbar.frame = frame;
-    CGRect delegateFrame = self.delegate.view.frame;
-    delegateFrame.size = [UIScreen mainScreen].bounds.size;
-    [self.delegate.view setFrame: delegateFrame];
-    [self.delegate.view addSubview:toolbBarManager.keyboardToolbar];
-    self.textView = textView;
+
 
 
 

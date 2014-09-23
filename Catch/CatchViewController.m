@@ -436,7 +436,17 @@
 
 -(BOOL)textViewShouldBeginEditing:(UITextView *)textView
 {
-    
+    ToolbarSingleton *toolbBarManager = [ToolbarSingleton sharedManager];
+    toolbBarManager.delegate = self;
+    //    CGRect frame = toolbBarManager.keyboardToolbar.frame;
+    //    if (self.delegate.checkKeyBoardHeight)
+    //    {
+    //        frame.origin = CGPointMake(0, 253);
+    //    } else {
+    //        frame.origin = CGPointMake(0, 317);
+    //    }
+    //toolbBarManager.keyboardToolbar.frame = frame;
+    textView.inputAccessoryView = toolbBarManager.keyboardToolbar;
     return YES;
 }
 - (void)keyboardWillShow:(NSNotification *)note {
@@ -454,14 +464,14 @@
         
         textView.text = @"";
     }
-    ToolbarSingleton *toolbBarManager = [ToolbarSingleton sharedManager];
-    [toolbBarManager changeDoneButtonTitle:@"Post"];
-    CGRect frame = toolbBarManager.keyboardToolbar.frame;
-
-    frame.origin = CGPointMake(0, 317);
-    toolbBarManager.keyboardToolbar.frame = frame;
-    [self.view addSubview:toolbBarManager.keyboardToolbar];
-    toolbBarManager.delegate = self;
+    ToolbarSingleton *toolBarManager = [ToolbarSingleton sharedManager];
+    [toolBarManager changeDoneButtonTitle:@"Post"];
+    CGRect frame = toolBarManager.keyboardToolbar.frame;
+    frame = CGRectMake(0, 0, frame.size.width, frame.size.height);
+    toolBarManager.keyboardToolbar.frame = frame;
+    
+    [textView setInputAccessoryView:toolBarManager.keyboardToolbar];
+    toolBarManager.delegate = self;
     CGRect bFrame = self.ballTableView.frame;
     CGRect sFrame = self.seperatorView.frame;
     CGRect tFrame = self.postStatusTextView.frame;
