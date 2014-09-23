@@ -14,7 +14,7 @@
 #import "AppNavigationController.h"
 
 @interface WelcomeViewController ()
-@property (strong, nonatomic) IBOutlet CircleButton *loginButton;
+
 
 @property (strong, nonatomic) IBOutlet CircleButton *infoButton;
 @property TransitionHomeManager *transitionHomeDelegate;
@@ -38,28 +38,23 @@
 }
 - (void)viewDidAppear:(BOOL)animated {
     NSLog(@"Splash - viewDidAppear");
+    self.loginButton.layer.cornerRadius = 5;
     if ([PFUser currentUser] && [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]])
     {
 
         //if user is already signed in, segue to homeView
         AppNavigationController *homeView = [self.storyboard instantiateViewControllerWithIdentifier:@"AppNavigationController"];
-//        HomeViewController *homeView = [self.storyboard instantiateViewControllerWithIdentifier:@"HomeViewController"];
-        //homeView.transitioningDelegate = self.transitionHomeDelegate;
-        //homeView.modalPresentationStyle = UIModalPresentationNone;
-        //[self presentViewController:homeView animated:NO completion:^{}];
-        
-        //        homeView.transitioningDelegate = (TransitionHomeManager *)self.transitioningDelegate;
-        //        homeView.modalPresentationStyle = UIModalPresentationCustom;
-        //        [self presentViewController:homeView animated:true completion:^{}];
+////        HomeViewController *homeView = [self.storyboard instantiateViewControllerWithIdentifier:@"HomeViewController"];
+//        homeView.modalPresentationStyle = UIModalPresentationNone;
+//        [self presentViewController:homeView animated:NO completion:^{}];
         
     } else {
-        [self.loginButton drawCircle:[Utils UIColorFromRGB:0x3B5998]];
-        [self.infoButton drawCircle:[Utils UIColorFromRGB:0xedd309]];
+       
     }
 
     //[self checkStatus];
 }
-- (IBAction)loginButtonTouchHandler:(CircleButton *)sender {
+- (IBAction)loginButtonTouchHandler:(UIButton *)sender {
     NSArray *permissionsArray = @[ @"user_friends", @"public_profile"];
     
     // Login PFUser using facebook
@@ -100,6 +95,10 @@
                     
                 }
             }];
+            AppNavigationController *homeView = [self.storyboard instantiateViewControllerWithIdentifier:@"AppNavigationController"];
+//            homeView.transitioningDelegate = self.transitionHomeDelegate;
+            homeView.modalPresentationStyle = UIModalPresentationNone;
+            [self presentViewController:homeView animated:NO completion:^{}];
 
         }
     }];

@@ -40,7 +40,7 @@
 
     //for testing
     _testArray = [NSArray arrayWithObjects:@"obj1",@"obj1",@"obj1",nil];
-    _labelArray = [NSArray arrayWithObjects:@"#whatTheFuck",@"#selfies", @"#bestSex",nil];
+    _labelArray = [NSArray arrayWithObjects:@"#whatTheFuck",@"Cute as fuck jkfdshgjksdf jkkjdfsjk dfkjhg sdfg kdjsfhgkdjfs", @"#bestSex",nil];
 
 
     [self.view setBackgroundColor:[Utils UIColorFromRGB:0xFCFCEB]];
@@ -53,9 +53,9 @@
     homeLabel.backgroundColor = [UIColor clearColor];
     homeLabel.textColor = [Utils UIColorFromRGB:0xFFFFFF];
     homeLabel.text = @"Catch";
+    homeLabel.font = [UIFont fontWithName:@"noteworthy" size:30];
     homeLabel.shadowColor = [UIColor colorWithWhite:0.0 alpha:0];
     homeLabel.textAlignment = NSTextAlignmentCenter;
-    homeLabel.font = [UIFont systemFontOfSize:35];
     self.navigationItem.titleView = homeLabel;
     [self.navigationController.navigationBar setBarTintColor:[Utils UIColorFromRGB:0xc93532]];
     [self.toolBar setBackgroundColor:[Utils UIColorFromRGB:0xD73033]];
@@ -117,6 +117,7 @@
 //        NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:_labelArray[0] attributes:attributes];
         //[string setAttributes:subattributes range:range];
     }
+    cell.selectionStyle = UITableViewCellSeparatorStyleNone;
     return cell;
 }
 #pragma mark UITableViewDelegate

@@ -47,7 +47,11 @@
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(presentBall:)];
     [tap setNumberOfTapsRequired:2];
     [self addGestureRecognizer:tap];
-    
+    if (self.attachedImage)
+    {
+        self.attachedImage.clipsToBounds = YES;
+        [self.attachedImage.layer setCornerRadius:5];
+    }
 }
 -(void) drawSeparator
 {

@@ -14,6 +14,7 @@
 @property BOOL isOpened;
 @property id<CatchTableViewCellDelegate> delegate;
 @property (strong, nonatomic) IBOutlet UITextView *ballTitle;
+@property (strong, nonatomic) IBOutlet UIImageView *attachedImage;
 -(void) setUp;
 @end
 @protocol CatchTableViewCellDelegate

@@ -243,10 +243,22 @@
             
             if (indexPath.row % 3 == 1) {
                 comment.textView.text = @"Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud ";
+                if (indexPath.row % 2 == 0)
+                {
+                    comment.attachedImage = nil;
+                }
             } else if (indexPath.row % 3 == 0) {
                 comment.textView.text = @" quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat";
+                if (indexPath.row % 2 == 0)
+                {
+                    comment.attachedImage = nil;
+                }
             } else {
                 comment.textView.text = @"factor tum poen legum odioque civiuda.";
+                if (indexPath.row % 2 == 0)
+                {
+                    comment.attachedImage = nil;
+                }
             }
             if (indexPath.row == value - 1)
             {
@@ -269,14 +281,29 @@
         CommentTableViewCell *cell = [self.ballTableView dequeueReusableCellWithIdentifier:@"commentTableViewCell"];
         if (indexPath.row % 3 == 1) {
             cell.textView.text = @"Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud ";
+            if (indexPath.row % 2 == 0)
+            {
+                cell.attachedImage = nil;
+            }
         } else if (indexPath.row % 3 == 0) {
             cell.textView.text = @" quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat";
+            if (indexPath.row % 2 == 0)
+            {
+                cell.attachedImage = nil;
+            }
         } else {
             cell.textView.text = @"factor tum poen legum odioque civiuda.";
+            if (indexPath.row % 2 == 0)
+            {
+                cell.attachedImage = nil;
+            }
         }
         
         int height = [Utils measureHeightOfUITextView:cell.textView];
-        return height + 10;
+        if (cell.attachedImage) {
+            height += cell.attachedImage.frame.size.height;
+        }
+        return height + 15;
     } else {
         return self.ballTableView.frame.size.height - 100;
     }

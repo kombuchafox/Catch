@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		70000D4019AB2981000A6EEA /* CollapsableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 70000D3F19AB2981000A6EEA /* CollapsableHeaderView.m */; };
+		7011D44F19D13B60003325C4 /* pencil_blank_T.png in Resources */ = {isa = PBXBuildFile; fileRef = 7011D44E19D13B60003325C4 /* pencil_blank_T.png */; };
 		701EACEB19AC80AE000EF225 /* line.png in Resources */ = {isa = PBXBuildFile; fileRef = 701EACEA19AC80AE000EF225 /* line.png */; };
 		7036914F1997EE770088C41C /* facebook-logo_000.png in Resources */ = {isa = PBXBuildFile; fileRef = 7036914E1997EE770088C41C /* facebook-logo_000.png */; };
 		7036915219980CE20088C41C /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7036915119980CE20088C41C /* HomeViewController.m */; };
@@ -106,6 +107,7 @@
 /* Begin PBXFileReference section */
 		70000D3E19AB2981000A6EEA /* CollapsableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollapsableHeaderView.h; sourceTree = "<group>"; };
 		70000D3F19AB2981000A6EEA /* CollapsableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollapsableHeaderView.m; sourceTree = "<group>"; };
+		7011D44E19D13B60003325C4 /* pencil_blank_T.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pencil_blank_T.png; sourceTree = "<group>"; };
 		701EACEA19AC80AE000EF225 /* line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = line.png; path = Catch/line.png; sourceTree = "<group>"; };
 		7036914E1997EE770088C41C /* facebook-logo_000.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "facebook-logo_000.png"; path = "Catch/facebook-logo_000.png"; sourceTree = "<group>"; };
 		7036915019980CE20088C41C /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
@@ -322,6 +324,7 @@
 				70F9315C199E980C0015A64A /* AddMessageTransitionManager.h */,
 				70F9315D199E980C0015A64A /* AddMessageTransitionManager.m */,
 				704460A619948DE000E65E93 /* Main.storyboard */,
+				7011D44E19D13B60003325C4 /* pencil_blank_T.png */,
 				70FEE82A19999C79006829ED /* Images */,
 				70FEE82919999C61006829ED /* Views */,
 				70E84F331995AE6E0038AC92 /* ViewControllers */,
@@ -399,8 +402,8 @@
 				70FEE82B19999DC2006829ED /* CatchTableViewCell.h */,
 				70FEE82C19999DC2006829ED /* CatchTableViewCell.m */,
 				7059ABE519B03A3A00213B9C /* BallUpdateTableViewCell.h */,
-				7059ABE619B03A3A00213B9C /* BallUpdateTableViewCell.m */,
 				70ACD7CE19BFC34300942DF9 /* PickFriendsTableViewCell.h */,
+				7059ABE619B03A3A00213B9C /* BallUpdateTableViewCell.m */,
 				70ACD7CF19BFC34300942DF9 /* PickFriendsTableViewCell.m */,
 				70ACD7D119BFC7F100942DF9 /* PickFriendTableViewCell.h */,
 				70ACD7D219BFC7F100942DF9 /* PickFriendTableViewCell.m */,
@@ -606,6 +609,7 @@
 				70F93166199F20920015A64A /* Cloud.png in Resources */,
 				70A9BCD019C2651F0059C3C1 /* triangleTear.png in Resources */,
 				70FEE83B199A1352006829ED /* circle.png in Resources */,
+				7011D44F19D13B60003325C4 /* pencil_blank_T.png in Resources */,
 				70D492EF1998AA7D00357DA8 /* group.png in Resources */,
 				70DD6F1119B3D0C700820124 /* paper.png in Resources */,
 				7059ABED19B066D800213B9C /* whiteArrow.png in Resources */,

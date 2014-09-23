@@ -73,10 +73,10 @@
     UILabel *newballLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, width, height)];
     newballLabel.backgroundColor = [UIColor clearColor];
     newballLabel.textColor = [UIColor whiteColor];
+    newballLabel.font = [UIFont fontWithName:@"noteworthy" size:30];
     newballLabel.text = @"New Catch";
     newballLabel.shadowColor = [UIColor colorWithWhite:0.0 alpha:0];
     newballLabel.textAlignment = NSTextAlignmentCenter;
-    newballLabel.font = [UIFont systemFontOfSize:30];
     self.navigationItem.titleView = newballLabel;
     self.ballTableView.delegate = self;
     ballRowExpanded = true;

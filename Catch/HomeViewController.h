@@ -11,6 +11,7 @@
 #import "CatchTableViewCell.h"
 @interface HomeViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, CatchTableViewCellDelegate>
 
+@property (strong, nonatomic) IBOutlet UITableView *newsFeedTable;
 
 @property TransitionHomeManager *logoutTransitionDelegate;
 @end
