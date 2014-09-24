@@ -263,8 +263,7 @@
                 catchPhraseViewCell = [self.ballTableView dequeueReusableCellWithIdentifier:@"CatchPhraseCell"];
                 catchPhraseViewCell.delegate = self;
 
-                frame = catchPhraseViewCell.addPictureButton.frame;
-                catchPhraseViewCell.addPictureButton.frame = CGRectMake(frame.origin.x, [self tableView:tableView heightForRowAtIndexPath:indexPath] - frame.size.height - 5, frame.size.width, frame.size.height);
+                //frame = catchPhraseViewCell.addPictureButton.frame;
             }
             cell = catchPhraseViewCell;
             break;

@@ -20,6 +20,7 @@
     dispatch_once(&onceToken, ^{
         sharedMyManager = [[self alloc] init];
     });
+    sharedMyManager.characterCount.text = @"100";
     return sharedMyManager;
 }
 
@@ -47,7 +48,7 @@
     self.keyboardToolbar.frame = CGRectMake(0, [UIScreen mainScreen].bounds.size.height - keyBoard.frame.size.height - 35, [UIScreen mainScreen].bounds.size.width, 35);
     self.addPictureButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 35,35)];
     [self.addPictureButton setImage:[UIImage imageNamed:@"cameraIcon.png"] forState:UIControlStateNormal];
-    
+    [self.addPictureButton addTarget:self action:@selector(addPictureButton:) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *cameraItem = [[UIBarButtonItem alloc] initWithCustomView:self.addPictureButton];
     
     
@@ -80,6 +81,11 @@
 -(void) doneButton: (UITapGestureRecognizer *) sender
 {
     [self.delegate doneButton];
+}
+
+-(void) addPictureButton: (UITapGestureRecognizer *) sender
+{
+    [self.delegate addPictureButton];
 }
 
 -(void) changeDoneButtonTitle:(NSString *) title

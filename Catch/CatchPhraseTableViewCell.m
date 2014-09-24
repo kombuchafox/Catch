@@ -40,6 +40,7 @@
     UILabel *characterCount;
     UIToolbar *_inputAccessoryView;
     UIButton *doneButton;
+    UIToolbar *keyboard;
     BOOL didPinch;
 }
 @end
@@ -278,10 +279,10 @@
     // Configure the view for the selected state
 }
 
-- (IBAction)addPicture:(UIButton *)sender
+- (void)addPictureButton
 {
-    [_inputAccessoryView removeFromSuperview];
-    [self.delegate presentPhotoAlbum:sender];
+    //[_inputAccessoryView removeFromSuperview];
+    [self.delegate presentPhotoAlbum:nil];
 }
 #pragma mark UITextViewDelegate
 -(BOOL)textViewShouldBeginEditing:(UITextView *)textView
@@ -350,8 +351,9 @@
     if (textView.text.length > 100) {
         textView.text = [textView.text substringToIndex:100];
     }
-    
-    characterCount.text = [NSString stringWithFormat:@"%d", 100 - textView.text.length];
+
+    ToolbarSingleton *toolBar = [ToolbarSingleton sharedManager];
+    toolBar.characterCount.text = [NSString stringWithFormat:@"%d", 100 - textView.text.length];
     
 }
 - (void)textViewDidEndEditing:(UITextView *)textView

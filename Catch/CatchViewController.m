@@ -39,17 +39,68 @@
     bool renderCrumpledBall;
     PickFriendsTableViewCell *pickFriendsCell;
     NSMutableArray *chosenFriends;
+    UIImageView *imageView;
 }
 
 @property BallView *ballSectionView;
 @end
 
 @implementation CatchViewController
-@synthesize ballSectionView;
+@synthesize ballSectionView, memeImage, memeView;
+
+-(void) setMemeImage:(UIImage *)newValue
+{
+    if (imageView) {
+        [imageView removeFromSuperview];
+    }
+    memeImage = newValue;
+    imageView = [[UIImageView alloc] initWithFrame:CGRectMake(self.postStatusTextView.center.x/2, self.postStatusTextView.center.y/2, 100, 120)];
+    UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
+    imageView.userInteractionEnabled = YES;
+    [imageView addGestureRecognizer:pan];
+    imageView.layer.cornerRadius = 10;
+    imageView.clipsToBounds = YES;
+    UIBezierPath *exclusionPath = [UIBezierPath bezierPathWithRect:CGRectMake(self.postStatusTextView.center.x/2, self.postStatusTextView.center.y/2, [UIScreen mainScreen].bounds.size.width, 200)];
+    
+    self.postStatusTextView.textContainer.exclusionPaths  = @[exclusionPath];
+    
+    [self.postStatusTextView addSubview:imageView];
+    imageView.image = newValue;
+    [self.postStatusTextView addSubview: imageView];
+    
+}
+-(UIImage*) memeImage
+{
+    return memeImage;
+}
+- (void)handlePan:(UIPanGestureRecognizer *)recognizer {
+    
+    CGPoint translation = [recognizer translationInView:self.postStatusTextView];
+    UIBezierPath *exclusionPath;
+    CGFloat newY, newX;
+    //    if (recognizer.view.center.y + translation.y > 100) {
+    newY = recognizer.view.center.y + translation.y;
+    //    } else {
+    //        newY = 110;
+    //    }
+    //    if (recognizer.view.center.x + translation.x > 25) {
+    newX = recognizer.view.center.x + translation.x;
+    //    } else {
+    //        newX = 75;
+    //    }
+    
+    recognizer.view.center = CGPointMake(newX, newY);
+    exclusionPath = [UIBezierPath bezierPathWithRect:CGRectMake(0, newY - 25, self.postStatusTextView.frame.size.width, 70)];
+    
+    self.postStatusTextView.textContainer.exclusionPaths = @[exclusionPath];
+    [recognizer setTranslation:CGPointMake(0, 0) inView:self.postStatusTextView];
+    
+}
 -(void) viewDidLoad
 {
     [super viewDidLoad];
     [self setUp];
+    [self setNeedsStatusBarAppearanceUpdate];
     identifierToSection = [[NSDictionary alloc] init];
     defaultHeight = 40;
     
@@ -213,6 +264,7 @@
     picker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
     [self presentViewController:picker animated:YES completion:nil];
 }
+
 -(CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     if (!self.didPinchPaper)
@@ -406,9 +458,10 @@
 {
     [picker dismissViewControllerAnimated:YES completion:nil];
     UIImage * pickedImage = [info objectForKey:UIImagePickerControllerOriginalImage];
-    catchPhraseViewCell.memeImage = pickedImage;
+    self.memeImage = pickedImage;
 
     [picker dismissViewControllerAnimated:YES completion:nil];
+    [self textViewDidBeginEditing:self.postStatusTextView];
 }
 -(void) loadMore: (UITapGestureRecognizer *) sender
 {
@@ -554,4 +607,16 @@
     }
     return newTitle;
 }
+
+#pragma mark ToolBarSingleton Delegate
+-(void) addPictureButton
+{
+    [self presentPhotoAlbum:nil];
+}
+
+-(UIStatusBarStyle)preferredStatusBarStyle{
+    return UIStatusBarStyleLightContent;
+}
+
+
 @end
