@@ -10,6 +10,7 @@
 
 @interface WelcomeViewController : UIViewController
 @property (strong, nonatomic) IBOutlet UIButton *loginButton;
+@property (strong, nonatomic) IBOutlet UIImageView *launchImageView;
 
 @end
 

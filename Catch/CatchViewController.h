@@ -17,6 +17,7 @@
 @property (strong, nonatomic) IBOutlet BallTableView *ballTableView;
 @property (strong, nonatomic) IBOutlet BallView *seperatorView;
 @property (strong, nonatomic) IBOutlet LinedTextView *postStatusTextView;
+@property (strong, nonatomic) IBOutlet UIView *threadInitialPostView;
 @property UIImageView *memeView;
 @property UIImage *memeImage;
 @property BOOL didPinchPaper;

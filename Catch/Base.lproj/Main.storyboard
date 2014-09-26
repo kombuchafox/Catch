@@ -33,27 +33,27 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" restorationIdentifier="incomingBall" selectionStyle="default" indentationWidth="10" reuseIdentifier="incomingBall" rowHeight="140" id="fbL-Bl-sk2" customClass="CatchTableViewCell">
-                                        <rect key="frame" x="0.0" y="22" width="320" height="140"/>
+                                    <tableViewCell contentMode="scaleToFill" restorationIdentifier="incomingBall" selectionStyle="default" indentationWidth="10" reuseIdentifier="threadWithPicture" rowHeight="150" id="fbL-Bl-sk2" customClass="CatchTableViewCell">
+                                        <rect key="frame" x="0.0" y="22" width="320" height="150"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fbL-Bl-sk2" id="Xl3-y4-LBA">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="139"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="149"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="crumpled_paper.png" id="xEF-pe-xM2">
                                                     <rect key="frame" x="10" y="6" width="40" height="43"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" editable="NO" text="Cute as fuck jkfdshgjksdf jkkjdfsjk dfkjhg sdfg kdjsfhgkdjfs" id="KAY-en-ZHt">
-                                                    <rect key="frame" x="69" y="6" width="125" height="112"/>
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" editable="NO" text="hello my name is bob the builder thank you very much I want to be doing cool things with my buddies" id="KAY-en-ZHt">
+                                                    <rect key="frame" x="69" y="6" width="132" height="135"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                 </textView>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photo-6-768x1024.jpg" id="fFJ-ub-dUY">
-                                                    <rect key="frame" x="202" y="13" width="98" height="86"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tumblr_mnxid4jaQc1rf2f7ho1_400.png" id="fFJ-ub-dUY">
+                                                    <rect key="frame" x="209" y="13" width="91" height="86"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                             </subviews>
@@ -68,7 +68,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" restorationIdentifier="findFriends" selectionStyle="default" indentationWidth="10" reuseIdentifier="findFriends" rowHeight="40" id="yrU-Eb-bIf" customClass="CatchTableViewCell">
-                                        <rect key="frame" x="0.0" y="162" width="320" height="40"/>
+                                        <rect key="frame" x="0.0" y="172" width="320" height="40"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="yrU-Eb-bIf" id="BkA-ST-LnS">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="39"/>
@@ -90,8 +90,8 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" restorationIdentifier="openedBallCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="openedBallCell" rowHeight="70" id="dgb-aT-mdh" customClass="CatchTableViewCell">
-                                        <rect key="frame" x="0.0" y="202" width="320" height="70"/>
+                                    <tableViewCell contentMode="scaleToFill" restorationIdentifier="openedBallCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="thread" rowHeight="70" id="dgb-aT-mdh" customClass="CatchTableViewCell">
+                                        <rect key="frame" x="0.0" y="212" width="320" height="70"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dgb-aT-mdh" id="lt7-fd-Nmo">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="69"/>
@@ -102,7 +102,7 @@
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                 </textView>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="paper.png" id="iwt-ZE-a3D">
@@ -501,12 +501,55 @@
                         <outlet property="ballTableView" destination="HoL-qc-g3X" id="y4k-GE-pm3"/>
                         <outlet property="postStatusTextView" destination="5LG-Dz-gw1" id="lS0-N8-qF9"/>
                         <outlet property="seperatorView" destination="BUA-z6-nfT" id="Fwl-fJ-HAd"/>
+                        <outlet property="threadInitialPostView" destination="Qkr-gV-jUG" id="Dkd-G9-rlm"/>
                         <segue destination="f3t-yK-iNA" kind="push" id="pwh-uP-iYc"/>
+                        <segue destination="EF7-5v-hZf" kind="push" id="81i-J4-d2e"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="huF-lo-asj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-366" y="-688"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="IOB-eH-6SZ">
+            <objects>
+                <viewController id="EF7-5v-hZf" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="pUO-FS-7GP">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="VaH-t3-Fjg">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="4z1-FH-ZJB">
+                                        <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4z1-FH-ZJB" id="k3T-4l-FBw">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ian Fox" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="qzI-RD-tMu">
+                                                    <rect key="frame" x="20" y="6" width="254" height="31"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="SBD-Pj-wZi"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="heB-tH-pCQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="137" y="-5"/>
         </scene>
         <!--Friends View Controller-->
         <scene sceneID="9ba-NH-DI4">
@@ -584,21 +627,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view clipsSubviews="YES" contentMode="scaleToFill" id="Qxv-KM-8xi" customClass="LinedPaperView">
+                            <view hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" id="Qxv-KM-8xi" customClass="LinedPaperView">
                                 <rect key="frame" x="9" y="20" width="302" height="528"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="vJI-AL-bj7">
-                                        <rect key="frame" x="30" y="383" width="243" height="58"/>
-                                        <color key="backgroundColor" red="0.57423531530000005" green="0.78588378930000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="23"/>
-                                        <state key="normal" title="Login With Facebook">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="loginButtonTouchHandler:" destination="uyK-26-dql" eventType="touchUpInside" id="9oD-ad-RNa"/>
-                                        </connections>
-                                    </button>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Catch " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="p9C-VH-RxA">
                                         <rect key="frame" x="0.0" y="20" width="302" height="56"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -606,27 +638,35 @@
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Threads and Friends. No Strings Attached." id="9wk-j9-WFc">
-                                        <rect key="frame" x="30" y="256" width="262" height="100"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                        <fontDescription key="fontDescription" name="Noteworthy-Light" family="Noteworthy" pointSize="28"/>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                    </textView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pencil_blank_T.png" id="ZSB-8H-7AG">
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pencil_blank_T.png" id="ZSB-8H-7AG">
                                 <rect key="frame" x="97" y="7" width="265" height="270"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default.png" id="sXv-4c-m2a">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="vJI-AL-bj7">
+                                <rect key="frame" x="39" y="389" width="243" height="58"/>
+                                <color key="backgroundColor" red="0.57423531530000005" green="0.78588378930000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="23"/>
+                                <state key="normal" title="Login With Facebook">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="loginButtonTouchHandler:" destination="uyK-26-dql" eventType="touchUpInside" id="9oD-ad-RNa"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <navigationItem key="navigationItem" id="zqI-Ps-uhj"/>
                     <connections>
                         <outlet property="infoButton" destination="vJI-AL-bj7" id="5Lu-S5-FQm"/>
+                        <outlet property="launchImageView" destination="sXv-4c-m2a" id="S7K-37-8Lc"/>
                         <outlet property="loginButton" destination="vJI-AL-bj7" id="Qx3-E5-sJZ"/>
                     </connections>
                 </viewController>
@@ -657,11 +697,12 @@
         <image name="Cloud.png" width="75" height="35"/>
         <image name="backArrow.png" width="60" height="60"/>
         <image name="crumpled_paper.png" width="164" height="153"/>
+        <image name="default.png" width="320" height="480"/>
         <image name="paper.png" width="204" height="256"/>
         <image name="pencil_blank_T.png" width="590" height="575"/>
-        <image name="photo-6-768x1024.jpg" width="768" height="1024"/>
         <image name="plusSign.png" width="50" height="49"/>
         <image name="triangleTear.png" width="420" height="420"/>
+        <image name="tumblr_mnxid4jaQc1rf2f7ho1_400.png" width="333" height="396"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

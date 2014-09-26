@@ -12,6 +12,7 @@
 @interface CatchTableViewCell : UITableViewCell
 @property (strong, nonatomic) IBOutlet UIImageView *ballImageView;
 @property BOOL isOpened;
+@property BOOL hasPicture;
 @property id<CatchTableViewCellDelegate> delegate;
 @property (strong, nonatomic) IBOutlet UITextView *ballTitle;
 @property (strong, nonatomic) IBOutlet UIImageView *attachedImage;

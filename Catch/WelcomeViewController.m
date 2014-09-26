@@ -30,7 +30,16 @@
             
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    NSString *launchImage;
+    self.launchImageView.frame = [UIScreen mainScreen].bounds;
+    if  ((UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) &&
+         ([UIScreen mainScreen].bounds.size.height > 480.0f)) {
+        launchImage = @"default-568h";
+    } else {
+        launchImage = @"default";
+    }
+    
+    [self.launchImageView setImage:[UIImage imageNamed:launchImage]];
 
     self.transitionHomeDelegate = [[TransitionHomeManager alloc] init];
     // Do any additional setup after loading the view, typically from a nib.
@@ -44,11 +53,12 @@
 
         //if user is already signed in, segue to homeView
         AppNavigationController *homeView = [self.storyboard instantiateViewControllerWithIdentifier:@"AppNavigationController"];
-////        HomeViewController *homeView = [self.storyboard instantiateViewControllerWithIdentifier:@"HomeViewController"];
+//        HomeViewController *homeView = [self.storyboard instantiateViewControllerWithIdentifier:@"HomeViewController"];
         homeView.modalPresentationStyle = UIModalPresentationNone;
         [self presentViewController:homeView animated:NO completion:^{}];
         
     } else {
+        self.loginButton.hidden = NO;
        
     }
 

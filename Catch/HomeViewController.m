@@ -40,7 +40,7 @@
 
     //for testing
     _testArray = [NSArray arrayWithObjects:@"obj1",@"obj1",@"obj1",nil];
-    _labelArray = [NSArray arrayWithObjects:@"#whatTheFuck",@"Cute as fuck jkfdshgjksdf jkkjdfsjk dfkjhg sdfg kdjsfhgkdjfs", @"#bestSex",nil];
+    _labelArray = [NSArray arrayWithObjects:@"#whatTheFuck",@"hello my name is bob the builder thank you very much I want to be doing cool things with my buddies", @"#bestSex",nil];
 
 
     [self.view setBackgroundColor:[Utils UIColorFromRGB:0xFCFCEB]];
@@ -98,10 +98,10 @@
     } else if (indexPath.row > 0) {
         if (indexPath.row % 2 == 0)
         {
-            cell = [self.catchesTableView dequeueReusableCellWithIdentifier:@"incomingBall"];
+            cell = [self.catchesTableView dequeueReusableCellWithIdentifier:@"threadWithPicture"];
             cell.isOpened = NO;
         } else {
-            cell = [self.catchesTableView dequeueReusableCellWithIdentifier:@"openedBallCell"];
+            cell = [self.catchesTableView dequeueReusableCellWithIdentifier:@"thread"];
             cell.isOpened = YES;
         }
         
@@ -125,7 +125,7 @@
 {
 
     if (indexPath.row == 0) return 40;
-    if (indexPath.row == 2) return 140;
+    if (indexPath.row == 2) return 150;
     return 70;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
