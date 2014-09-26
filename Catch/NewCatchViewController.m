@@ -70,14 +70,16 @@
     [self.view setBackgroundColor:[Utils UIColorFromRGB:0xF5F5F5]];
     int height = self.navigationController.navigationBar.frame.size.height + 0;
     int width = self.navigationController.navigationBar.frame.size.width;
-    UILabel *newballLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, width, height)];
-    newballLabel.backgroundColor = [UIColor clearColor];
-    newballLabel.textColor = [UIColor whiteColor];
-    newballLabel.font = [UIFont fontWithName:@"noteworthy" size:30];
-    newballLabel.text = @"New Catch";
-    newballLabel.shadowColor = [UIColor colorWithWhite:0.0 alpha:0];
-    newballLabel.textAlignment = NSTextAlignmentCenter;
-    self.navigationItem.titleView = newballLabel;
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(5, -3, width/2, height)];
+    label.backgroundColor = [UIColor clearColor];
+    label.textColor = [Utils UIColorFromRGB:0xFFFFFF];
+    label.text = @"New Catch";
+    label.font = [UIFont fontWithName:@"noteworthy" size:33.5];
+    label.shadowColor = [UIColor colorWithWhite:0.0 alpha:0];
+    label.textAlignment = NSTextAlignmentCenter;
+    UIView *overView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, width/2, height)];
+    [overView addSubview:label];
+    self.navigationItem.titleView = overView;
     self.ballTableView.delegate = self;
     ballRowExpanded = true;
     [self.backButton setContentEdgeInsets:UIEdgeInsetsMake(0, -30, 0, 0)];
@@ -89,9 +91,6 @@
     [self setUp];
 }
 
-- (IBAction)dismissNewBall:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
 
 
 - (IBAction)pushFriendsViewController:(UIButton *)sender {
@@ -136,7 +135,7 @@
     if (!cancelButton)
     {
     cancelButton = [[UIButton alloc]initWithFrame:CGRectMake(10, 0, headerViewHeight, headerViewHeight)];
-    [cancelButton setTitle: @"✖︎" forState: UIControlStateNormal];
+    [cancelButton setTitle: @"✕" forState: UIControlStateNormal];
 
     cancelButton.titleLabel.font = [UIFont systemFontOfSize:30];
     cancelButton.titleLabel.textColor = [UIColor whiteColor];
@@ -343,6 +342,7 @@
     self.navigationController.navigationBar.shadowImage = [UIImage new];
     self.navigationItem.titleView = nil;
     self.navigationController.navigationBar.translucent = YES;
+    self.backButton.titleLabel.text = @"";
 }
 
 -(void) changeOriginYBy: (CGFloat) newY for:(UIView *) view;

@@ -12,6 +12,9 @@
 		701EACEB19AC80AE000EF225 /* line.png in Resources */ = {isa = PBXBuildFile; fileRef = 701EACEA19AC80AE000EF225 /* line.png */; };
 		7023B1D819D5332B009835F6 /* default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7023B1D719D5332B009835F6 /* default-568h@2x.png */; };
 		7023B1DA19D53337009835F6 /* default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7023B1D919D53337009835F6 /* default@2x.png */; };
+		7023B1DD19D5406E009835F6 /* PeopleInThreadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7023B1DC19D5406E009835F6 /* PeopleInThreadViewController.m */; };
+		7023B1DF19D55366009835F6 /* newspaper-48.png in Resources */ = {isa = PBXBuildFile; fileRef = 7023B1DE19D55366009835F6 /* newspaper-48.png */; };
+		7023B1E119D55445009835F6 /* newspaper-32.png in Resources */ = {isa = PBXBuildFile; fileRef = 7023B1E019D55445009835F6 /* newspaper-32.png */; };
 		7036914F1997EE770088C41C /* facebook-logo_000.png in Resources */ = {isa = PBXBuildFile; fileRef = 7036914E1997EE770088C41C /* facebook-logo_000.png */; };
 		7036915219980CE20088C41C /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7036915119980CE20088C41C /* HomeViewController.m */; };
 		70369156199813F80088C41C /* TransitionHomeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 70369155199813F70088C41C /* TransitionHomeManager.m */; };
@@ -113,6 +116,10 @@
 		701EACEA19AC80AE000EF225 /* line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = line.png; path = Catch/line.png; sourceTree = "<group>"; };
 		7023B1D719D5332B009835F6 /* default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "default-568h@2x.png"; sourceTree = "<group>"; };
 		7023B1D919D53337009835F6 /* default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "default@2x.png"; sourceTree = "<group>"; };
+		7023B1DB19D5406E009835F6 /* PeopleInThreadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PeopleInThreadViewController.h; sourceTree = "<group>"; };
+		7023B1DC19D5406E009835F6 /* PeopleInThreadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PeopleInThreadViewController.m; sourceTree = "<group>"; };
+		7023B1DE19D55366009835F6 /* newspaper-48.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "newspaper-48.png"; sourceTree = "<group>"; };
+		7023B1E019D55445009835F6 /* newspaper-32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "newspaper-32.png"; sourceTree = "<group>"; };
 		7036914E1997EE770088C41C /* facebook-logo_000.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "facebook-logo_000.png"; path = "Catch/facebook-logo_000.png"; sourceTree = "<group>"; };
 		7036915019980CE20088C41C /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		7036915119980CE20088C41C /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
@@ -276,6 +283,8 @@
 			children = (
 				70B67D7919AF032C00197B46 /* CatchViewController.h */,
 				70B67D7A19AF032C00197B46 /* CatchViewController.m */,
+				7023B1DB19D5406E009835F6 /* PeopleInThreadViewController.h */,
+				7023B1DC19D5406E009835F6 /* PeopleInThreadViewController.m */,
 				70E5C50B199840B400D16D1C /* NewCatchViewController.h */,
 				70E5C50C199840B400D16D1C /* NewCatchViewController.m */,
 				704460A319948DE000E65E93 /* WelcomeViewController.h */,
@@ -328,6 +337,8 @@
 				70F9315C199E980C0015A64A /* AddMessageTransitionManager.h */,
 				70F9315D199E980C0015A64A /* AddMessageTransitionManager.m */,
 				704460A619948DE000E65E93 /* Main.storyboard */,
+				7023B1E019D55445009835F6 /* newspaper-32.png */,
+				7023B1DE19D55366009835F6 /* newspaper-48.png */,
 				7023B1D919D53337009835F6 /* default@2x.png */,
 				7023B1D719D5332B009835F6 /* default-568h@2x.png */,
 				7011D44E19D13B60003325C4 /* pencil_blank_T.png */,
@@ -408,8 +419,8 @@
 				70FEE82B19999DC2006829ED /* CatchTableViewCell.h */,
 				70FEE82C19999DC2006829ED /* CatchTableViewCell.m */,
 				7059ABE519B03A3A00213B9C /* BallUpdateTableViewCell.h */,
-				70ACD7CE19BFC34300942DF9 /* PickFriendsTableViewCell.h */,
 				7059ABE619B03A3A00213B9C /* BallUpdateTableViewCell.m */,
+				70ACD7CE19BFC34300942DF9 /* PickFriendsTableViewCell.h */,
 				70ACD7CF19BFC34300942DF9 /* PickFriendsTableViewCell.m */,
 				70ACD7D119BFC7F100942DF9 /* PickFriendTableViewCell.h */,
 				70ACD7D219BFC7F100942DF9 /* PickFriendTableViewCell.m */,
@@ -616,8 +627,10 @@
 				70F93166199F20920015A64A /* Cloud.png in Resources */,
 				70A9BCD019C2651F0059C3C1 /* triangleTear.png in Resources */,
 				70FEE83B199A1352006829ED /* circle.png in Resources */,
+				7023B1DF19D55366009835F6 /* newspaper-48.png in Resources */,
 				7011D44F19D13B60003325C4 /* pencil_blank_T.png in Resources */,
 				70D492EF1998AA7D00357DA8 /* group.png in Resources */,
+				7023B1E119D55445009835F6 /* newspaper-32.png in Resources */,
 				70DD6F1119B3D0C700820124 /* paper.png in Resources */,
 				7059ABED19B066D800213B9C /* whiteArrow.png in Resources */,
 				70A9BCD219C2653B0059C3C1 /* crumpled_paper.png in Resources */,
@@ -660,6 +673,7 @@
 				704460A219948DE000E65E93 /* AppDelegate.m in Sources */,
 				70FEE8301999FFFB006829ED /* BallView.m in Sources */,
 				70000D4019AB2981000A6EEA /* CollapsableHeaderView.m in Sources */,
+				7023B1DD19D5406E009835F6 /* PeopleInThreadViewController.m in Sources */,
 				70FEE839199A0A82006829ED /* HSBSupport.m in Sources */,
 				70ACD7D319BFC7F100942DF9 /* PickFriendTableViewCell.m in Sources */,
 				7044609F19948DE000E65E93 /* main.m in Sources */,

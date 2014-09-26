@@ -15,6 +15,7 @@
 #import "ToolbarSingleton.h"
 #import "PickFriendsTableViewCell.h"
 #import "PaperBallTableViewCell.h"
+#import "PeopleInThreadViewController.h"
 #define toolBarButtonSize 45
 #define headerViewHeight 45.0
 #define defaultThrowToLabel @"Throw To..."
@@ -36,7 +37,7 @@
     NSString *defaultString;
     UIButton *cancelButton;
     UIButton *okButton;
-    bool renderCrumpledBall;
+    bool renderCrumpledBall, initialPostExpanded;
     PickFriendsTableViewCell *pickFriendsCell;
     NSMutableArray *chosenFriends;
     UIImageView *imageView;
@@ -123,7 +124,13 @@
     [self.seperatorView drawSeparator];
     defaultString = @"What's really on your mind?";
     self.postStatusTextView.text = defaultString;
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(expandInitialPost:)];
+    [self.threadInitialPostView addGestureRecognizer:tap];
+    initialPostExpanded = FALSE;
+    
 }
+
+
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationSlide]  ;
@@ -153,6 +160,7 @@
 -(void) viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    self.navigationController.navigationBarHidden = YES;
 
     
 }
@@ -187,7 +195,7 @@
     if (!cancelButton)
     {
         cancelButton = [[UIButton alloc]initWithFrame:CGRectMake(10, 0, headerViewHeight, headerViewHeight)];
-        [cancelButton setTitle: @"✖︎" forState: UIControlStateNormal];
+        [cancelButton setTitle: @"✕" forState: UIControlStateNormal];
         
         cancelButton.titleLabel.font = [UIFont systemFontOfSize:30];
         cancelButton.titleLabel.textColor = [UIColor whiteColor];
@@ -391,10 +399,7 @@
     }
 }
 #pragma mark BallViewDelegate
--(void) updateBallColor:(CGFloat)value
-{
-    //[ballSectionView updateColor:[UIColor colorWithHue:value saturation:1 brightness:1 alpha:1]];
-}
+
 -(void)setAllViewToZeroAlpha
 {
     [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
@@ -483,6 +488,43 @@
             [self.navigationController pushViewController:imageInspector animated:YES];
         }
     }
+}
+
+-(void) expandInitialPost: (UITapGestureRecognizer *) sender
+{
+    if (!initialPostExpanded)
+    {
+        CGRect frame = self.threadInitialPostView.frame;
+        frame = CGRectMake(frame.origin.x, frame.origin.y, frame.size.width, frame.size.height + 50);
+        
+        self.threadInitialPostView.frame = frame;
+        frame = self.containerView.frame;
+        frame = CGRectMake(frame.origin.x, frame.origin.y + 50, frame.size.width, frame.size.height);
+        UIView *coverView = [[UIView alloc] initWithFrame:CGRectMake(0, self.threadInitialPostView.frame.origin.y, frame.size.width, frame.size.height)];
+         self.containerView.frame = frame;
+        coverView.backgroundColor = [UIColor lightGrayColor];
+        coverView.alpha = 0.4;
+        [self.containerView addSubview:coverView];
+        UITapGestureRecognizer *toggle = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(cancelTap:)];
+        [coverView addGestureRecognizer:toggle];
+        initialPostExpanded = TRUE;
+    } else {
+        
+    }
+}
+
+-(void) cancelTap: (UITapGestureRecognizer *) sender
+{
+    [sender.view removeFromSuperview];
+    CGRect frame = self.threadInitialPostView.frame;
+    frame = CGRectMake(frame.origin.x, frame.origin.y, frame.size.width, frame.size.height - 50);
+    
+    self.threadInitialPostView.frame = frame;
+    frame = self.containerView.frame;
+    frame = CGRectMake(frame.origin.x, frame.origin.y - 50, frame.size.width, frame.size.height);
+    self.containerView.frame = frame;
+    initialPostExpanded = FALSE;
+    
 }
 
 #pragma mark UITextViewDelegate
@@ -619,4 +661,19 @@
 }
 
 
+- (IBAction)viewPeopleButton:(id)sender {
+    PeopleInThreadViewController *people = [self.storyboard instantiateViewControllerWithIdentifier:@"peopleInThreadViewController"];
+    self.navigationController.navigationBarHidden = NO;
+//    self.navigationController.navigationItem.title = @"People";
+//    int height = self.navigationController.navigationBar.frame.size.height + 0;
+//    int width = self.navigationController.navigationBar.frame.size.width;
+//    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, width, height)];
+//    label.backgroundColor = [UIColor clearColor];
+//    label.textColor = [UIColor blueColor];
+//    label.font = [UIFont systemFontOfSize:30];
+//    label.text = @"People";
+//    label.textAlignment = NSTextAlignmentCenter;
+//    people.navigationItem.titleView = label;
+   [self.navigationController pushViewController:people animated:YES];
+}
 @end

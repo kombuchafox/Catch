@@ -139,7 +139,8 @@
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="21F-85-MY3">
                                 <rect key="frame" x="249" y="-3" width="55" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="plusSign.png">
+                                <fontDescription key="fontDescription" name="CourierNewPS-BoldMT" family="Courier New" pointSize="48"/>
+                                <state key="normal" title="＋">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -149,8 +150,8 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="addButton" destination="21F-85-MY3" id="1iZ-Ly-hFl"/>
                         <outlet property="catchesTableView" destination="904-iS-M7e" id="I7U-7J-Ivy"/>
-                        <outlet property="friendsButton" destination="21F-85-MY3" id="aMu-Qj-uHb"/>
                         <outlet property="inTheAirButton" destination="gmg-4z-LnU" id="fMh-oP-bbn"/>
                         <outlet property="newsFeedTable" destination="904-iS-M7e" id="rXf-YU-8Jo"/>
                         <outlet property="settingsButton" destination="W4X-BV-w9c" id="a4Q-aQ-Z1K"/>
@@ -278,9 +279,10 @@
                     <navigationItem key="navigationItem" id="uPf-bp-37C">
                         <barButtonItem key="leftBarButtonItem" style="plain" id="Zu2-xz-uao">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="n2v-1T-XVf">
-                                <rect key="frame" x="16" y="-6" width="39" height="55"/>
+                                <rect key="frame" x="16" y="-13" width="48" height="70"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="backArrow.png">
+                                <fontDescription key="fontDescription" name="Courier" family="Courier" pointSize="47"/>
+                                <state key="normal" title="≡">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -295,10 +297,6 @@
                                 <state key="normal">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <connections>
-                                    <action selector="dismissNewBall:" destination="btR-9B-fYI" eventType="touchUpInside" id="kYp-mn-IJ7"/>
-                                    <action selector="pushFriendsViewController:" destination="btR-9B-fYI" eventType="touchUpInside" id="W47-YQ-3oR"/>
-                                </connections>
                             </button>
                         </barButtonItem>
                     </navigationItem>
@@ -335,7 +333,7 @@
                                         <rect key="frame" x="280" y="14" width="33" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="34"/>
-                                        <state key="normal" title="✖︎">
+                                        <state key="normal" title="✕">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -486,6 +484,9 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="viewPeopleButton:" destination="1CS-jF-byD" eventType="touchUpInside" id="DoB-5r-HDt"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" red="0.57423531530000005" green="0.78588378930000002" blue="1" alpha="0.81999999999999995" colorSpace="calibratedRGB"/>
@@ -499,6 +500,7 @@
                     <navigationItem key="navigationItem" id="IyN-sf-AI0"/>
                     <connections>
                         <outlet property="ballTableView" destination="HoL-qc-g3X" id="y4k-GE-pm3"/>
+                        <outlet property="containerView" destination="aXL-bP-uKt" id="CV9-ed-Nd3"/>
                         <outlet property="postStatusTextView" destination="5LG-Dz-gw1" id="lS0-N8-qF9"/>
                         <outlet property="seperatorView" destination="BUA-z6-nfT" id="Fwl-fJ-HAd"/>
                         <outlet property="threadInitialPostView" destination="Qkr-gV-jUG" id="Dkd-G9-rlm"/>
@@ -510,10 +512,10 @@
             </objects>
             <point key="canvasLocation" x="-366" y="-688"/>
         </scene>
-        <!--View Controller-->
+        <!--People In Thread View Controller-->
         <scene sceneID="IOB-eH-6SZ">
             <objects>
-                <viewController id="EF7-5v-hZf" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="peopleInThreadViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="EF7-5v-hZf" customClass="PeopleInThreadViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="pUO-FS-7GP">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -524,7 +526,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="4z1-FH-ZJB">
-                                        <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="86" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4z1-FH-ZJB" id="k3T-4l-FBw">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -533,7 +535,7 @@
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ian Fox" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="qzI-RD-tMu">
                                                     <rect key="frame" x="20" y="6" width="254" height="31"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -546,6 +548,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="SBD-Pj-wZi"/>
+                    <connections>
+                        <outlet property="peopleTableView" destination="VaH-t3-Fjg" id="678-0z-0Pk"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="heB-tH-pCQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -700,7 +705,6 @@
         <image name="default.png" width="320" height="480"/>
         <image name="paper.png" width="204" height="256"/>
         <image name="pencil_blank_T.png" width="590" height="575"/>
-        <image name="plusSign.png" width="50" height="49"/>
         <image name="triangleTear.png" width="420" height="420"/>
         <image name="tumblr_mnxid4jaQc1rf2f7ho1_400.png" width="333" height="396"/>
     </resources>

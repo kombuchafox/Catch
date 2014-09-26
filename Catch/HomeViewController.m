@@ -17,23 +17,19 @@
 
 @interface HomeViewController()
 @property (strong, nonatomic) IBOutlet CircleButton *inTheAirButton;
-@property (strong, nonatomic) IBOutlet CircleButton *addBallButton;
+
 
 @property (strong, nonatomic) IBOutlet UIButton *settingsButton;
-@property (strong, nonatomic) IBOutlet UIButton *friendsButton;
+@property (strong, nonatomic) IBOutlet UIButton *addButton;
 @property (strong, nonatomic) NSArray* _testArray;
 @property (strong, nonatomic) NSArray* _labelArray;
 @property (strong, nonatomic) IBOutlet UITableView *catchesTableView;
-@property (strong, nonatomic) IBOutlet UIView *statusBarView;
-@property (strong, nonatomic) IBOutlet UIToolbar *toolBar;
-
 @end
 
 @implementation HomeViewController
 @synthesize _testArray;
 @synthesize _labelArray;
 @synthesize inTheAirButton;
-@synthesize addBallButton;
 
 -(void)viewDidLoad
 {
@@ -44,24 +40,23 @@
 
 
     [self.view setBackgroundColor:[Utils UIColorFromRGB:0xFCFCEB]];
-    [self.addBallButton drawCircle:[Utils UIColorFromRGB:0xF2877D ]];
     [self.inTheAirButton drawCircle:[Utils UIColorFromRGB:0xF7C811 ]];
     //[self.incomingBallsButton drawCircle:[Utils UIColorFromRGB:0x90D4D4 ]];
-    int height = self.navigationController.navigationBar.frame.size.height;
+    int height = self.navigationController.navigationBar.frame.size.height + 60;
     int width = self.navigationController.navigationBar.frame.size.width;
-    UILabel *homeLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, width, height)];
+    UILabel *homeLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 20, width/2, height/2)];
     homeLabel.backgroundColor = [UIColor clearColor];
     homeLabel.textColor = [Utils UIColorFromRGB:0xFFFFFF];
     homeLabel.text = @"Catch";
-    homeLabel.font = [UIFont fontWithName:@"noteworthy" size:30];
+    homeLabel.font = [UIFont fontWithName:@"noteworthy" size:35];
     homeLabel.shadowColor = [UIColor colorWithWhite:0.0 alpha:0];
     homeLabel.textAlignment = NSTextAlignmentCenter;
-    self.navigationItem.titleView = homeLabel;
+    UIView *overView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, width, height)];
+    [overView addSubview:homeLabel];
+    self.navigationItem.titleView = overView;
     [self.navigationController.navigationBar setBarTintColor:[Utils UIColorFromRGB:0xc93532]];
-    [self.toolBar setBackgroundColor:[Utils UIColorFromRGB:0xD73033]];
-    [self.statusBarView setBackgroundColor:[Utils UIColorFromRGB:0xD73033]];
-    [self.settingsButton setContentEdgeInsets:UIEdgeInsetsMake(0, -30, 0, 0)];
-    [self.friendsButton setContentEdgeInsets:UIEdgeInsetsMake(0, 20, 0, -15)];
+//    [self.settingsButton setContentEdgeInsets:UIEdgeInsetsMake(0, -30, 0, 0)];
+    [self.addButton setContentEdgeInsets:UIEdgeInsetsMake(0, 0, 0, -45)];
 
 }
 -(void)viewDidAppear:(BOOL)animated
