@@ -48,7 +48,7 @@
     homeLabel.backgroundColor = [UIColor clearColor];
     homeLabel.textColor = [Utils UIColorFromRGB:0xFFFFFF];
     homeLabel.text = @"Catch";
-    homeLabel.font = [UIFont fontWithName:@"noteworthy" size:35];
+    homeLabel.font = [UIFont systemFontOfSize:34];
     homeLabel.shadowColor = [UIColor colorWithWhite:0.0 alpha:0];
     homeLabel.textAlignment = NSTextAlignmentCenter;
     UIView *overView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, width, height)];
@@ -120,7 +120,7 @@
 {
 
     if (indexPath.row == 0) return 40;
-    if (indexPath.row == 2) return 150;
+    if (indexPath.row == 2) return 180;
     return 70;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section

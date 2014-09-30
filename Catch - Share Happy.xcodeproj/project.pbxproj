@@ -15,6 +15,11 @@
 		7023B1DD19D5406E009835F6 /* PeopleInThreadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7023B1DC19D5406E009835F6 /* PeopleInThreadViewController.m */; };
 		7023B1DF19D55366009835F6 /* newspaper-48.png in Resources */ = {isa = PBXBuildFile; fileRef = 7023B1DE19D55366009835F6 /* newspaper-48.png */; };
 		7023B1E119D55445009835F6 /* newspaper-32.png in Resources */ = {isa = PBXBuildFile; fileRef = 7023B1E019D55445009835F6 /* newspaper-32.png */; };
+		7023B1E319D568D4009835F6 /* pinch.png in Resources */ = {isa = PBXBuildFile; fileRef = 7023B1E219D568D3009835F6 /* pinch.png */; };
+		7023B1E619DA6163009835F6 /* UIImage+ResizeAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 7023B1E519DA6163009835F6 /* UIImage+ResizeAdditions.m */; };
+		7023B1E919DA61F4009835F6 /* UIImage+AlphaAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 7023B1E819DA61F4009835F6 /* UIImage+AlphaAdditions.m */; };
+		7023B1EC19DA6244009835F6 /* UIImage+Alpha.m in Sources */ = {isa = PBXBuildFile; fileRef = 7023B1EB19DA6244009835F6 /* UIImage+Alpha.m */; };
+		7023B1EF19DA629E009835F6 /* UIImage+RoundedCornerAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 7023B1EE19DA629E009835F6 /* UIImage+RoundedCornerAdditions.m */; };
 		7036914F1997EE770088C41C /* facebook-logo_000.png in Resources */ = {isa = PBXBuildFile; fileRef = 7036914E1997EE770088C41C /* facebook-logo_000.png */; };
 		7036915219980CE20088C41C /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7036915119980CE20088C41C /* HomeViewController.m */; };
 		70369156199813F80088C41C /* TransitionHomeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 70369155199813F70088C41C /* TransitionHomeManager.m */; };
@@ -120,6 +125,15 @@
 		7023B1DC19D5406E009835F6 /* PeopleInThreadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PeopleInThreadViewController.m; sourceTree = "<group>"; };
 		7023B1DE19D55366009835F6 /* newspaper-48.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "newspaper-48.png"; sourceTree = "<group>"; };
 		7023B1E019D55445009835F6 /* newspaper-32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "newspaper-32.png"; sourceTree = "<group>"; };
+		7023B1E219D568D3009835F6 /* pinch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pinch.png; sourceTree = "<group>"; };
+		7023B1E419DA6163009835F6 /* UIImage+ResizeAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ResizeAdditions.h"; sourceTree = "<group>"; };
+		7023B1E519DA6163009835F6 /* UIImage+ResizeAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ResizeAdditions.m"; sourceTree = "<group>"; };
+		7023B1E719DA61F4009835F6 /* UIImage+AlphaAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+AlphaAdditions.h"; sourceTree = "<group>"; };
+		7023B1E819DA61F4009835F6 /* UIImage+AlphaAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+AlphaAdditions.m"; sourceTree = "<group>"; };
+		7023B1EA19DA6244009835F6 /* UIImage+Alpha.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Alpha.h"; sourceTree = "<group>"; };
+		7023B1EB19DA6244009835F6 /* UIImage+Alpha.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Alpha.m"; sourceTree = "<group>"; };
+		7023B1ED19DA629E009835F6 /* UIImage+RoundedCornerAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+RoundedCornerAdditions.h"; sourceTree = "<group>"; };
+		7023B1EE19DA629E009835F6 /* UIImage+RoundedCornerAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+RoundedCornerAdditions.m"; sourceTree = "<group>"; };
 		7036914E1997EE770088C41C /* facebook-logo_000.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "facebook-logo_000.png"; path = "Catch/facebook-logo_000.png"; sourceTree = "<group>"; };
 		7036915019980CE20088C41C /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		7036915119980CE20088C41C /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
@@ -337,6 +351,7 @@
 				70F9315C199E980C0015A64A /* AddMessageTransitionManager.h */,
 				70F9315D199E980C0015A64A /* AddMessageTransitionManager.m */,
 				704460A619948DE000E65E93 /* Main.storyboard */,
+				7023B1E219D568D3009835F6 /* pinch.png */,
 				7023B1E019D55445009835F6 /* newspaper-32.png */,
 				7023B1DE19D55366009835F6 /* newspaper-48.png */,
 				7023B1D919D53337009835F6 /* default@2x.png */,
@@ -344,7 +359,6 @@
 				7011D44E19D13B60003325C4 /* pencil_blank_T.png */,
 				70FEE82A19999C79006829ED /* Images */,
 				70FEE82919999C61006829ED /* Views */,
-				70E84F331995AE6E0038AC92 /* ViewControllers */,
 				70E84F321995AE540038AC92 /* Resources */,
 				704460A919948DE000E65E93 /* Images.xcassets */,
 				7044609C19948DE000E65E93 /* Supporting Files */,
@@ -485,18 +499,19 @@
 		70E84F321995AE540038AC92 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				7023B1E419DA6163009835F6 /* UIImage+ResizeAdditions.h */,
+				7023B1E519DA6163009835F6 /* UIImage+ResizeAdditions.m */,
+				7023B1ED19DA629E009835F6 /* UIImage+RoundedCornerAdditions.h */,
+				7023B1EE19DA629E009835F6 /* UIImage+RoundedCornerAdditions.m */,
+				7023B1E719DA61F4009835F6 /* UIImage+AlphaAdditions.h */,
+				7023B1EA19DA6244009835F6 /* UIImage+Alpha.h */,
+				7023B1EB19DA6244009835F6 /* UIImage+Alpha.m */,
+				7023B1E819DA61F4009835F6 /* UIImage+AlphaAdditions.m */,
 				704A94781995E63900BCEC06 /* Utils.h */,
 				704A94761995E62800BCEC06 /* Utils.m */,
 				70ABBAFF1995D8DB00761B84 /* Graduated_Blue_Background.png */,
 			);
 			name = Resources;
-			sourceTree = "<group>";
-		};
-		70E84F331995AE6E0038AC92 /* ViewControllers */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = ViewControllers;
 			sourceTree = "<group>";
 		};
 		70FEE82919999C61006829ED /* Views */ = {
@@ -647,6 +662,7 @@
 				70D492EB19989BC700357DA8 /* roundabout-bg-shadow.png in Resources */,
 				70D5FDE119AACCEC0074DB15 /* yck4KBboi.png in Resources */,
 				70ABBB001995D8DC00761B84 /* Graduated_Blue_Background.png in Resources */,
+				7023B1E319D568D4009835F6 /* pinch.png in Resources */,
 				70D5FDE519AACE1A0074DB15 /* tumblr_mnxid4jaQc1rf2f7ho1_400.png in Resources */,
 				70F8486A19AC427300073556 /* Shadow.png in Resources */,
 				70F8486E19AC7E0600073556 /* bokeh.png in Resources */,
@@ -667,12 +683,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7023B1EF19DA629E009835F6 /* UIImage+RoundedCornerAdditions.m in Sources */,
 				70E0BCE819B530F400C9633A /* ImageInspectorViewController.m in Sources */,
 				70A9BCD519CCC4220059C3C1 /* PaperBallTableViewCell.m in Sources */,
 				704460A519948DE000E65E93 /* WelcomeViewController.m in Sources */,
 				704460A219948DE000E65E93 /* AppDelegate.m in Sources */,
 				70FEE8301999FFFB006829ED /* BallView.m in Sources */,
 				70000D4019AB2981000A6EEA /* CollapsableHeaderView.m in Sources */,
+				7023B1E919DA61F4009835F6 /* UIImage+AlphaAdditions.m in Sources */,
 				7023B1DD19D5406E009835F6 /* PeopleInThreadViewController.m in Sources */,
 				70FEE839199A0A82006829ED /* HSBSupport.m in Sources */,
 				70ACD7D319BFC7F100942DF9 /* PickFriendTableViewCell.m in Sources */,
@@ -692,7 +710,9 @@
 				70ABBB031995E13000761B84 /* CircleButton.m in Sources */,
 				70ACD7CA19BC032300942DF9 /* ToolbarSingleton.m in Sources */,
 				70F9315B199D664B0015A64A /* AddMessageViewController.m in Sources */,
+				7023B1E619DA6163009835F6 /* UIImage+ResizeAdditions.m in Sources */,
 				70FEE833199A0767006829ED /* ColorBarPicker.m in Sources */,
+				7023B1EC19DA6244009835F6 /* UIImage+Alpha.m in Sources */,
 				70E777EA19A7DF4F00A4E563 /* CollapsebleHeaderViewController.m in Sources */,
 				70E777F219A7E86200A4E563 /* NewBallTableView.m in Sources */,
 				70E777F519A84ECE00A4E563 /* BallGraphicTableViewCell.m in Sources */,

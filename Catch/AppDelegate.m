@@ -21,7 +21,7 @@
     // Override point for customization after application launch.
     [Parse setApplicationId:@"Nm8AyLxz7pkk5q4mlYjYIMV8HFk61oe2norr6E2H" clientKey:@"XWBmfSAG7dLW2lExJKH5ARGauFH7ko8kLaaOhNDA"];
     [PFFacebookUtils initializeFacebook];
-
+   
     return YES;
 }
 - (BOOL)application:(UIApplication *)application
@@ -56,5 +56,7 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     [[PFFacebookUtils session] close];
 }
+
+
 
 @end

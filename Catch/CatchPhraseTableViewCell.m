@@ -12,6 +12,7 @@
 #import "ToolbarSingleton.h"
 #import <UIKit/UIKit.h>
 
+
 #define kDefaultNumberOfSpinnerMarkers 12
 #define kDefaultSpread 35.0
 #define kDefaultColor ([Utils UIColorFromRGB:0xFFFFFF])
@@ -43,6 +44,9 @@
     UIToolbar *keyboard;
     BOOL didPinch;
 }
+
+@property (nonatomic, assign) UIBackgroundTaskIdentifier fileUploadBackgroundTaskId;
+@property (nonatomic, assign) UIBackgroundTaskIdentifier photoPostBackgroundTaskId;
 @end
 @implementation CatchPhraseTableViewCell
 
@@ -186,9 +190,9 @@
 
 -(void) handlePinch: (UIPinchGestureRecognizer *) sender
 {
-    [self.delegate collapsePaper];
     didPinch = YES;
     if (sender.scale < 1){
+        [self.delegate shouldUploadThread:imageView.image withText:self.textView.text];
         [self.delegate collapsePaper];
         didPinch = YES;
     }
@@ -254,6 +258,7 @@
              CGFloat markerAnimationDuration = kDefaultSpeed/kDefaultNumberOfSpinnerMarkers;
              [spinnerReplicator setInstanceDelay:markerAnimationDuration];
              [marker addAnimation:fade forKey:kMarkerAnimationKey];
+             [self.delegate postThread];
          }];
     }];
 }

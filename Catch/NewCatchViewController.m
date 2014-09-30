@@ -12,6 +12,7 @@
 #import "AddMessageTransitionManager.h"
 #import "NewBallTableView.h"
 #import "Utils.h"
+#import <Parse/Parse.h>
 #import <UIKit/UIKit.h>
 #import "FriendsViewController.h"
 #import "BallGraphicTableViewCell.h"
@@ -19,7 +20,10 @@
 #import "CollapsableHeaderView.h"
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "PickFriendsTableViewCell.h"
+#import "UIImage+ResizeAdditions.h"
 #import "HomeViewController.h"
+
+
 #define headerViewHeight 45.0
 #define navigationTitle  @"New Catch"
 #define defaultThrowToLabel @"Throw To..."
@@ -46,7 +50,10 @@
 @property (strong, nonatomic) IBOutlet NewBallTableView *ballTableView;
 @property AddMessageTransitionManager *addMessageTransitionManager;
 @property BallView *ballSectionView;
-
+@property (nonatomic, strong) PFFile *photoFile;
+@property (nonatomic, strong) PFFile *thumbnailFile;
+@property (nonatomic, assign) UIBackgroundTaskIdentifier fileUploadBackgroundTaskId;
+@property (nonatomic, assign) UIBackgroundTaskIdentifier threadPostBackgroundTaskId;
 
 @end
 @implementation NewCatchViewController
@@ -74,7 +81,7 @@
     label.backgroundColor = [UIColor clearColor];
     label.textColor = [Utils UIColorFromRGB:0xFFFFFF];
     label.text = @"New Catch";
-    label.font = [UIFont fontWithName:@"noteworthy" size:33.5];
+    label.font = [UIFont systemFontOfSize:31.5];
     label.shadowColor = [UIColor colorWithWhite:0.0 alpha:0];
     label.textAlignment = NSTextAlignmentCenter;
     UIView *overView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, width/2, height)];
@@ -84,6 +91,7 @@
     ballRowExpanded = true;
     [self.backButton setContentEdgeInsets:UIEdgeInsetsMake(0, -30, 0, 0)];
     self.ballTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+
 }
 -(void) viewDidAppear:(BOOL)animated
 {
@@ -386,7 +394,6 @@
 -(void) collapsePaper
 {
     self.didPinchPaper = TRUE;
-
     ballRowExpanded = false;
     [self.ballTableView expandHeader:1];
 
@@ -411,10 +418,70 @@
         catchPhraseHeaderView.titleLabel.text = newText;
         catchPhraseHeaderView.titleLabel.font = [UIFont boldSystemFontOfSize:36];
     }
-    
-    
 }
 
+-(BOOL) shouldUploadThread:(UIImage *) image withText:(NSString *)text
+{
+    UIImage *resizedImage = [image resizedImageWithContentMode:UIViewContentModeScaleAspectFit bounds:CGSizeMake(560.0f, 560.0f) interpolationQuality:kCGInterpolationHigh];
+    UIImage *thumbnailImage = [image thumbnailImage:86.0f transparentBorder:0.0f cornerRadius:10.0f interpolationQuality:kCGInterpolationDefault];
+    
+    // JPEG to decrease file size and enable faster uploads & downloads
+    NSData *imageData = UIImageJPEGRepresentation(resizedImage, 0.8f);
+    NSData *thumbnailImageData = UIImagePNGRepresentation(thumbnailImage);
+    
+    if (!imageData || !thumbnailImageData) {
+        return NO;
+    }
+    
+    self.photoFile = [PFFile fileWithData:imageData];
+    self.thumbnailFile = [PFFile fileWithData:thumbnailImageData];
+    
+    // Request a background execution task to allow us to finish uploading the photo even if the app is backgrounded
+    self.fileUploadBackgroundTaskId = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
+        [[UIApplication sharedApplication] endBackgroundTask:self.fileUploadBackgroundTaskId];
+    }];
+    
+    [self.photoFile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (succeeded) {
+            [self.thumbnailFile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                [[UIApplication sharedApplication] endBackgroundTask:self.fileUploadBackgroundTaskId];
+            }];
+            
+        } else {
+            [[UIApplication sharedApplication] endBackgroundTask:self.fileUploadBackgroundTaskId];
+        }
+    }];
+    
+    return YES;
+}
+-(void) postThread
+{    // Make sure there were no errors creating the image files
+    if (!self.photoFile || !self.thumbnailFile) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Couldn't post your thread" message:nil delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Dismiss", nil];
+        [alert show];
+        return;
+    }
+    
+    PFObject *thread = [PFObject objectWithClassName:@"Thread"];
+    [thread setObject:self.photoFile forKey:@"image"];
+    [thread setObject:self.thumbnailFile forKey:@"thumbnailImage"];
+    [thread setObject:@"helloWorld" forKey:@"content"];
+    self.threadPostBackgroundTaskId = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
+        [[UIApplication sharedApplication] endBackgroundTask:self.threadPostBackgroundTaskId];
+    }];
+    [thread saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
+     {
+         if (succeeded)
+         {
+            [self popViewController:nil];
+         } else {
+             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Couldn't post your thread" message:nil delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Dismiss", nil];
+             [alert show];
+
+         }
+         [[UIApplication sharedApplication] endBackgroundTask:self.threadPostBackgroundTaskId];
+     }];
+}
 #pragma mark UIImagePickerControllDelegate
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {

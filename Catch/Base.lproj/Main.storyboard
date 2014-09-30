@@ -33,11 +33,11 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" restorationIdentifier="incomingBall" selectionStyle="default" indentationWidth="10" reuseIdentifier="threadWithPicture" rowHeight="150" id="fbL-Bl-sk2" customClass="CatchTableViewCell">
-                                        <rect key="frame" x="0.0" y="22" width="320" height="150"/>
+                                    <tableViewCell contentMode="scaleToFill" restorationIdentifier="incomingBall" selectionStyle="default" indentationWidth="10" reuseIdentifier="threadWithPicture" rowHeight="180" id="fbL-Bl-sk2" customClass="CatchTableViewCell">
+                                        <rect key="frame" x="0.0" y="22" width="320" height="180"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fbL-Bl-sk2" id="Xl3-y4-LBA">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="149"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="179"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="crumpled_paper.png" id="xEF-pe-xM2">
@@ -45,15 +45,15 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" editable="NO" text="hello my name is bob the builder thank you very much I want to be doing cool things with my buddies" id="KAY-en-ZHt">
-                                                    <rect key="frame" x="69" y="6" width="132" height="135"/>
+                                                    <rect key="frame" x="69" y="6" width="231" height="86"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                 </textView>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tumblr_mnxid4jaQc1rf2f7ho1_400.png" id="fFJ-ub-dUY">
-                                                    <rect key="frame" x="209" y="13" width="91" height="86"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photo-6-768x1024.jpg" id="fFJ-ub-dUY">
+                                                    <rect key="frame" x="113" y="90" width="96" height="81"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                             </subviews>
@@ -68,7 +68,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" restorationIdentifier="findFriends" selectionStyle="default" indentationWidth="10" reuseIdentifier="findFriends" rowHeight="40" id="yrU-Eb-bIf" customClass="CatchTableViewCell">
-                                        <rect key="frame" x="0.0" y="172" width="320" height="40"/>
+                                        <rect key="frame" x="0.0" y="202" width="320" height="40"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="yrU-Eb-bIf" id="BkA-ST-LnS">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="39"/>
@@ -91,7 +91,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" restorationIdentifier="openedBallCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="thread" rowHeight="70" id="dgb-aT-mdh" customClass="CatchTableViewCell">
-                                        <rect key="frame" x="0.0" y="212" width="320" height="70"/>
+                                        <rect key="frame" x="0.0" y="242" width="320" height="70"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dgb-aT-mdh" id="lt7-fd-Nmo">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="69"/>
@@ -491,6 +491,10 @@
                                         </subviews>
                                         <color key="backgroundColor" red="0.57423531530000005" green="0.78588378930000002" blue="1" alpha="0.81999999999999995" colorSpace="calibratedRGB"/>
                                     </view>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pinch.png" id="dkX-OA-KH1">
+                                        <rect key="frame" x="259" y="78" width="100" height="100"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
@@ -705,8 +709,9 @@
         <image name="default.png" width="320" height="480"/>
         <image name="paper.png" width="204" height="256"/>
         <image name="pencil_blank_T.png" width="590" height="575"/>
+        <image name="photo-6-768x1024.jpg" width="164" height="153"/>
+        <image name="pinch.png" width="504" height="360"/>
         <image name="triangleTear.png" width="420" height="420"/>
-        <image name="tumblr_mnxid4jaQc1rf2f7ho1_400.png" width="333" height="396"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

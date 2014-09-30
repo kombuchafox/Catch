@@ -27,5 +27,9 @@
     // Drawing code
 }
 */
-
+//- (void)insertRowsAtIndexPaths:(NSArray *)indexPaths
+//              withRowAnimation:(UITableViewRowAnimation)animation
+//{
+//    NSLog(@"%d",[indexPaths count]);
+//}
 @end

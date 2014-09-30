@@ -17,6 +17,8 @@
 -(void)updateText:(NSString *) newText;
 -(void) collapsePaper;
 -(void) presentPhotoAlbum: (UIButton*) sender;
+-(BOOL) shouldUploadThread:(UIImage *) image withText:(NSString *)text;
+-(void) postThread;
 @required
 -(void)updateBallColor:(CGFloat) value;
 @required

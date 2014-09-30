@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-
 @interface Utils : NSObject 
 
 + (UIColor *) UIColorFromRGB:(int) rgbValue;

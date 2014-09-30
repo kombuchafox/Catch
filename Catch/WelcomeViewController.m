@@ -30,6 +30,7 @@
             
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self setNeedsStatusBarAppearanceUpdate];
     NSString *launchImage;
     self.launchImageView.frame = [UIScreen mainScreen].bounds;
     if  ((UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) &&
@@ -118,5 +119,7 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
+-(UIStatusBarStyle)preferredStatusBarStyle{
+    return UIStatusBarStyleLightContent;
+}
 @end

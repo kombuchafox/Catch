@@ -181,6 +181,7 @@
     return 2;
     
 }
+
 #pragma mark UITableViewDelegateMethods
 -(UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
@@ -320,6 +321,7 @@
                     comment.attachedImage = nil;
                 }
             }
+            comment.textView.text = [NSString stringWithFormat:@"%d %@", indexPath.row, comment.textView.text];
             if (indexPath.row == value - 1)
             {
                 
@@ -587,6 +589,11 @@
 {
     ToolbarSingleton *toolBar = [ToolbarSingleton sharedManager];
     [toolBar.keyboardToolbar removeFromSuperview];
+    value += 1;
+    [self.ballTableView beginUpdates];
+    NSArray *array = [[NSArray alloc] initWithObjects:[NSIndexPath indexPathForItem:0 inSection:0], nil];
+    [self.ballTableView insertRowsAtIndexPaths:array withRowAnimation:UITableViewRowAnimationTop];
+    [self.ballTableView endUpdates];
     [self.postStatusTextView endEditing:YES];
 }
 - (void)textViewDidChange:(UITextView *)textView
